@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none"
+  stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"
+  aria-labelledby="title" role="img">
+  <title id="title">Marine house bank</title>
+  
+<path d="M10 41h42l-8 9H18z"/>
+<path d="M19 41l5-13h17l6 13"/>
+<path d="M26 28v-7h8l4 7"/>
+<path d="M16 54c5 3 10 3 15 0 5 3 10 3 15 0"/>
+
+</svg>

@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none"
+  stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"
+  aria-labelledby="title" role="img">
+  <title id="title">Home energy</title>
+  
+<path d="M8 30 32 10l24 20"/>
+<path d="M13 27v27h38V27"/>
+<path d="m34 22-8 13h7l-4 11 10-15h-7l2-9Z"/>
+<path d="M44 16h7v8"/>
+
+</svg>

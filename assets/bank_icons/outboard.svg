@@ -1,0 +1,15 @@
+<svg width="64" height="64" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title" stroke-linejoin="round" stroke-linecap="round" stroke-width="2.2" stroke="currentColor" fill="none">
+ <title id="title">Outboard starter</title>
+
+ <g>
+  <title>Layer 1</title>
+  <path id="svg_1" d="m27,12l12,0c5,0 9,4 9,9l0,8l-21,0l0,-17z"/>
+  <path id="svg_2" d="m29,29l0,10l6,4l0,10"/>
+  <path stroke="null" transform="rotate(-32.1196 35.3042 56.7821)" id="svg_3" d="m38.19779,54.41403c-2.59742,0 -9.50445,2.39054 -3.22007,4.73614"/>
+  <path stroke="null" id="svg_4" d="m33.37211,52.62094c1.54981,0 -4.76486,-8.44702 -3.98643,1.13358"/>
+  <circle id="svg_5" r="2" cy="53" cx="35"/>
+  <path stroke="null" id="svg_6" d="m27,18l19.18044,0"/>
+  <line fill="none" id="svg_7" y2="51.0933" x2="37.37078" y1="30.24416" x1="46.16532" stroke="null"/>
+  <path stroke="null" transform="rotate(-153.991 39.7341 52.566)" id="svg_8" d="m42.62763,50.19954c-2.59741,0 -9.50444,2.38891 -3.22007,4.73291"/>
+ </g>
+</svg>

@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none"
+  stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"
+  aria-labelledby="title" role="img">
+  <title id="title">Car engine</title>
+  
+<path d="M14 24h8l4-5h12l4 5h8v21h-6l-3 5H23l-3-5h-6z"/>
+<path d="M14 29H9v11h5M50 29h5v11h-5"/>
+<path d="M27 15h10"/>
+<path d="m34 27-7 10h6l-3 8 9-12h-6l1-6Z"/>
+
+</svg>

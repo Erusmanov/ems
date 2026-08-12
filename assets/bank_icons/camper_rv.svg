@@ -1,0 +1,14 @@
+<svg width="64" height="64" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title" stroke-linejoin="round" stroke-linecap="round" stroke-width="2.2" stroke="currentColor" fill="none">
+ <title id="title">Camper RV</title>
+
+ <g>
+  <title>Layer 1</title>
+  <path stroke="null" id="svg_1" d="m9,23l36.00752,0l9.82023,9l0,16l-45.82775,0l0,-25z"/>
+  <path stroke="null" id="svg_2" d="m43.02529,23l0,11l10.43541,0"/>
+  <path id="svg_3" d="m15,29l11,0l0,9l-11,0l0,-9z"/>
+  <path id="svg_4" d="m31.95694,33l6.99998,0l0,15"/>
+  <circle id="svg_5" r="4" cy="49.86329" cx="19"/>
+  <circle id="svg_6" r="4" cy="49.86329" cx="47.07587"/>
+  <line stroke="null" fill="none" id="svg_7" y2="47.35749" x2="31.84143" y1="33.00342" x1="31.84143"/>
+ </g>
+</svg>

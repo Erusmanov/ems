@@ -1,0 +1,12 @@
+<svg width="64" height="64" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title" stroke-linejoin="round" stroke-linecap="round" stroke-width="2.2" stroke="currentColor" fill="none">
+ <title id="title">Winch</title>
+
+ <g>
+  <title>Layer 1</title>
+  <path id="svg_1" d="m10.4375,31.74998l42,0"/>
+  <rect id="svg_2" rx="4" height="20" width="30" y="21.875" x="16.75"/>
+  <path id="svg_3" d="m23,25l0,14m4,-15l0,16m4,-16l0,16m4,-16l0,16m4,-15l0,14"/>
+  <path id="svg_4" d="m32,42l0,8"/>
+  <path id="svg_5" d="m32,50c0,6 8,6 8,0"/>
+ </g>
+</svg>

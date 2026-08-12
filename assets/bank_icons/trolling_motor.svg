@@ -1,0 +1,15 @@
+<svg width="64" height="64" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title" stroke-linejoin="round" stroke-linecap="round" stroke-width="2.2" stroke="currentColor" fill="none">
+ <title id="title">Trolling motor</title>
+
+ <g>
+  <title>Layer 1</title>
+  <path stroke="null" id="svg_1" d="m14.83328,13l20.38717,0c3.39787,0 5.94627,3 5.94627,7s-2.5484,7 -5.94627,7l-20.38717,0l0,-14z"/>
+  <path id="svg_2" d="m14.83342,20l26.00004,0"/>
+  <path id="svg_3" d="m25,27l0,23"/>
+  <path stroke="null" id="svg_4" d="m25,50l6.33354,0"/>
+  <circle id="svg_6" r="2" cy="49.83334" cx="33.16702"/>
+  <path stroke="null" transform="rotate(88.2969 32.9301 54.0832)" id="svg_7" d="m29.24275,53.75428c4.89953,-4.93431 8.81916,-0.98686 6.85935,2.96059"/>
+  <path transform="rotate(89.3396 33.4039 45.6668)" id="svg_8" d="m37.16691,46.00011c-5,5 -9,1 -7,-3"/>
+  <path id="svg_9" d="m20,32.33329l10,0"/>
+ </g>
+</svg>

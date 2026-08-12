@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none"
+  stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"
+  aria-labelledby="title" role="img">
+  <title id="title">Marine instruments</title>
+  
+<circle cx="32" cy="34" r="19"/>
+<circle cx="32" cy="34" r="15"/>
+<path d="M32 19v4M20 24l3 3M44 24l-3 3M18 35h4M42 35h4"/>
+<path d="M32 34 42 25"/>
+<circle cx="32" cy="34" r="2"/>
+
+</svg>

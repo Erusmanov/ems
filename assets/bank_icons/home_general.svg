@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none"
+  stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"
+  aria-labelledby="title" role="img">
+  <title id="title">Home general</title>
+  
+<path d="M8 30 32 10l24 20"/>
+<path d="M13 27v27h38V27"/>
+<path d="M25 31h14v14H25z"/>
+<path d="M25 38h14M32 31v14"/>
+<path d="M44 16h7v8"/>
+
+</svg>

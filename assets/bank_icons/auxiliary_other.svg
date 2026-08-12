@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none"
+  stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"
+  aria-labelledby="title" role="img">
+  <title id="title">Auxiliary battery</title>
+  
+<rect x="11" y="22" width="42" height="28" rx="3"/>
+<path d="M18 22v-5h8v5M38 22v-5h8v5"/>
+<path d="M20 34h10M25 29v10M39 34h8"/>
+
+</svg>

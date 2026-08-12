@@ -1,0 +1,11 @@
+<svg width="64" height="64" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title" stroke-linejoin="round" stroke-linecap="round" stroke-width="2.2" stroke="currentColor" fill="none">
+ <title id="title">Bow thruster</title>
+
+ <g>
+  <title>Layer 1</title>
+  <path id="svg_1" d="m15.0625,15.6875l34,0l0,8l-34,0l0,-8z"/>
+  <circle id="svg_2" r="14" cy="39" cx="32"/>
+  <circle id="svg_3" r="4" cy="39" cx="32"/>
+  <path id="svg_4" d="m32,35c5,-8 11,-3 7,3m-3,1c8,5 3,11 -3,7m-1,-3c-5,8 -11,3 -7,-3m3,-1c-8,-5 -3,-11 3,-7"/>
+ </g>
+</svg>

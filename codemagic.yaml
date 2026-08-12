@@ -1,0 +1,36 @@
+# Codemagic CI: сборка iOS и публикация в TestFlight.
+# Настройка в UI Codemagic:
+#   1. Подключить этот репозиторий.
+#   2. Teams -> Integrations -> App Store Connect: добавить API-ключ
+#      (создаётся в App Store Connect -> Users and Access -> Integrations,
+#      роль App Manager). Имя интеграции: asc_key (см. ниже).
+#   3. Приложение с bundle id com.empower.empowerBms должно быть создано
+#      в App Store Connect (Apps -> "+") до первой публикации.
+workflows:
+  ios-testflight:
+    name: iOS TestFlight
+    max_build_duration: 60
+    instance_type: mac_mini_m2
+    integrations:
+      app_store_connect: asc_key
+    environment:
+      ios_signing:
+        distribution_type: app_store
+        bundle_identifier: com.empower.empowerBms
+      flutter: stable
+    scripts:
+      - name: Get dependencies
+        script: flutter pub get
+      - name: Tests
+        script: flutter test
+      - name: Build signed IPA
+        script: |
+          flutter build ipa --release \
+            --build-number=$PROJECT_BUILD_NUMBER \
+            --export-options-plist=/Users/builder/export_options.plist
+    artifacts:
+      - build/ios/ipa/*.ipa
+    publishing:
+      app_store_connect:
+        auth: integration
+        submit_to_testflight: true
