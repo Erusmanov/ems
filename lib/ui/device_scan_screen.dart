@@ -5,6 +5,7 @@ import 'package:permission_handler/permission_handler.dart';
 import 'package:provider/provider.dart';
 import '../models/bank.dart';
 import '../state/app_state.dart';
+import '../state/settings_state.dart';
 import '../theme/app_theme.dart';
 import 'banks_screen.dart' show BankEditDialog;
 
@@ -482,7 +483,21 @@ class _DeviceScanScreenState extends State<DeviceScanScreen> {
               child: CircularProgressIndicator(
                   strokeWidth: 2, color: AppColors.accent))
           : Icon(Icons.chevron_right, color: AppColors.textSecondary),
-      onTap: connecting ? null : () => _connect(r.device, name),
+      onTap: connecting
+          ? null
+          : () {
+              // Клиенты добавляли в банк колонки и наушники (видео 17.08):
+              // подключение не-АКБ разрешено только в режиме разработчика.
+              final isDev = context.read<SettingsState>().devMode;
+              if (!isBms && !isDev) {
+                ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                    content: Text(
+                        'Это устройство не похоже на АКБ Daly — подключить '
+                        'его нельзя. АКБ помечены жёлтым значком.')));
+                return;
+              }
+              _connect(r.device, name);
+            },
     );
   }
 }

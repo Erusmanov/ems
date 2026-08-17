@@ -225,27 +225,11 @@ class AppState extends ChangeNotifier {
       final veto = canAddBatteryTo(targetBank);
       if (veto != null) return veto;
     }
-    Bank? createdBank;
+    // ВАЖНО (видео 17.08): батарея попадает в банк ТОЛЬКО после успешной
+    // валидации. Раньше placeholder добавлялся до проверки — чужие BLE-девайсы
+    // висели в банке «без заряда и вольтажа», пока шёл таймаут.
     try {
       final source = BleBmsDataSource(device, overrideName: name);
-      if (owningBank == null) {
-        final battery = BatteryData.placeholder(deviceId: id, bleName: name);
-        if (targetBank != null) {
-          targetBank.batteries.add(battery);
-        } else {
-          createdBank = Bank(
-            id: 'ble-$id',
-            name: newBank?.name ?? name,
-            iconId: newBank?.iconId ?? defaultBankIconId,
-            type: newBank?.type ?? BankType.single,
-            batteries: [battery],
-            socWarning: _socWarning,
-            socCritical: _socCritical,
-          );
-          _banks.insert(0, createdBank);
-          _bankCurrentAvg[createdBank.id] = RollingAverage();
-        }
-      }
       _sources[id] = source;
       _subs.add(source.readings.listen(_onReading));
       // Подписка ДО start — чтобы не пропустить первый кадр
@@ -288,17 +272,29 @@ class AppState extends ChangeNotifier {
           }
         }
       }
+      // Все проверки пройдены — теперь батарея попадает в банк,
+      // причём сразу с живыми данными первого кадра.
+      if (owningBank == null) {
+        if (targetBank != null) {
+          targetBank.batteries.add(firstData);
+        } else {
+          final createdBank = Bank(
+            id: 'ble-$id',
+            name: newBank?.name ?? name,
+            iconId: newBank?.iconId ?? defaultBankIconId,
+            type: newBank?.type ?? BankType.single,
+            batteries: [firstData],
+            socWarning: _socWarning,
+            socCritical: _socCritical,
+          );
+          _banks.insert(0, createdBank);
+          _bankCurrentAvg[createdBank.id] = RollingAverage();
+        }
+      }
       _persist();
       notifyListeners();
       return null;
     } catch (e) {
-      if (owningBank == null) {
-        targetBank?.batteries.removeWhere((b) => b.deviceId == id);
-        if (createdBank != null) {
-          _banks.remove(createdBank);
-          _bankCurrentAvg.remove(createdBank.id);
-        }
-      }
       final src = _sources.remove(id);
       if (src != null) {
         try {

@@ -101,9 +101,16 @@ class _EmPowerAppState extends State<EmPowerApp> with WidgetsBindingObserver {
             // Без «резинового» оверскролла: списки упираются в край,
             // пустоту вниз не потянуть (комментарий Михаила 15.07, п.9)
             scrollBehavior: const _ClampedScrollBehavior(),
+            // KeyedSubtree по теме: полная пересборка дерева при переключении.
+            // Иначе const-виджеты и неактивные вкладки оставались в цветах
+            // старой темы («экзотические раскрасы», видео Михаила 17.08) —
+            // статическая палитра AppColors не пробивает их кэш.
             home: AnnotatedRegion<SystemUiOverlayStyle>(
               value: overlay,
-              child: const HomeShell(),
+              child: KeyedSubtree(
+                key: ValueKey('theme-$dark'),
+                child: const HomeShell(),
+              ),
             ),
           );
         },
