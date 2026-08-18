@@ -66,7 +66,7 @@ class _DeviceInfoScreenState extends State<DeviceInfoScreen> {
               'Число от 1 до 16. Уникальный адрес нужен, чтобы батареи '
               'различались на шине RS485 и на приборах NMEA2000. '
               'Внимание: на NMEA2000-приборах номер отображается на единицу '
-              'меньше (адрес 14 виден как «.13») — так устроено у Daly.',
+              'меньше (адрес 14 виден как «.13») — особенность протокола.',
               style: TextStyle(color: AppColors.textSecondary, fontSize: 13),
             ),
             const SizedBox(height: 10),

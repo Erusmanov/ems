@@ -119,7 +119,7 @@ class _DebugRegistersScreenState extends State<DebugRegistersScreen> {
         'SOC (регистр 0x2A): сырое = $raw\n'
         '→ как ×0.1 %: ${(raw * 0.1).toStringAsFixed(1)} %   '
         '→ как 1 %: $raw %\n'
-        'Сравните с показанием оригинального приложения Daly.',
+        'Сравните с показанием сервисного приложения производителя BMS.',
         style: TextStyle(
             color: AppColors.textPrimary, fontSize: 13, height: 1.4),
       ),

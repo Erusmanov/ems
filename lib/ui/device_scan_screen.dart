@@ -412,7 +412,7 @@ class _DeviceScanScreenState extends State<DeviceScanScreen> {
                         _scanning
                             ? 'Поиск АКБ поблизости…'
                             : 'АКБ не найдены.\nУбедитесь, что батарея включена и '
-                              'не подключена к другому приложению (Daly), затем '
+                              'не подключена к другому приложению, затем '
                               'обновите поиск. Кнопка «Показать все» выводит '
                               'остальные BLE-устройства.',
                         textAlign: TextAlign.center,
@@ -492,8 +492,8 @@ class _DeviceScanScreenState extends State<DeviceScanScreen> {
               if (!isBms && !isDev) {
                 ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
                     content: Text(
-                        'Это устройство не похоже на АКБ Daly — подключить '
-                        'его нельзя. АКБ помечены жёлтым значком.')));
+                        'Это устройство не похоже на АКБ EM-Power — '
+                        'подключить его нельзя. АКБ помечены жёлтым значком.')));
                 return;
               }
               _connect(r.device, name);

@@ -117,7 +117,7 @@ class BleBmsDataSource implements BmsDataSource {
           .take(6)
           .join(', ');
       throw StateError(
-          'Не найдены характеристики DL-B40 (fff1/fff2). '
+          'BMS этого типа не поддерживается. '
           'Сервисы устройства: ${found.isEmpty ? 'нет данных' : found}');
     }
 

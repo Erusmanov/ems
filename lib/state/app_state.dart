@@ -242,7 +242,7 @@ class AppState extends ChangeNotifier {
         firstData = await firstReading.timeout(const Duration(seconds: 8));
       } on TimeoutException {
         throw StateError(
-            'Устройство подключилось, но не отвечает как Daly BMS — банк не создан');
+            'Устройство подключилось, но BMS не отвечает. Банк не создан');
       }
       // Совместимость АКБ в банке (тест 26.07: 12В и 36В в параллели — «бабах»):
       // число ячеек (=номинал напряжения) строго равно, ёмкость в пределах 15%.
