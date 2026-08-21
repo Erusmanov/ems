@@ -1,0 +1,76 @@
+# iOS-сборка и публикация в TestFlight на бесплатных macOS-минутах GitHub.
+# Запуск: вкладка Actions -> iOS TestFlight -> Run workflow.
+#
+# Требуемые секреты репозитория (Settings -> Secrets and variables -> Actions):
+#   IOS_P12_BASE64      - сертификат+ключ подписи (p12) в base64
+#   IOS_P12_PASSWORD    - пароль p12
+#   IOS_PROFILE_BASE64  - provisioning profile "EM-Power AppStore" в base64
+#   ASC_API_KEY_BASE64  - AuthKey_6CKWDNKM9Y.p8 в base64
+name: iOS TestFlight
+
+on:
+  workflow_dispatch:
+
+env:
+  ASC_KEY_ID: 6CKWDNKM9Y
+  ASC_ISSUER_ID: 408c23cc-cd8e-42e5-97a8-d00b834e233e
+  TEAM_ID: B3KJUDD9DR
+
+jobs:
+  build-and-upload:
+    runs-on: macos-14
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+
+      - name: Import signing certificate
+        run: |
+          echo "$IOS_P12_BASE64" | base64 --decode > /tmp/dist.p12
+          security create-keychain -p ci ci.keychain
+          security default-keychain -s ci.keychain
+          security unlock-keychain -p ci ci.keychain
+          security set-keychain-settings -lut 3600 ci.keychain
+          security import /tmp/dist.p12 -k ci.keychain -P "$IOS_P12_PASSWORD" \
+            -T /usr/bin/codesign -T /usr/bin/security
+          security set-key-partition-list -S apple-tool:,apple: -s -k ci ci.keychain
+        env:
+          IOS_P12_BASE64: ${{ secrets.IOS_P12_BASE64 }}
+          IOS_P12_PASSWORD: ${{ secrets.IOS_P12_PASSWORD }}
+
+      - name: Install provisioning profile
+        run: |
+          mkdir -p ~/Library/MobileDevice/Provisioning\ Profiles
+          echo "$IOS_PROFILE_BASE64" | base64 --decode \
+            > ~/Library/MobileDevice/Provisioning\ Profiles/empower.mobileprovision
+        env:
+          IOS_PROFILE_BASE64: ${{ secrets.IOS_PROFILE_BASE64 }}
+
+      - name: Flutter deps and tests
+        run: |
+          flutter pub get
+          flutter test
+
+      - name: Build signed IPA
+        run: |
+          flutter build ipa --release \
+            --export-options-plist=ios/ExportOptions.plist
+
+      - name: Upload to TestFlight
+        run: |
+          mkdir -p ~/private_keys
+          echo "$ASC_API_KEY_BASE64" | base64 --decode \
+            > ~/private_keys/AuthKey_${ASC_KEY_ID}.p8
+          xcrun altool --upload-app -f build/ios/ipa/*.ipa -t ios \
+            --apiKey "$ASC_KEY_ID" --apiIssuer "$ASC_ISSUER_ID"
+        env:
+          ASC_API_KEY_BASE64: ${{ secrets.ASC_API_KEY_BASE64 }}
+
+      - name: Keep IPA as artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: ipa
+          path: build/ios/ipa/*.ipa
