@@ -10,6 +10,9 @@ name: iOS TestFlight
 
 on:
   workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ['.github/workflows/ios-testflight.yml']
 
 env:
   ASC_KEY_ID: 6CKWDNKM9Y
