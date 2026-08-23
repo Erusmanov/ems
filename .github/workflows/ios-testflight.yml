@@ -37,6 +37,10 @@ jobs:
           security import /tmp/dist.p12 -k ci.keychain -P "$IOS_P12_PASSWORD" \
             -T /usr/bin/codesign -T /usr/bin/security
           security set-key-partition-list -S apple-tool:,apple: -s -k ci ci.keychain
+          # Keychain обязан быть в SEARCH LIST, иначе codesign его не видит
+          security list-keychains -d user -s ci.keychain login.keychain
+          echo "=== Доступные подписи: ==="
+          security find-identity -v -p codesigning
         env:
           IOS_P12_BASE64: ${{ secrets.IOS_P12_BASE64 }}
           IOS_P12_PASSWORD: ${{ secrets.IOS_P12_PASSWORD }}
