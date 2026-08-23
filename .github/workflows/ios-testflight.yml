@@ -68,6 +68,7 @@ jobs:
           # ломали их: "does not support provisioning profiles")
           set -o pipefail
           flutter build ipa --release \
+            --build-number=$GITHUB_RUN_NUMBER \
             --export-options-plist=ios/ExportOptions.plist
 
       - name: Upload to TestFlight

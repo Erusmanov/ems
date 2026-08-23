@@ -15,11 +15,18 @@ class NotificationService {
   static Future<void> init() async {
     if (_inited) return;
     _inited = true;
-    const android = AndroidInitializationSettings('@mipmap/ic_launcher');
-    await _plugin.initialize(
-        settings: const InitializationSettings(android: android));
-    // Android 13+: разрешение на уведомления запрашивается в рантайме
-    await Permission.notification.request();
+    // ВАЖНО: без DarwinInitializationSettings инициализация на iOS кидала
+    // исключение прямо в main() → вечный белый экран (репорт Михаила 23.08)
+    try {
+      const android = AndroidInitializationSettings('@mipmap/ic_launcher');
+      const darwin = DarwinInitializationSettings();
+      await _plugin.initialize(
+          settings: const InitializationSettings(
+              android: android, iOS: darwin));
+      await Permission.notification.request();
+    } catch (_) {
+      // уведомления не критичны — приложение должно запускаться всегда
+    }
   }
 
   static const _details = NotificationDetails(

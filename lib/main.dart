@@ -10,11 +10,31 @@ import 'ui/home_shell.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Hive.initFlutter();
-  final settingsBox = await Hive.openBox(SettingsState.boxName);
-  final banksBox = await Hive.openBox(AppState.banksBoxName);
-  await NotificationService.init();
-  runApp(EmPowerApp(settingsBox: settingsBox, banksBox: banksBox));
+  // Любой сбой инициализации не должен оставлять вечный белый экран
+  // (репорт Михаила 23.08, iOS): показываем текст ошибки вместо тишины.
+  try {
+    await Hive.initFlutter();
+    final settingsBox = await Hive.openBox(SettingsState.boxName);
+    final banksBox = await Hive.openBox(AppState.banksBoxName);
+    await NotificationService.init();
+    runApp(EmPowerApp(settingsBox: settingsBox, banksBox: banksBox));
+  } catch (e, st) {
+    runApp(MaterialApp(
+      debugShowCheckedModeBanner: false,
+      home: Scaffold(
+        backgroundColor: const Color(0xFF000000),
+        body: SafeArea(
+          child: SingleChildScrollView(
+            padding: const EdgeInsets.all(24),
+            child: Text(
+              'Ошибка запуска EM-Power\n\n$e\n\n$st',
+              style: const TextStyle(color: Color(0xFFF2F4F7), fontSize: 13),
+            ),
+          ),
+        ),
+      ),
+    ));
+  }
 }
 
 class _ClampedScrollBehavior extends MaterialScrollBehavior {
