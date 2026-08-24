@@ -399,6 +399,50 @@ class _DeviceScanScreenState extends State<DeviceScanScreen> {
               ],
             ),
           ),
+          // Подключённые сейчас батареи не видны в эфире (BLE-моносоединение)
+          // — показываем их отдельным блоком, чтобы картина была полной (24.08)
+          Builder(builder: (context) {
+            final online = context
+                .watch<AppState>()
+                .banks
+                .expand((bk) => bk.batteries.map((bat) => (bk, bat)))
+                .where((e) => e.$2.connected)
+                .toList();
+            if (online.isEmpty) return const SizedBox.shrink();
+            return Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(16, 6, 16, 2),
+                  child: Text('НА СВЯЗИ (НЕ ВИДНЫ В ПОИСКЕ)',
+                      style: TextStyle(
+                          color: AppColors.textLabel,
+                          fontSize: 10,
+                          fontWeight: FontWeight.w600,
+                          letterSpacing: 0.8)),
+                ),
+                for (final (bk, bat) in online)
+                  Padding(
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 16, vertical: 4),
+                    child: Row(children: [
+                      const Icon(Icons.bluetooth_connected,
+                          size: 14, color: AppColors.socGreen),
+                      const SizedBox(width: 10),
+                      Expanded(
+                        child: Text('${bat.bleName} — банк «${bk.name}»',
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                            style: TextStyle(
+                                color: AppColors.textSecondary,
+                                fontSize: 12)),
+                      ),
+                    ]),
+                  ),
+                Divider(height: 12, color: AppColors.cardBorder),
+              ],
+            );
+          }),
           Expanded(
             child: Builder(builder: (context) {
               final visible = _showAll

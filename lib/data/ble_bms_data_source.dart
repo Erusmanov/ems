@@ -289,18 +289,36 @@ class BleBmsDataSource implements BmsDataSource {
 
   /// Разовое чтение паспортных данных BMS: версия ПО, серийник платы, дата
   /// производства (регистры 0xA9+, 0xB9+, 0xCC — карта Daly Modbus).
+  /// У части прошивок (RSCAN/STN, скрин Михаила 24.08) блочное чтение этих
+  /// регистров отбивается — тогда пробуем прочитать поштучно.
   Future<void> _readDeviceInfo() async {
     _infoTried = true;
+    Future<List<int>> readBlockOrSingles(int start, int len) async {
+      try {
+        return await _readRegs(start, len);
+      } catch (_) {
+        final out = <int>[];
+        for (var i = 0; i < len; i++) {
+          try {
+            out.addAll(await _readRegs(start + i, 1));
+          } catch (_) {
+            out.add(0);
+          }
+        }
+        return out;
+      }
+    }
     try {
-      _swVersion = _asciiFromRegs(
-          await _readRegs(DalyReg.swVersionStart, DalyReg.swVersionLen));
+      _swVersion = _asciiFromRegs(await readBlockOrSingles(
+          DalyReg.swVersionStart, DalyReg.swVersionLen));
     } catch (_) {}
     try {
-      _serialNumber = _asciiFromRegs(
-          await _readRegs(DalyReg.machineCodeStart, DalyReg.machineCodeLen));
+      _serialNumber = _asciiFromRegs(await readBlockOrSingles(
+          DalyReg.machineCodeStart, DalyReg.machineCodeLen));
     } catch (_) {}
     try {
-      final r = await _readRegs(DalyReg.mfgDateStart, DalyReg.mfgDateLen);
+      final r =
+          await readBlockOrSingles(DalyReg.mfgDateStart, DalyReg.mfgDateLen);
       if (r.length >= 2) {
         // YYMMDD00: r0 = 0xYYMM, r1 = 0xDD00
         final yy = (r[0] >> 8) & 0xFF;

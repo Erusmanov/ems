@@ -254,17 +254,20 @@ class _DeviceInfoScreenState extends State<DeviceInfoScreen> {
     }
 
     final df = DateFormat('dd.MM.yyyy');
+    // Поля, которых прошивка не отдаёт, не показываем вовсе (пустые прочерки
+    // на скрине Михаила 24.08 выглядели как недоделка)
     final rows = <(IconData, String, String)>[
       (Icons.bluetooth, 'BLE-имя', battery.bleName),
-      (Icons.memory, 'Версия ПО BMS', battery.swVersion ?? '—'),
-      (Icons.qr_code_2, 'Имя устройства', battery.serialNumber ?? '—'),
-      (
-        Icons.event,
-        'Дата производства',
-        battery.manufactureDate != null
-            ? df.format(battery.manufactureDate!)
-            : '—'
-      ),
+      if (battery.swVersion != null)
+        (Icons.memory, 'Версия ПО BMS', battery.swVersion!),
+      if (battery.serialNumber != null)
+        (Icons.qr_code_2, 'Имя устройства', battery.serialNumber!),
+      if (battery.manufactureDate != null)
+        (
+          Icons.event,
+          'Дата производства',
+          df.format(battery.manufactureDate!)
+        ),
       (Icons.grid_view_rounded, 'Количество ячеек', '${battery.cellCount}'),
       (Icons.thermostat, 'Датчиков температуры', '${battery.tempSensorCount}'),
       (Icons.replay, 'Циклов заряд/разряд', '${battery.cycles}'),
