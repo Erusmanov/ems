@@ -145,13 +145,24 @@ class BatteryDetailScreen extends StatelessWidget {
                     fontSize: 10,
                     letterSpacing: 0.8)),
             const SizedBox(height: 3),
-            Text(value,
-                textAlign: ta,
-                style: TextStyle(
-                    color: AppColors.textPrimary,
-                    fontSize: 17,
-                    fontWeight: FontWeight.w600,
-                    fontFeatures: [FontFeature.tabularFigures()])),
+            // FittedBox: длинное значение («3.332 V (12)») ужимается,
+            // а не переносится — экран не «скачет» (коммент Михаила 24.08)
+            FittedBox(
+              fit: BoxFit.scaleDown,
+              alignment: switch (align) {
+                < 0 => Alignment.centerLeft,
+                > 0 => Alignment.centerRight,
+                _ => Alignment.center,
+              },
+              child: Text(value,
+                  maxLines: 1,
+                  textAlign: ta,
+                  style: TextStyle(
+                      color: AppColors.textPrimary,
+                      fontSize: 17,
+                      fontWeight: FontWeight.w600,
+                      fontFeatures: [FontFeature.tabularFigures()])),
+            ),
           ],
         ),
       );

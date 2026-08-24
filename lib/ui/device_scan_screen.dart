@@ -439,6 +439,14 @@ class _DeviceScanScreenState extends State<DeviceScanScreen> {
     final name = rawName.isNotEmpty ? rawName : 'Без имени';
     final isBms = _looksLikeBms(r);
     final connecting = _connectingId == r.device.remoteId.str;
+    // АКБ, уже назначенная в банк, помечается и не подключается повторно
+    // (коммент Михаила 24.08: «в списке ничем не отличается»)
+    final ownerBank = context
+        .read<AppState>()
+        .banks
+        .where((bk) =>
+            bk.batteries.any((bat) => bat.deviceId == r.device.remoteId.str))
+        .firstOrNull;
     return ListTile(
       leading: Icon(
         isBms ? Icons.battery_charging_full : Icons.bluetooth,
@@ -452,7 +460,18 @@ class _DeviceScanScreenState extends State<DeviceScanScreen> {
                 style: TextStyle(
                     color: AppColors.textPrimary, fontWeight: FontWeight.w600)),
           ),
-          if (isBms)
+          if (ownerBank != null)
+            Container(
+              margin: const EdgeInsets.only(left: 8),
+              padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+              decoration: BoxDecoration(
+                color: AppColors.socGreen.withValues(alpha: 0.15),
+                borderRadius: BorderRadius.circular(8),
+              ),
+              child: Text('В БАНКЕ',
+                  style: TextStyle(color: AppColors.socGreen, fontSize: 10)),
+            )
+          else if (isBms)
             Container(
               margin: const EdgeInsets.only(left: 8),
               padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
@@ -486,6 +505,13 @@ class _DeviceScanScreenState extends State<DeviceScanScreen> {
       onTap: connecting
           ? null
           : () {
+              if (ownerBank != null) {
+                ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                    content: Text(
+                        'Эта АКБ уже в банке «${ownerBank.name}». Управлять ею '
+                        'можно из вкладки «Банки».')));
+                return;
+              }
               // Клиенты добавляли в банк колонки и наушники (видео 17.08):
               // подключение не-АКБ разрешено только в режиме разработчика.
               final isDev = context.read<SettingsState>().devMode;
