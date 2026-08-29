@@ -70,5 +70,7 @@
 	<string>Bluetooth используется для подключения к BMS ваших аккумуляторов и чтения их параметров.</string>
 	<key>NSBluetoothPeripheralUsageDescription</key>
 	<string>Bluetooth используется для подключения к BMS ваших аккумуляторов.</string>
+	<key>ITSAppUsesNonExemptEncryption</key>
+	<false/>
 </dict>
 </plist>
