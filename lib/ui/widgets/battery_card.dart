@@ -27,16 +27,16 @@ class _BatteryCardState extends State<BatteryCard> {
   }
 
   String _statusLabel(ChargeStatus s) => switch (s) {
-        ChargeStatus.charging => 'Заряд',
-        ChargeStatus.discharging => 'Разряд',
-        ChargeStatus.standby => 'Ожидание',
-      };
+    ChargeStatus.charging => 'Заряд',
+    ChargeStatus.discharging => 'Разряд',
+    ChargeStatus.standby => 'Ожидание',
+  };
 
   Color _statusColor(ChargeStatus s) => switch (s) {
-        ChargeStatus.charging => AppColors.statusCharge,
-        ChargeStatus.discharging => AppColors.statusDischarge,
-        ChargeStatus.standby => AppColors.statusStandby,
-      };
+    ChargeStatus.charging => AppColors.statusCharge,
+    ChargeStatus.discharging => AppColors.statusDischarge,
+    ChargeStatus.standby => AppColors.statusStandby,
+  };
 
   @override
   Widget build(BuildContext context) {
@@ -64,36 +64,73 @@ class _BatteryCardState extends State<BatteryCard> {
           _header(bank, battery),
           Padding(
             padding: const EdgeInsets.fromLTRB(14, 4, 14, 10),
-            child: Row(
-              children: [
-                Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      _metric('НАПРЯЖЕНИЕ', '${agg.voltage.toStringAsFixed(2)} V'),
-                      const SizedBox(height: 24),
-                      _metric('ТОК', '${agg.current.toStringAsFixed(1)} A'),
-                    ],
-                  ),
-                ),
-                SocRing(
+            child: LayoutBuilder(
+              builder: (context, constraints) {
+                final scale = MediaQuery.textScalerOf(context).scale(19) / 19;
+                final ring = SocRing(
                   soc: agg.soc,
                   color: ringColor,
                   statusText: _statusLabel(agg.status),
                   statusColor: _statusColor(agg.status),
-                  size: 138,
-                ),
-                Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.end,
-                    children: [
-                      _metric('МОЩНОСТЬ', _fmtPower(agg.power), end: true),
-                      const SizedBox(height: 24),
-                      _metric(time.label.toUpperCase(), time.text, end: true),
-                    ],
+                  size: (138 * scale.clamp(1.0, 2.0)).clamp(
+                    0.0,
+                    constraints.maxWidth,
                   ),
-                ),
-              ],
+                );
+                final metrics = [
+                  _metric('НАПРЯЖЕНИЕ', '${agg.voltage.toStringAsFixed(2)} V'),
+                  _metric('ТОК', '${agg.current.toStringAsFixed(1)} A'),
+                  _metric('МОЩНОСТЬ', _fmtPower(agg.power), end: true),
+                  _metric(time.label.toUpperCase(), time.text, end: true),
+                ];
+                if (constraints.maxWidth < ring.size + 300 * scale) {
+                  final columns = constraints.maxWidth >= 300 * scale ? 2 : 1;
+                  return Column(
+                    children: [
+                      ring,
+                      const SizedBox(height: 12),
+                      Wrap(
+                        spacing: 12,
+                        runSpacing: 16,
+                        children: [
+                          for (final metric in metrics)
+                            SizedBox(
+                              width:
+                                  (constraints.maxWidth - 12 * (columns - 1)) /
+                                  columns,
+                              child: metric,
+                            ),
+                        ],
+                      ),
+                    ],
+                  );
+                }
+                return Row(
+                  children: [
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          metrics[0],
+                          const SizedBox(height: 24),
+                          metrics[1],
+                        ],
+                      ),
+                    ),
+                    ring,
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.end,
+                        children: [
+                          metrics[2],
+                          const SizedBox(height: 24),
+                          metrics[3],
+                        ],
+                      ),
+                    ),
+                  ],
+                );
+              },
             ),
           ),
           if (_expanded) _extraPanel(battery, agg),
@@ -111,63 +148,83 @@ class _BatteryCardState extends State<BatteryCard> {
     return InkWell(
       // Тап по заголовку — конфигурация банка (решение Михаила 15.07);
       // к ячейкам батареи — из списка батарей на экране конфигурации.
-      onTap: () => Navigator.of(context).push(MaterialPageRoute(
-        builder: (_) => BankConfigScreen(bankId: bank.id),
-      )),
+      onTap: () => Navigator.of(context).push(
+        MaterialPageRoute(builder: (_) => BankConfigScreen(bankId: bank.id)),
+      ),
       borderRadius: BorderRadius.circular(18),
       child: Padding(
-      padding: const EdgeInsets.fromLTRB(14, 12, 14, 4),
-      child: Row(
-        children: [
-          BankIcon(bank.iconId, color: AppColors.accent, size: 36),
-          const SizedBox(width: 10),
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(bank.name,
+        padding: const EdgeInsets.fromLTRB(14, 12, 14, 4),
+        child: Row(
+          children: [
+            BankIcon(bank.iconId, color: AppColors.accent, size: 36),
+            const SizedBox(width: 10),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    bank.name,
                     style: TextStyle(
-                        color: AppColors.textPrimary,
-                        fontSize: 16,
-                        fontWeight: FontWeight.w600)),
-                Text(subtitle,
+                      color: AppColors.textPrimary,
+                      fontSize: 16,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                  Text(
+                    subtitle,
                     style: TextStyle(
-                        color: AppColors.textSecondary, fontSize: 11)),
-              ],
+                      color: AppColors.textSecondary,
+                      fontSize: 11,
+                    ),
+                  ),
+                ],
+              ),
             ),
-          ),
-          // Шестерёнка вместо Bluetooth: тап ведёт в настройки банка (26.07)
-          Icon(Icons.settings,
+            // Шестерёнка вместо Bluetooth: тап ведёт в настройки банка (26.07)
+            Icon(
+              Icons.settings,
               color: bank.connected
                   ? AppColors.textSecondary
                   : AppColors.textLabel,
-              size: 18),
-        ],
-      ),
+              size: 18,
+            ),
+          ],
+        ),
       ),
     );
   }
 
   Widget _metric(String label, String value, {bool end = false}) {
     return Column(
-      crossAxisAlignment: end ? CrossAxisAlignment.end : CrossAxisAlignment.start,
+      crossAxisAlignment: end
+          ? CrossAxisAlignment.end
+          : CrossAxisAlignment.start,
       children: [
-        Text(label,
-            textAlign: end ? TextAlign.right : TextAlign.left,
-            style: TextStyle(
-                color: AppColors.textLabel,
-                fontSize: 10,
-                fontWeight: FontWeight.w500,
-                letterSpacing: 0.8)),
+        Text(
+          label,
+          textAlign: end ? TextAlign.right : TextAlign.left,
+          style: TextStyle(
+            color: AppColors.textLabel,
+            fontSize: 10,
+            fontWeight: FontWeight.w500,
+            letterSpacing: 0.8,
+          ),
+        ),
         const SizedBox(height: 3),
-        Text(value,
+        FittedBox(
+          fit: BoxFit.scaleDown,
+          child: Text(
+            value.replaceAll(' ', '\u00a0'),
             textAlign: end ? TextAlign.right : TextAlign.left,
             style: TextStyle(
-                color: AppColors.textPrimary,
-                fontSize: 19,
-                fontWeight: FontWeight.w600,
-                letterSpacing: 0.2,
-                fontFeatures: [FontFeature.tabularFigures()])),
+              color: AppColors.textPrimary,
+              fontSize: 19,
+              fontWeight: FontWeight.w600,
+              letterSpacing: 0.2,
+              fontFeatures: [FontFeature.tabularFigures()],
+            ),
+          ),
+        ),
       ],
     );
   }
@@ -177,11 +234,21 @@ class _BatteryCardState extends State<BatteryCard> {
     // Параметры одной АКБ (ячейки, ср.напр., дисперсия, циклы, дата, SN) —
     // на экране батареи/ячеек, не на карточке банка.
     final tiles = <_Param>[
-      _Param(Icons.battery_5_bar, 'ЁМКОСТЬ ОСТАТОК',
-          '${agg.remaining.toStringAsFixed(1)} Ah'),
-      _Param(Icons.battery_full, 'ЁМКОСТЬ ПОЛНАЯ',
-          '${agg.full.toStringAsFixed(1)} Ah'),
-      _Param(Icons.thermostat, 'ТЕМПЕРАТУРА', '${agg.tempAvg.toStringAsFixed(1)} °C'),
+      _Param(
+        Icons.battery_5_bar,
+        'ЁМКОСТЬ ОСТАТОК',
+        '${agg.remaining.toStringAsFixed(1)} Ah',
+      ),
+      _Param(
+        Icons.battery_full,
+        'ЁМКОСТЬ ПОЛНАЯ',
+        '${agg.full.toStringAsFixed(1)} Ah',
+      ),
+      _Param(
+        Icons.thermostat,
+        'ТЕМПЕРАТУРА',
+        '${agg.tempAvg.toStringAsFixed(1)} °C',
+      ),
     ];
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
@@ -190,12 +257,25 @@ class _BatteryCardState extends State<BatteryCard> {
       ),
       child: Column(
         children: [
-          GridView.count(
-            crossAxisCount: 3,
-            shrinkWrap: true,
-            physics: const NeverScrollableScrollPhysics(),
-            childAspectRatio: 1.85,
-            children: tiles.map((t) => _paramTile(t)).toList(),
+          LayoutBuilder(
+            builder: (context, constraints) {
+              final scale = MediaQuery.textScalerOf(context).scale(15) / 15;
+              final columns = (constraints.maxWidth / (125 * scale))
+                  .floor()
+                  .clamp(1, 3);
+              return Wrap(
+                spacing: 8,
+                runSpacing: 4,
+                children: [
+                  for (final tile in tiles)
+                    SizedBox(
+                      width:
+                          (constraints.maxWidth - 8 * (columns - 1)) / columns,
+                      child: _paramTile(tile),
+                    ),
+                ],
+              );
+            },
           ),
           Align(
             alignment: Alignment.centerLeft,
@@ -213,8 +293,7 @@ class _BatteryCardState extends State<BatteryCard> {
   }
 
   Widget _paramTile(_Param t) {
-    // Зона подписи фиксированной высоты (2 строки), значения — крупнее и
-    // строго в один горизонтальный ряд (комментарий Михаила 15.07, п.4).
+    // Высота зависит от текста, включая системный масштаб шрифта.
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 6, horizontal: 2),
       child: Row(
@@ -226,22 +305,27 @@ class _BatteryCardState extends State<BatteryCard> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                SizedBox(
-                  height: 22,
-                  child: Text(t.label,
-                      maxLines: 2,
-                      overflow: TextOverflow.ellipsis,
-                      style: TextStyle(
-                          color: AppColors.textLabel,
-                          fontSize: 9,
-                          height: 1.1)),
+                Text(
+                  t.label,
+                  style: TextStyle(
+                    color: AppColors.textLabel,
+                    fontSize: 9,
+                    height: 1.1,
+                  ),
                 ),
-                Text(t.value,
+                const SizedBox(height: 4),
+                FittedBox(
+                  fit: BoxFit.scaleDown,
+                  child: Text(
+                    t.value.replaceAll(' ', '\u00a0'),
                     style: TextStyle(
-                        color: AppColors.textPrimary,
-                        fontSize: 15,
-                        fontWeight: FontWeight.w600,
-                        fontFeatures: const [FontFeature.tabularFigures()])),
+                      color: AppColors.textPrimary,
+                      fontSize: 15,
+                      fontWeight: FontWeight.w600,
+                      fontFeatures: const [FontFeature.tabularFigures()],
+                    ),
+                  ),
+                ),
               ],
             ),
           ),

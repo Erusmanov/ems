@@ -61,17 +61,20 @@ class SocRing extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 2),
-              Text('SOC',
-                  style: TextStyle(
-                      color: AppColors.textSecondary,
-                      fontSize: size * 0.085,
-                      letterSpacing: 1.5)),
+              Text(
+                'SOC',
+                style: TextStyle(
+                  color: AppColors.textSecondary,
+                  fontSize: math.min(size, 150) * 0.085,
+                  letterSpacing: 1.5,
+                ),
+              ),
               const SizedBox(height: 4),
               Text(
                 statusText,
                 style: TextStyle(
                   color: statusColor,
-                  fontSize: size * 0.085,
+                  fontSize: math.min(size, 150) * 0.085,
                   fontWeight: FontWeight.w600,
                 ),
               ),
@@ -125,6 +128,5 @@ class _RingPainter extends CustomPainter {
   }
 
   @override
-  bool shouldRepaint(_RingPainter old) =>
-      old.soc != soc || old.color != color;
+  bool shouldRepaint(_RingPainter old) => old.soc != soc || old.color != color;
 }
