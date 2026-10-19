@@ -67,15 +67,18 @@ class _BatteryCardState extends State<BatteryCard> {
             child: LayoutBuilder(
               builder: (context, constraints) {
                 final scale = MediaQuery.textScalerOf(context).scale(19) / 19;
+                final accessibleLayout = scale > 1.3;
                 final ring = SocRing(
                   soc: agg.soc,
                   color: ringColor,
                   statusText: _statusLabel(agg.status),
                   statusColor: _statusColor(agg.status),
-                  size: (138 * scale.clamp(1.0, 2.0)).clamp(
-                    0.0,
-                    constraints.maxWidth,
-                  ),
+                  size: accessibleLayout
+                      ? (138 * scale.clamp(1.0, 2.0)).clamp(
+                          0.0,
+                          constraints.maxWidth,
+                        )
+                      : (constraints.maxWidth * 0.40).clamp(0.0, 138.0),
                 );
                 final metrics = [
                   _metric('НАПРЯЖЕНИЕ', '${agg.voltage.toStringAsFixed(2)} V'),
@@ -83,7 +86,8 @@ class _BatteryCardState extends State<BatteryCard> {
                   _metric('МОЩНОСТЬ', _fmtPower(agg.power), end: true),
                   _metric(time.label.toUpperCase(), time.text, end: true),
                 ];
-                if (constraints.maxWidth < ring.size + 300 * scale) {
+                if (accessibleLayout &&
+                    constraints.maxWidth < ring.size + 300 * scale) {
                   final columns = constraints.maxWidth >= 300 * scale ? 2 : 1;
                   return Column(
                     children: [
@@ -200,14 +204,17 @@ class _BatteryCardState extends State<BatteryCard> {
           ? CrossAxisAlignment.end
           : CrossAxisAlignment.start,
       children: [
-        Text(
-          label,
-          textAlign: end ? TextAlign.right : TextAlign.left,
-          style: TextStyle(
-            color: AppColors.textLabel,
-            fontSize: 10,
-            fontWeight: FontWeight.w500,
-            letterSpacing: 0.8,
+        FittedBox(
+          fit: BoxFit.scaleDown,
+          child: Text(
+            label,
+            textAlign: end ? TextAlign.right : TextAlign.left,
+            style: TextStyle(
+              color: AppColors.textLabel,
+              fontSize: 10,
+              fontWeight: FontWeight.w500,
+              letterSpacing: 0.8,
+            ),
           ),
         ),
         const SizedBox(height: 3),

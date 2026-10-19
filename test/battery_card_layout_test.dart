@@ -6,9 +6,10 @@ import 'package:empower_bms/models/bank.dart';
 import 'package:empower_bms/models/bms_data.dart';
 import 'package:empower_bms/state/app_state.dart';
 import 'package:empower_bms/ui/widgets/battery_card.dart';
+import 'package:empower_bms/ui/widgets/soc_ring.dart';
 
 void main() {
-  for (final width in [320.0, 375.0, 443.0, 768.0]) {
+  for (final width in [320.0, 375.0, 390.0, 443.0, 768.0]) {
     for (final scale in [1.0, 1.5, 2.0]) {
       testWidgets('Battery card width=$width textScale=$scale', (tester) async {
         tester.view.physicalSize = Size(width, 1800);
@@ -59,6 +60,19 @@ void main() {
           ),
         );
         await tester.pumpAndSettle();
+        if (scale == 1.0) {
+          final ring = tester.getRect(find.byType(SocRing));
+          final voltage = tester.getRect(find.text('13.30\u00a0V'));
+          final power = tester.getRect(find.text('0\u00a0W'));
+          expect(voltage.right, lessThanOrEqualTo(ring.left + 0.1));
+          expect(power.left, greaterThanOrEqualTo(ring.right - 0.1));
+          expect(voltage.center.dy, inInclusiveRange(ring.top, ring.bottom));
+          expect(power.center.dy, inInclusiveRange(ring.top, ring.bottom));
+          expect(
+            tester.getSize(find.byType(BatteryCard)).height,
+            lessThan(280),
+          );
+        }
         await tester.tap(find.byIcon(Icons.keyboard_arrow_down));
         await tester.pumpAndSettle();
         expect(tester.takeException(), isNull);
