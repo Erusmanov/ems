@@ -106,7 +106,7 @@ class SettingsScreen extends StatelessWidget {
             _switchRow(
               context,
               icon: Icons.science_outlined,
-              label: 'Демо-банки (без железа)',
+              label: 'Демо режим',
               value: settings.demoMode,
               onChanged: (v) {
                 settings.demoMode = v;
