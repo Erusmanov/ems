@@ -68,8 +68,7 @@ const messages = {
     "connect_device": "Подключить устройство",
     "device_connected": "Устройство подключено",
     "connect_failed": "Не удалось подключиться",
-    "not_a_bms":
-        "Устройство подключилось, но не отвечает как Daly BMS — банк не создан",
+    "not_a_bms": "Устройство подключилось, но не отвечает как Daly BMS — банк не создан",
     "no_alerts": "Уведомлений нет",
     "all_ok": "Все подключённые батареи в норме",
     "alarm": "АВАРИЯ",
@@ -151,59 +150,46 @@ const messages = {
     "message_036": "Предупреждения о низком заряде банков АКБ",
     "message_037": "Критический заряд",
     "message_038": "«{0}»: SOC {1} % — ниже критического порога {2} %",
-    "message_039":
-        "В одиночный банк можно добавить только одну АКБ. Смените тип банка на параллельный или последовательный.",
+    "message_039": "В одиночный банк можно добавить только одну АКБ. Смените тип банка на параллельный или последовательный.",
     "message_040": "Устройство уже подключено",
-    "message_041":
-        "Устройство подключилось, но BMS не отвечает. Банк не создан",
-    "message_042":
-        "АКБ различаются по напряжению ({0}S против {1}S) — устанавливать их в общий банк недопустимо.",
-    "message_043":
-        "АКБ различаются по номинальной ёмкости ({0} Ач против {1} Ач) — устанавливать их в общий банк недопустимо.",
+    "message_041": "Устройство подключилось, но BMS не отвечает. Банк не создан",
+    "message_042": "АКБ различаются по напряжению ({0}S против {1}S) — устанавливать их в общий банк недопустимо.",
+    "message_043": "АКБ различаются по номинальной ёмкости ({0} Ач против {1} Ач) — устанавливать их в общий банк недопустимо.",
     "message_044": "Банк не найден",
-    "message_045":
-        "В одиночном банке не может быть больше одной АКБ — сначала отвяжите лишние батареи.",
+    "message_045": "В одиночном банке не может быть больше одной АКБ — сначала отвяжите лишние батареи.",
     "message_046": "Устройство не подключено",
     "message_047": "BMS вернула другое значение: {0} с",
     "message_048": "BMS вернула другое значение: {0}",
     "message_049": "Разброс SOC между АКБ {0} %",
     "message_050": "SOC ниже критического порога ({0} % ≤ {1} %)",
     "message_051": "SOC ниже порога уведомления ({0} % ≤ {1} %)",
-    "message_052": "{0} • {1} АКБ • SOC {2} %",
+    "message_052": "{0} • {1} • SOC {2} %",
     "message_053": "Введите название банка",
     "message_054": "Это имя уже занято другим банком",
     "message_055": "«{0}» будет удалён. {1}",
     "message_056": "Банк станет одиночным",
-    "message_057":
-        "После отвязки «{0}» в банке останется одна АКБ, поэтому «{1}» автоматически станет одиночным банком. Продолжить?",
+    "message_057": "После отвязки «{0}» в банке останется одна АКБ, поэтому «{1}» автоматически станет одиночным банком. Продолжить?",
     "message_058": "Отвязать",
     "message_059": "Удалить банк вместе с АКБ?",
-    "message_060":
-        "«{0}» — единственная АКБ банка. Пустых банков не бывает, поэтому вместе с отвязкой будет удалён и банк «{1}».",
+    "message_060": "«{0}» — единственная АКБ банка. Пустых банков не бывает, поэтому вместе с отвязкой будет удалён и банк «{1}».",
     "message_061": "Отвязать батарею?",
     "message_062": "«{0}» будет отключена и убрана из банка «{1}».",
-    "message_063":
-        "{0} требует минимум две АКБ — добавьте вторую батарею или смените тип.",
+    "message_063": "{0} требует минимум две АКБ — добавьте вторую батарею или смените тип.",
     "message_069": "Ячейка {0}, мВ",
-    "message_090":
-        "Сырых данных нет.\nДемо-устройства (мок) не отдают регистры — подключите реальную BMS.",
-    "message_091":
-        "SOC (регистр 0x2A): сырое = {0}\n→ как ×0.1 %: {1} %   → как 1 %: {2} %\nСравните с показанием сервисного приложения производителя BMS.",
+    "message_090": "Сырых данных нет.\nДемо-устройства (мок) не отдают регистры — подключите реальную BMS.",
+    "message_091": "SOC (регистр 0x2A): сырое = {0}\n→ как ×0.1 %: {1} %   → как 1 %: {2} %\nСравните с показанием сервисного приложения производителя BMS.",
     "message_092": "Адрес платы",
-    "message_093":
-        "Число от 1 до 16. Уникальный адрес нужен, чтобы батареи различались на шине RS485 и на приборах NMEA2000. Внимание: на NMEA2000-приборах номер отображается на единицу меньше (адрес 14 виден как «.13») — особенность протокола.",
+    "message_093": "Число от 1 до 16. Уникальный адрес нужен, чтобы батареи различались на шине RS485 и на приборах NMEA2000. Внимание: на NMEA2000-приборах номер отображается на единицу меньше (адрес 14 виден как «.13») — особенность протокола.",
     "message_094": "Адрес",
     "message_095": "Допустимый адрес — от 1 до 16 (проверено на BMS)",
     "message_096": "Записать",
-    "message_097":
-        "Адрес платы записан и проверен. Если приборы NMEA2000 не увидели смену — перезагрузите BMS.",
+    "message_097": "Адрес платы записан и проверен. Если приборы NMEA2000 не увидели смену — перезагрузите BMS.",
     "message_098": "Ошибка записи: {0}",
     "message_099": "{0} ч",
     "message_100": "{0} мин",
     "message_101": "{0} с",
     "message_107": "Никогда (не засыпать)",
-    "message_109":
-        "BMS перезапустится, связь с батареей на несколько секунд оборвётся. Затем подключите её заново через поиск, если не подхватится сама.",
+    "message_109": "BMS перезапустится, связь с батареей на несколько секунд оборвётся. Затем подключите её заново через поиск, если не подхватится сама.",
     "message_110": "Перезагрузить",
     "message_111": "Ошибка: {0}",
     "message_112": "Имя устройства",
@@ -222,24 +208,18 @@ const messages = {
     "message_131": "НА СВЯЗИ (НЕ ВИДНЫ В ПОИСКЕ)",
     "message_132": "{0} — банк «{1}»",
     "message_133": "Поиск АКБ поблизости…",
-    "message_134":
-        "АКБ не найдены.\nУбедитесь, что батарея включена и не подключена к другому приложению, затем обновите поиск. Кнопка «Показать все» выводит остальные BLE-устройства.",
+    "message_134": "АКБ не найдены.\nУбедитесь, что батарея включена и не подключена к другому приложению, затем обновите поиск. Кнопка «Показать все» выводит остальные BLE-устройства.",
     "message_135": "В БАНКЕ",
-    "message_136":
-        "Эта АКБ уже в банке «{0}». Управлять ею можно из вкладки «Банки».",
-    "message_137":
-        "Это устройство не похоже на АКБ EM-Power — подключить его нельзя. АКБ помечены жёлтым значком.",
+    "message_136": "Эта АКБ уже в банке «{0}». Управлять ею можно из вкладки «Банки».",
+    "message_137": "Это устройство не похоже на АКБ EM-Power — подключить его нельзя. АКБ помечены жёлтым значком.",
     "message_138": "Режим разработчика включён",
     "message_139": "Режим разработчика выключен",
-    "message_141":
-        "Пороги задают цвет кольца SOC на главном экране: выше «Уведомления» — зелёный, между порогами — жёлтый, ниже «Критического» — красный.",
+    "message_141": "Пороги задают цвет кольца SOC на главном экране: выше «Уведомления» — зелёный, между порогами — жёлтый, ниже «Критического» — красный.",
     "message_142": "Демо режим",
-    "message_143":
-        "Вкл — три демонстрационных банка с имитацией данных. Выкл — только реальные устройства; ваши банки сохраняются и восстанавливаются при запуске.",
+    "message_143": "Вкл — три демонстрационных банка с имитацией данных. Выкл — только реальные устройства; ваши банки сохраняются и восстанавливаются при запуске.",
     "message_151": "нет данных",
     "message_152": "Подключённые батареи ({0}) будут отвязаны.",
-    "message_065":
-        "В одиночном банке может быть только одна АКБ. Чтобы добавить ещё — смените тип банка на параллельный или последовательный.",
+    "message_065": "В одиночном банке может быть только одна АКБ. Чтобы добавить ещё — смените тип банка на параллельный или последовательный.",
     "message_066": "БАНК",
     "message_067": "Информация об устройстве",
     "message_078": "Число ячеек",
@@ -284,6 +264,12 @@ const messages = {
     "message_115": "Температура min / max",
     "message_116": "Адрес платы (RS485 / NMEA2000)",
     "message_149": "{0}ч {1}м",
+    "battery_count_one": "{0} АКБ",
+    "battery_count_few": "{0} АКБ",
+    "battery_count_other": "{0} АКБ",
+    "message_152_one": "Подключённая батарея ({0}) будет отвязана.",
+    "message_152_few": "Подключённые батареи ({0}) будут отвязаны.",
+    "message_152_other": "Подключённые батареи ({0}) будут отвязаны."
   },
   "en": {
     "nav_home": "Home",
@@ -353,8 +339,7 @@ const messages = {
     "connect_device": "Connect device",
     "device_connected": "Device connected",
     "connect_failed": "Connection failed",
-    "not_a_bms":
-        "Device connected but does not respond as a Daly BMS — bank not created",
+    "not_a_bms": "Device connected but does not respond as a Daly BMS — bank not created",
     "no_alerts": "No alerts",
     "all_ok": "All connected batteries are OK",
     "alarm": "ALARM",
@@ -436,59 +421,46 @@ const messages = {
     "message_036": "Low battery bank charge warnings",
     "message_037": "Critical battery level",
     "message_038": "“{0}”: SOC {1}% — below the critical threshold of {2}%",
-    "message_039":
-        "A single bank supports one battery. Change the bank type to parallel or series to add more.",
+    "message_039": "A single bank supports one battery. Change the bank type to parallel or series to add more.",
     "message_040": "Device already connected",
-    "message_041":
-        "Device connected, but BMS is not responding. No bank was created.",
-    "message_042":
-        "Batteries have different voltages ({0}S vs {1}S). They cannot share a bank.",
-    "message_043":
-        "Batteries have different rated capacities ({0} Ah vs {1} Ah). They cannot share a bank.",
+    "message_041": "Device connected, but BMS is not responding. No bank was created.",
+    "message_042": "Batteries have different voltages ({0}S vs {1}S). They cannot share a bank.",
+    "message_043": "Batteries have different rated capacities ({0} Ah vs {1} Ah). They cannot share a bank.",
     "message_044": "Bank not found",
-    "message_045":
-        "A single bank cannot contain multiple batteries. Unlink the extra batteries first.",
+    "message_045": "A single bank cannot contain multiple batteries. Unlink the extra batteries first.",
     "message_046": "Device not connected",
     "message_047": "BMS returned a different value: {0} s",
     "message_048": "BMS returned a different value: {0}",
     "message_049": "SOC spread between batteries: {0}%",
     "message_050": "SOC at or below critical threshold ({0}% ≤ {1}%)",
     "message_051": "SOC at or below warning threshold ({0}% ≤ {1}%)",
-    "message_052": "{0} • {1} batteries • SOC {2}%",
+    "message_052": "{0} • {1} • SOC {2}%",
     "message_053": "Enter a bank name",
     "message_054": "Another bank already uses this name",
     "message_055": "“{0}” will be deleted. {1}",
     "message_056": "Bank will become single",
-    "message_057":
-        "Unlinking “{0}” will leave one battery. “{1}” will become a single bank. Continue?",
+    "message_057": "Unlinking “{0}” will leave one battery. “{1}” will become a single bank. Continue?",
     "message_058": "Unlink",
     "message_059": "Delete bank and unlink battery?",
-    "message_060":
-        "“{0}” is the only battery. Unlinking it will also delete bank “{1}”, since empty banks are not allowed.",
+    "message_060": "“{0}” is the only battery. Unlinking it will also delete bank “{1}”, since empty banks are not allowed.",
     "message_061": "Unlink battery?",
     "message_062": "“{0}” will be disconnected and removed from bank “{1}”.",
-    "message_063":
-        "{0} needs at least two batteries. Add another battery or change the type.",
+    "message_063": "{0} needs at least two batteries. Add another battery or change the type.",
     "message_069": "Cell {0}, mV",
-    "message_090":
-        "No raw data. Demo devices do not provide registers. Connect a real BMS.",
-    "message_091":
-        "SOC (register 0x2A): raw = {0}\nAt ×0.1%: {1}%   At 1%: {2}%\nCompare with the BMS manufacturer's service app.",
+    "message_090": "No raw data. Demo devices do not provide registers. Connect a real BMS.",
+    "message_091": "SOC (register 0x2A): raw = {0}\nAt ×0.1%: {1}%   At 1%: {2}%\nCompare with the BMS manufacturer's service app.",
     "message_092": "Board address",
-    "message_093":
-        "Number from 1 to 16. A unique address identifies each battery on RS485 and NMEA2000 devices. NMEA2000 displays one less: address 14 appears as “.13”.",
+    "message_093": "Number from 1 to 16. A unique address identifies each battery on RS485 and NMEA2000 devices. NMEA2000 displays one less: address 14 appears as “.13”.",
     "message_094": "Address",
     "message_095": "Valid address range: 1–16",
     "message_096": "Write",
-    "message_097":
-        "Board address written and verified. Restart BMS if NMEA2000 devices do not detect the change.",
+    "message_097": "Board address written and verified. Restart BMS if NMEA2000 devices do not detect the change.",
     "message_098": "Write error: {0}",
     "message_099": "{0} h",
     "message_100": "{0} min",
     "message_101": "{0} s",
     "message_107": "Never (stay awake)",
-    "message_109":
-        "BMS will restart and disconnect briefly. Reconnect via device search if it does not reconnect automatically.",
+    "message_109": "BMS will restart and disconnect briefly. Reconnect via device search if it does not reconnect automatically.",
     "message_110": "Restart",
     "message_111": "Error: {0}",
     "message_112": "Device name",
@@ -497,36 +469,28 @@ const messages = {
     "message_118": "Scan error: {0}",
     "message_119": "WHICH BANK SHOULD THIS DEVICE JOIN?",
     "message_120": "Single bank is already occupied",
-    "message_122":
-        "Battery added. “{0}” is {1}: add at least one more battery.",
+    "message_122": "Battery added. “{0}” is {1}: add at least one more battery.",
     "message_123": "Could not connect: {0}",
     "message_124": "Please wait — connecting device",
     "message_125": "Bank has one battery",
-    "message_126":
-        "“{0}” is {1} and needs at least two batteries. What would you like to do?",
+    "message_126": "“{0}” is {1} and needs at least two batteries. What would you like to do?",
     "message_127": "Add another",
     "message_128": "Make single",
     "message_131": "CONNECTED (NOT SHOWN IN SCAN)",
     "message_132": "{0} — bank “{1}”",
     "message_133": "Searching for nearby batteries…",
-    "message_134":
-        "No batteries found. Ensure the battery is on and not connected to another app, then scan again. “Show all” lists other BLE devices.",
+    "message_134": "No batteries found. Ensure the battery is on and not connected to another app, then scan again. “Show all” lists other BLE devices.",
     "message_135": "IN BANK",
-    "message_136":
-        "This battery is already in bank “{0}”. Manage it from the Banks tab.",
-    "message_137":
-        "This device does not appear to be an EM-Power battery and cannot be connected. Batteries have a yellow icon.",
+    "message_136": "This battery is already in bank “{0}”. Manage it from the Banks tab.",
+    "message_137": "This device does not appear to be an EM-Power battery and cannot be connected. Batteries have a yellow icon.",
     "message_138": "Developer mode enabled",
     "message_139": "Developer mode disabled",
-    "message_141":
-        "SOC ring colors: green above the warning threshold, yellow between thresholds, red below the critical threshold.",
+    "message_141": "SOC ring colors: green above the warning threshold, yellow between thresholds, red below the critical threshold.",
     "message_142": "Demo mode",
-    "message_143":
-        "On: three demo banks with simulated data. Off: real devices only. Your banks are saved and restored on startup.",
+    "message_143": "On: three demo banks with simulated data. Off: real devices only. Your banks are saved and restored on startup.",
     "message_151": "No data",
     "message_152": "Connected batteries ({0}) will be unlinked.",
-    "message_065":
-        "A single bank supports one battery. Change the bank type to parallel or series to add more.",
+    "message_065": "A single bank supports one battery. Change the bank type to parallel or series to add more.",
     "message_066": "Bank",
     "message_067": "About device",
     "message_078": "Cell count",
@@ -571,6 +535,12 @@ const messages = {
     "message_115": "TEMPERATURE min / max",
     "message_116": "Board address (RS485 / NMEA2000)",
     "message_149": "{0} h {1} min",
+    "battery_count_one": "{0} battery",
+    "battery_count_few": "{0} batteries",
+    "battery_count_other": "{0} batteries",
+    "message_152_one": "The connected battery ({0}) will be unlinked.",
+    "message_152_few": "Connected batteries ({0}) will be unlinked.",
+    "message_152_other": "Connected batteries ({0}) will be unlinked."
   },
   "de": {
     "nav_home": "Start",
@@ -640,8 +610,7 @@ const messages = {
     "connect_device": "Gerät verbinden",
     "device_connected": "Gerät verbunden",
     "connect_failed": "Verbindung fehlgeschlagen",
-    "not_a_bms":
-        "Gerät verbunden, antwortet aber nicht als Daly-BMS — Bank nicht angelegt",
+    "not_a_bms": "Gerät verbunden, antwortet aber nicht als Daly-BMS — Bank nicht angelegt",
     "no_alerts": "Keine Meldungen",
     "all_ok": "Alle verbundenen Batterien in Ordnung",
     "alarm": "ALARM",
@@ -723,59 +692,46 @@ const messages = {
     "message_036": "Warnungen bei niedrigem Ladezustand",
     "message_037": "Kritischer Ladezustand",
     "message_038": "„{0}“: SOC {1}% — unter der kritischen Schwelle von {2}%",
-    "message_039":
-        "Eine Einzelbank unterstützt eine Batterie. Für weitere Batterien auf Parallel- oder Reihenschaltung wechseln.",
+    "message_039": "Eine Einzelbank unterstützt eine Batterie. Für weitere Batterien auf Parallel- oder Reihenschaltung wechseln.",
     "message_040": "Gerät bereits verbunden",
-    "message_041":
-        "Gerät verbunden, aber BMS antwortet nicht. Keine Bank erstellt.",
-    "message_042":
-        "Batterien haben unterschiedliche Spannungen ({0}S / {1}S). Gemeinsame Bank unzulässig.",
-    "message_043":
-        "Unterschiedliche Nennkapazitäten ({0} Ah / {1} Ah). Gemeinsame Bank unzulässig.",
+    "message_041": "Gerät verbunden, aber BMS antwortet nicht. Keine Bank erstellt.",
+    "message_042": "Batterien haben unterschiedliche Spannungen ({0}S / {1}S). Gemeinsame Bank unzulässig.",
+    "message_043": "Unterschiedliche Nennkapazitäten ({0} Ah / {1} Ah). Gemeinsame Bank unzulässig.",
     "message_044": "Bank nicht gefunden",
-    "message_045":
-        "Eine Einzelbank darf nur eine Batterie enthalten. Weitere Batterien zuerst trennen.",
+    "message_045": "Eine Einzelbank darf nur eine Batterie enthalten. Weitere Batterien zuerst trennen.",
     "message_046": "Gerät nicht verbunden",
     "message_047": "BMS meldet einen anderen Wert: {0} s",
     "message_048": "BMS meldet einen anderen Wert: {0}",
     "message_049": "SOC-Abweichung zwischen Batterien: {0}%",
     "message_050": "SOC an/unter kritischer Schwelle ({0}% ≤ {1}%)",
     "message_051": "SOC an/unter Warnschwelle ({0}% ≤ {1}%)",
-    "message_052": "{0} • {1} Batterien • SOC {2}%",
+    "message_052": "{0} • {1} • SOC {2}%",
     "message_053": "Banknamen eingeben",
     "message_054": "Name bereits vergeben",
     "message_055": "„{0}“ wird gelöscht. {1}",
     "message_056": "Bank wird zur Einzelbank",
-    "message_057":
-        "Nach Trennen von „{0}“ bleibt eine Batterie. „{1}“ wird zur Einzelbank. Fortfahren?",
+    "message_057": "Nach Trennen von „{0}“ bleibt eine Batterie. „{1}“ wird zur Einzelbank. Fortfahren?",
     "message_058": "Trennen",
     "message_059": "Bank löschen und Batterie trennen?",
-    "message_060":
-        "„{0}“ ist die einzige Batterie. Beim Trennen wird auch Bank „{1}“ gelöscht, da leere Banken unzulässig sind.",
+    "message_060": "„{0}“ ist die einzige Batterie. Beim Trennen wird auch Bank „{1}“ gelöscht, da leere Banken unzulässig sind.",
     "message_061": "Batterie trennen?",
     "message_062": "„{0}“ wird getrennt und aus Bank „{1}“ entfernt.",
-    "message_063":
-        "{0} benötigt mindestens zwei Batterien. Batterie hinzufügen oder Typ ändern.",
+    "message_063": "{0} benötigt mindestens zwei Batterien. Batterie hinzufügen oder Typ ändern.",
     "message_069": "Zelle {0}, mV",
-    "message_090":
-        "Keine Rohdaten. Demogeräte liefern keine Register. Eine echte BMS verbinden.",
-    "message_091":
-        "SOC (Register 0x2A): roh = {0}\nBei ×0.1%: {1}%   Bei 1%: {2}%\nMit der Service-App des BMS-Herstellers vergleichen.",
+    "message_090": "Keine Rohdaten. Demogeräte liefern keine Register. Eine echte BMS verbinden.",
+    "message_091": "SOC (Register 0x2A): roh = {0}\nBei ×0.1%: {1}%   Bei 1%: {2}%\nMit der Service-App des BMS-Herstellers vergleichen.",
     "message_092": "Platinenadresse",
-    "message_093":
-        "Zahl von 1 bis 16. Eine eindeutige Adresse identifiziert jede Batterie an RS485 und NMEA2000. NMEA2000 zeigt eins weniger an: Adresse 14 erscheint als „.13“.",
+    "message_093": "Zahl von 1 bis 16. Eine eindeutige Adresse identifiziert jede Batterie an RS485 und NMEA2000. NMEA2000 zeigt eins weniger an: Adresse 14 erscheint als „.13“.",
     "message_094": "Adresse",
     "message_095": "Gültiger Adressbereich: 1–16",
     "message_096": "Schreiben",
-    "message_097":
-        "Platinenadresse geschrieben und geprüft. BMS neu starten, falls NMEA2000 die Änderung nicht erkennt.",
+    "message_097": "Platinenadresse geschrieben und geprüft. BMS neu starten, falls NMEA2000 die Änderung nicht erkennt.",
     "message_098": "Schreibfehler: {0}",
     "message_099": "{0} Std.",
     "message_100": "{0} Min.",
     "message_101": "{0} s",
     "message_107": "Nie (wach bleiben)",
-    "message_109":
-        "BMS startet neu und trennt kurz die Verbindung. Falls nötig, über die Gerätesuche erneut verbinden.",
+    "message_109": "BMS startet neu und trennt kurz die Verbindung. Falls nötig, über die Gerätesuche erneut verbinden.",
     "message_110": "Neu starten",
     "message_111": "Fehler: {0}",
     "message_112": "Gerätename",
@@ -784,36 +740,28 @@ const messages = {
     "message_118": "Suchfehler: {0}",
     "message_119": "ZU WELCHER BANK HINZUFÜGEN?",
     "message_120": "Einzelbank bereits belegt",
-    "message_122":
-        "Batterie hinzugefügt. „{0}“ ist {1}: mindestens eine weitere Batterie hinzufügen.",
+    "message_122": "Batterie hinzugefügt. „{0}“ ist {1}: mindestens eine weitere Batterie hinzufügen.",
     "message_123": "Verbindung fehlgeschlagen: {0}",
     "message_124": "Bitte warten — Gerät wird verbunden",
     "message_125": "Bank enthält eine Batterie",
-    "message_126":
-        "„{0}“ ist {1} und benötigt mindestens zwei Batterien. Wie fortfahren?",
+    "message_126": "„{0}“ ist {1} und benötigt mindestens zwei Batterien. Wie fortfahren?",
     "message_127": "Weitere hinzufügen",
     "message_128": "Als Einzelbank verwenden",
     "message_131": "VERBUNDEN (NICHT IN DER SUCHE)",
     "message_132": "{0} — Bank „{1}“",
     "message_133": "Batterien in der Nähe suchen…",
-    "message_134":
-        "Keine Batterien gefunden. Batterie einschalten und von anderen Apps trennen, dann erneut suchen. „Alle anzeigen“ listet weitere BLE-Geräte.",
+    "message_134": "Keine Batterien gefunden. Batterie einschalten und von anderen Apps trennen, dann erneut suchen. „Alle anzeigen“ listet weitere BLE-Geräte.",
     "message_135": "IN BANK",
-    "message_136":
-        "Diese Batterie ist bereits in Bank „{0}“. Verwaltung über den Tab „Bänke“.",
-    "message_137":
-        "Dieses Gerät scheint keine EM-Power-Batterie zu sein und kann nicht verbunden werden. Batterien haben ein gelbes Symbol.",
+    "message_136": "Diese Batterie ist bereits in Bank „{0}“. Verwaltung über den Tab „Bänke“.",
+    "message_137": "Dieses Gerät scheint keine EM-Power-Batterie zu sein und kann nicht verbunden werden. Batterien haben ein gelbes Symbol.",
     "message_138": "Entwicklermodus aktiviert",
     "message_139": "Entwicklermodus deaktiviert",
-    "message_141":
-        "SOC-Ringfarben: Grün über der Warnschwelle, Gelb zwischen den Schwellen, Rot unter der kritischen Schwelle.",
+    "message_141": "SOC-Ringfarben: Grün über der Warnschwelle, Gelb zwischen den Schwellen, Rot unter der kritischen Schwelle.",
     "message_142": "Demomodus",
-    "message_143":
-        "Ein: drei Demobanken mit simulierten Daten. Aus: nur echte Geräte. Ihre Banken werden gespeichert und beim Start wiederhergestellt.",
+    "message_143": "Ein: drei Demobanken mit simulierten Daten. Aus: nur echte Geräte. Ihre Banken werden gespeichert und beim Start wiederhergestellt.",
     "message_151": "Keine Daten",
     "message_152": "Verbundene Batterien ({0}) werden getrennt.",
-    "message_065":
-        "Eine Einzelbank unterstützt eine Batterie. Für weitere Batterien auf Parallel- oder Reihenschaltung wechseln.",
+    "message_065": "Eine Einzelbank unterstützt eine Batterie. Für weitere Batterien auf Parallel- oder Reihenschaltung wechseln.",
     "message_066": "Bank",
     "message_067": "Über das Gerät",
     "message_078": "Zellenanzahl",
@@ -858,6 +806,12 @@ const messages = {
     "message_115": "TEMPERATUR min / max",
     "message_116": "Platinenadresse (RS485 / NMEA2000)",
     "message_149": "{0} Std. {1} Min.",
+    "battery_count_one": "{0} Batterie",
+    "battery_count_few": "{0} Batterien",
+    "battery_count_other": "{0} Batterien",
+    "message_152_one": "Die verbundene Batterie ({0}) wird getrennt.",
+    "message_152_few": "Verbundene Batterien ({0}) werden getrennt.",
+    "message_152_other": "Verbundene Batterien ({0}) werden getrennt."
   },
   "fr": {
     "nav_home": "Accueil",
@@ -927,8 +881,7 @@ const messages = {
     "connect_device": "Connecter un appareil",
     "device_connected": "Appareil connecté",
     "connect_failed": "Échec de connexion",
-    "not_a_bms":
-        "Appareil connecté mais ne répond pas comme un BMS Daly — parc non créé",
+    "not_a_bms": "Appareil connecté mais ne répond pas comme un BMS Daly — parc non créé",
     "no_alerts": "Aucune alerte",
     "all_ok": "Toutes les batteries connectées sont OK",
     "alarm": "ALARME",
@@ -1010,59 +963,46 @@ const messages = {
     "message_036": "Alertes de faible charge des parcs",
     "message_037": "Charge critique",
     "message_038": "« {0} » : SOC {1}% — sous le seuil critique de {2}%",
-    "message_039":
-        "Un parc simple accepte une batterie. Choisissez parallèle ou série pour en ajouter.",
+    "message_039": "Un parc simple accepte une batterie. Choisissez parallèle ou série pour en ajouter.",
     "message_040": "Appareil déjà connecté",
-    "message_041":
-        "Appareil connecté, mais le BMS ne répond pas. Aucun parc créé.",
-    "message_042":
-        "Tensions différentes ({0}S / {1}S). Ces batteries ne peuvent pas partager un parc.",
-    "message_043":
-        "Capacités nominales différentes ({0} Ah / {1} Ah). Un même parc est interdit.",
+    "message_041": "Appareil connecté, mais le BMS ne répond pas. Aucun parc créé.",
+    "message_042": "Tensions différentes ({0}S / {1}S). Ces batteries ne peuvent pas partager un parc.",
+    "message_043": "Capacités nominales différentes ({0} Ah / {1} Ah). Un même parc est interdit.",
     "message_044": "Parc introuvable",
-    "message_045":
-        "Un parc simple ne peut contenir qu'une batterie. Retirez d'abord les autres.",
+    "message_045": "Un parc simple ne peut contenir qu'une batterie. Retirez d'abord les autres.",
     "message_046": "Appareil non connecté",
     "message_047": "Le BMS renvoie une autre valeur : {0} s",
     "message_048": "Le BMS renvoie une autre valeur : {0}",
     "message_049": "Écart de SOC entre batteries : {0}%",
     "message_050": "SOC au seuil critique ou inférieur ({0}% ≤ {1}%)",
     "message_051": "SOC au seuil d'alerte ou inférieur ({0}% ≤ {1}%)",
-    "message_052": "{0} • {1} batteries • SOC {2}%",
+    "message_052": "{0} • {1} • SOC {2}%",
     "message_053": "Saisissez un nom de parc",
     "message_054": "Ce nom est déjà utilisé",
     "message_055": "« {0} » sera supprimé. {1}",
     "message_056": "Le parc deviendra simple",
-    "message_057":
-        "Retirer « {0} » laissera une batterie. « {1} » deviendra un parc simple. Continuer ?",
+    "message_057": "Retirer « {0} » laissera une batterie. « {1} » deviendra un parc simple. Continuer ?",
     "message_058": "Dissocier",
     "message_059": "Supprimer le parc et dissocier la batterie ?",
-    "message_060":
-        "« {0} » est la seule batterie. Sa dissociation supprimera aussi le parc « {1} », car un parc ne peut être vide.",
+    "message_060": "« {0} » est la seule batterie. Sa dissociation supprimera aussi le parc « {1} », car un parc ne peut être vide.",
     "message_061": "Dissocier la batterie ?",
     "message_062": "« {0} » sera déconnectée et retirée du parc « {1} ».",
-    "message_063":
-        "{0} nécessite au moins deux batteries. Ajoutez-en une ou changez le type.",
+    "message_063": "{0} nécessite au moins deux batteries. Ajoutez-en une ou changez le type.",
     "message_069": "Cellule {0}, mV",
-    "message_090":
-        "Aucune donnée brute. Les appareils démo ne fournissent pas de registres. Connectez un vrai BMS.",
-    "message_091":
-        "SOC (registre 0x2A) : brut = {0}\nÀ ×0.1% : {1}%   À 1% : {2}%\nComparez avec l'application du fabricant du BMS.",
+    "message_090": "Aucune donnée brute. Les appareils démo ne fournissent pas de registres. Connectez un vrai BMS.",
+    "message_091": "SOC (registre 0x2A) : brut = {0}\nÀ ×0.1% : {1}%   À 1% : {2}%\nComparez avec l'application du fabricant du BMS.",
     "message_092": "Adresse de la carte",
-    "message_093":
-        "Nombre de 1 à 16. Une adresse unique distingue les batteries sur RS485 et NMEA2000. NMEA2000 affiche un de moins : l'adresse 14 apparaît « .13 ».",
+    "message_093": "Nombre de 1 à 16. Une adresse unique distingue les batteries sur RS485 et NMEA2000. NMEA2000 affiche un de moins : l'adresse 14 apparaît « .13 ».",
     "message_094": "Adresse",
     "message_095": "Plage d'adresses valide : 1–16",
     "message_096": "Écrire",
-    "message_097":
-        "Adresse écrite et vérifiée. Redémarrez le BMS si NMEA2000 ne détecte pas le changement.",
+    "message_097": "Adresse écrite et vérifiée. Redémarrez le BMS si NMEA2000 ne détecte pas le changement.",
     "message_098": "Erreur d'écriture : {0}",
     "message_099": "{0} h",
     "message_100": "{0} min",
     "message_101": "{0} s",
     "message_107": "Jamais (rester actif)",
-    "message_109":
-        "Le BMS redémarrera et se déconnectera brièvement. Reconnectez-le via la recherche si nécessaire.",
+    "message_109": "Le BMS redémarrera et se déconnectera brièvement. Reconnectez-le via la recherche si nécessaire.",
     "message_110": "Redémarrer",
     "message_111": "Erreur : {0}",
     "message_112": "Nom de l'appareil",
@@ -1071,36 +1011,28 @@ const messages = {
     "message_118": "Erreur de recherche : {0}",
     "message_119": "À QUEL PARC AJOUTER L'APPAREIL ?",
     "message_120": "Parc simple déjà occupé",
-    "message_122":
-        "Batterie ajoutée. « {0} » est {1} : ajoutez au moins une autre batterie.",
+    "message_122": "Batterie ajoutée. « {0} » est {1} : ajoutez au moins une autre batterie.",
     "message_123": "Connexion impossible : {0}",
     "message_124": "Patientez — connexion en cours",
     "message_125": "Le parc contient une batterie",
-    "message_126":
-        "« {0} » est {1} et nécessite au moins deux batteries. Que faire ?",
+    "message_126": "« {0} » est {1} et nécessite au moins deux batteries. Que faire ?",
     "message_127": "Ajouter une autre",
     "message_128": "Convertir en simple",
     "message_131": "CONNECTÉS (ABSENTS DE LA RECHERCHE)",
     "message_132": "{0} — parc « {1} »",
     "message_133": "Recherche de batteries à proximité…",
-    "message_134":
-        "Aucune batterie trouvée. Vérifiez qu'elle est allumée et déconnectée des autres applications, puis relancez la recherche. « Tout afficher » liste les autres appareils BLE.",
+    "message_134": "Aucune batterie trouvée. Vérifiez qu'elle est allumée et déconnectée des autres applications, puis relancez la recherche. « Tout afficher » liste les autres appareils BLE.",
     "message_135": "DANS UN PARC",
-    "message_136":
-        "Cette batterie est déjà dans « {0} ». Gérez-la dans l'onglet Parcs.",
-    "message_137":
-        "Cet appareil ne semble pas être une batterie EM-Power et ne peut être connecté. Les batteries ont une icône jaune.",
+    "message_136": "Cette batterie est déjà dans « {0} ». Gérez-la dans l'onglet Parcs.",
+    "message_137": "Cet appareil ne semble pas être une batterie EM-Power et ne peut être connecté. Les batteries ont une icône jaune.",
     "message_138": "Mode développeur activé",
     "message_139": "Mode développeur désactivé",
-    "message_141":
-        "Couleurs SOC : vert au-dessus du seuil d'alerte, jaune entre les seuils, rouge sous le seuil critique.",
+    "message_141": "Couleurs SOC : vert au-dessus du seuil d'alerte, jaune entre les seuils, rouge sous le seuil critique.",
     "message_142": "Mode démo",
-    "message_143":
-        "Activé : trois parcs démo avec données simulées. Désactivé : appareils réels uniquement. Vos parcs sont conservés et restaurés au démarrage.",
+    "message_143": "Activé : trois parcs démo avec données simulées. Désactivé : appareils réels uniquement. Vos parcs sont conservés et restaurés au démarrage.",
     "message_151": "Aucune donnée",
     "message_152": "Les batteries connectées ({0}) seront dissociées.",
-    "message_065":
-        "Un parc simple accepte une batterie. Choisissez parallèle ou série pour en ajouter.",
+    "message_065": "Un parc simple accepte une batterie. Choisissez parallèle ou série pour en ajouter.",
     "message_066": "Parc",
     "message_067": "À propos de l'appareil",
     "message_078": "Nombre de cellules",
@@ -1145,6 +1077,12 @@ const messages = {
     "message_115": "TEMPÉRATURE min / max",
     "message_116": "Adresse de la carte (RS485 / NMEA2000)",
     "message_149": "{0} h {1} min",
+    "battery_count_one": "{0} batterie",
+    "battery_count_few": "{0} batteries",
+    "battery_count_other": "{0} batteries",
+    "message_152_one": "La batterie connectée ({0}) sera dissociée.",
+    "message_152_few": "Les batteries connectées ({0}) seront dissociées.",
+    "message_152_other": "Les batteries connectées ({0}) seront dissociées."
   },
   "es": {
     "nav_home": "Inicio",
@@ -1214,8 +1152,7 @@ const messages = {
     "connect_device": "Conectar dispositivo",
     "device_connected": "Dispositivo conectado",
     "connect_failed": "Error de conexión",
-    "not_a_bms":
-        "El dispositivo se conectó pero no responde como BMS Daly: banco no creado",
+    "not_a_bms": "El dispositivo se conectó pero no responde como BMS Daly: banco no creado",
     "no_alerts": "Sin alertas",
     "all_ok": "Todas las baterías conectadas están bien",
     "alarm": "ALARMA",
@@ -1297,59 +1234,46 @@ const messages = {
     "message_036": "Avisos de carga baja de los bancos",
     "message_037": "Nivel de carga crítico",
     "message_038": "«{0}»: SOC {1}% — por debajo del umbral crítico de {2}%",
-    "message_039":
-        "Un banco individual admite una batería. Cambie a paralelo o serie para añadir más.",
+    "message_039": "Un banco individual admite una batería. Cambie a paralelo o serie para añadir más.",
     "message_040": "Dispositivo ya conectado",
-    "message_041":
-        "Dispositivo conectado, pero el BMS no responde. No se creó el banco.",
-    "message_042":
-        "Voltajes distintos ({0}S / {1}S). No pueden formar un mismo banco.",
-    "message_043":
-        "Capacidades nominales distintas ({0} Ah / {1} Ah). No pueden compartir banco.",
+    "message_041": "Dispositivo conectado, pero el BMS no responde. No se creó el banco.",
+    "message_042": "Voltajes distintos ({0}S / {1}S). No pueden formar un mismo banco.",
+    "message_043": "Capacidades nominales distintas ({0} Ah / {1} Ah). No pueden compartir banco.",
     "message_044": "Banco no encontrado",
-    "message_045":
-        "Un banco individual solo admite una batería. Desvincule primero las demás.",
+    "message_045": "Un banco individual solo admite una batería. Desvincule primero las demás.",
     "message_046": "Dispositivo no conectado",
     "message_047": "BMS devolvió otro valor: {0} s",
     "message_048": "BMS devolvió otro valor: {0}",
     "message_049": "Diferencia de SOC entre baterías: {0}%",
     "message_050": "SOC en el umbral crítico o inferior ({0}% ≤ {1}%)",
     "message_051": "SOC en el umbral de aviso o inferior ({0}% ≤ {1}%)",
-    "message_052": "{0} • {1} baterías • SOC {2}%",
+    "message_052": "{0} • {1} • SOC {2}%",
     "message_053": "Introduzca un nombre de banco",
     "message_054": "Este nombre ya está en uso",
     "message_055": "Se eliminará «{0}». {1}",
     "message_056": "El banco será individual",
-    "message_057":
-        "Al desvincular «{0}» quedará una batería. «{1}» será un banco individual. ¿Continuar?",
+    "message_057": "Al desvincular «{0}» quedará una batería. «{1}» será un banco individual. ¿Continuar?",
     "message_058": "Desvincular",
     "message_059": "¿Eliminar banco y desvincular batería?",
-    "message_060":
-        "«{0}» es la única batería. Al desvincularla se eliminará «{1}», ya que no se permiten bancos vacíos.",
+    "message_060": "«{0}» es la única batería. Al desvincularla se eliminará «{1}», ya que no se permiten bancos vacíos.",
     "message_061": "¿Desvincular batería?",
     "message_062": "«{0}» se desconectará y eliminará del banco «{1}».",
-    "message_063":
-        "{0} necesita al menos dos baterías. Añada otra o cambie el tipo.",
+    "message_063": "{0} necesita al menos dos baterías. Añada otra o cambie el tipo.",
     "message_069": "Celda {0}, mV",
-    "message_090":
-        "Sin datos sin procesar. Los dispositivos demo no proporcionan registros. Conecte un BMS real.",
-    "message_091":
-        "SOC (registro 0x2A): bruto = {0}\nA ×0.1%: {1}%   A 1%: {2}%\nCompare con la aplicación del fabricante del BMS.",
+    "message_090": "Sin datos sin procesar. Los dispositivos demo no proporcionan registros. Conecte un BMS real.",
+    "message_091": "SOC (registro 0x2A): bruto = {0}\nA ×0.1%: {1}%   A 1%: {2}%\nCompare con la aplicación del fabricante del BMS.",
     "message_092": "Dirección de placa",
-    "message_093":
-        "Número de 1 a 16. Una dirección única identifica cada batería en RS485 y NMEA2000. NMEA2000 muestra uno menos: la dirección 14 aparece como «.13».",
+    "message_093": "Número de 1 a 16. Una dirección única identifica cada batería en RS485 y NMEA2000. NMEA2000 muestra uno menos: la dirección 14 aparece como «.13».",
     "message_094": "Dirección",
     "message_095": "Rango de dirección válido: 1–16",
     "message_096": "Escribir",
-    "message_097":
-        "Dirección guardada y verificada. Reinicie BMS si NMEA2000 no detecta el cambio.",
+    "message_097": "Dirección guardada y verificada. Reinicie BMS si NMEA2000 no detecta el cambio.",
     "message_098": "Error de escritura: {0}",
     "message_099": "{0} h",
     "message_100": "{0} min",
     "message_101": "{0} s",
     "message_107": "Nunca (sin suspensión)",
-    "message_109":
-        "BMS se reiniciará y desconectará brevemente. Reconecte mediante búsqueda si no lo hace automáticamente.",
+    "message_109": "BMS se reiniciará y desconectará brevemente. Reconecte mediante búsqueda si no lo hace automáticamente.",
     "message_110": "Reiniciar",
     "message_111": "Error: {0}",
     "message_112": "Nombre del dispositivo",
@@ -1358,36 +1282,28 @@ const messages = {
     "message_118": "Error de búsqueda: {0}",
     "message_119": "¿A QUÉ BANCO AÑADIR EL DISPOSITIVO?",
     "message_120": "Banco individual ya ocupado",
-    "message_122":
-        "Batería añadida. «{0}» es {1}: añada al menos otra batería.",
+    "message_122": "Batería añadida. «{0}» es {1}: añada al menos otra batería.",
     "message_123": "No se pudo conectar: {0}",
     "message_124": "Espere — conectando dispositivo",
     "message_125": "El banco tiene una batería",
-    "message_126":
-        "«{0}» es {1} y necesita al menos dos baterías. ¿Qué desea hacer?",
+    "message_126": "«{0}» es {1} y necesita al menos dos baterías. ¿Qué desea hacer?",
     "message_127": "Añadir otra",
     "message_128": "Convertir en individual",
     "message_131": "CONECTADOS (NO VISIBLES EN BÚSQUEDA)",
     "message_132": "{0} — banco «{1}»",
     "message_133": "Buscando baterías cercanas…",
-    "message_134":
-        "No se encontraron baterías. Compruebe que estén encendidas y desconectadas de otras aplicaciones, y busque de nuevo. «Mostrar todo» lista otros dispositivos BLE.",
+    "message_134": "No se encontraron baterías. Compruebe que estén encendidas y desconectadas de otras aplicaciones, y busque de nuevo. «Mostrar todo» lista otros dispositivos BLE.",
     "message_135": "EN BANCO",
-    "message_136":
-        "Esta batería ya está en «{0}». Gestiónela desde la pestaña Bancos.",
-    "message_137":
-        "Este dispositivo no parece una batería EM-Power y no puede conectarse. Las baterías tienen un icono amarillo.",
+    "message_136": "Esta batería ya está en «{0}». Gestiónela desde la pestaña Bancos.",
+    "message_137": "Este dispositivo no parece una batería EM-Power y no puede conectarse. Las baterías tienen un icono amarillo.",
     "message_138": "Modo desarrollador activado",
     "message_139": "Modo desarrollador desactivado",
-    "message_141":
-        "Colores SOC: verde sobre el umbral de aviso, amarillo entre umbrales, rojo bajo el umbral crítico.",
+    "message_141": "Colores SOC: verde sobre el umbral de aviso, amarillo entre umbrales, rojo bajo el umbral crítico.",
     "message_142": "Modo demo",
-    "message_143":
-        "Activado: tres bancos demo con datos simulados. Desactivado: solo dispositivos reales. Sus bancos se guardan y restauran al iniciar.",
+    "message_143": "Activado: tres bancos demo con datos simulados. Desactivado: solo dispositivos reales. Sus bancos se guardan y restauran al iniciar.",
     "message_151": "Sin datos",
     "message_152": "Se desvincularán las baterías conectadas ({0}).",
-    "message_065":
-        "Un banco individual admite una batería. Cambie a paralelo o serie para añadir más.",
+    "message_065": "Un banco individual admite una batería. Cambie a paralelo o serie para añadir más.",
     "message_066": "Banco",
     "message_067": "Sobre el dispositivo",
     "message_078": "Número de celdas",
@@ -1432,6 +1348,12 @@ const messages = {
     "message_115": "TEMPERATURA min / max",
     "message_116": "Dirección de placa (RS485 / NMEA2000)",
     "message_149": "{0} h {1} min",
+    "battery_count_one": "{0} batería",
+    "battery_count_few": "{0} baterías",
+    "battery_count_other": "{0} baterías",
+    "message_152_one": "Se desvinculará la batería conectada ({0}).",
+    "message_152_few": "Se desvincularán las baterías conectadas ({0}).",
+    "message_152_other": "Se desvincularán las baterías conectadas ({0})."
   },
   "it": {
     "nav_home": "Home",
@@ -1501,8 +1423,7 @@ const messages = {
     "connect_device": "Connetti dispositivo",
     "device_connected": "Dispositivo connesso",
     "connect_failed": "Connessione non riuscita",
-    "not_a_bms":
-        "Dispositivo connesso ma non risponde come BMS Daly — banco non creato",
+    "not_a_bms": "Dispositivo connesso ma non risponde come BMS Daly — banco non creato",
     "no_alerts": "Nessun avviso",
     "all_ok": "Tutte le batterie collegate sono OK",
     "alarm": "ALLARME",
@@ -1584,59 +1505,46 @@ const messages = {
     "message_036": "Avvisi di carica bassa dei banchi",
     "message_037": "Carica critica",
     "message_038": "«{0}»: SOC {1}% — sotto la soglia critica del {2}%",
-    "message_039":
-        "Un banco singolo ammette una batteria. Passare a parallelo o serie per aggiungerne altre.",
+    "message_039": "Un banco singolo ammette una batteria. Passare a parallelo o serie per aggiungerne altre.",
     "message_040": "Dispositivo già connesso",
-    "message_041":
-        "Dispositivo connesso, ma il BMS non risponde. Banco non creato.",
-    "message_042":
-        "Tensioni diverse ({0}S / {1}S). Le batterie non possono condividere un banco.",
-    "message_043":
-        "Capacità nominali diverse ({0} Ah / {1} Ah). Non possono condividere un banco.",
+    "message_041": "Dispositivo connesso, ma il BMS non risponde. Banco non creato.",
+    "message_042": "Tensioni diverse ({0}S / {1}S). Le batterie non possono condividere un banco.",
+    "message_043": "Capacità nominali diverse ({0} Ah / {1} Ah). Non possono condividere un banco.",
     "message_044": "Banco non trovato",
-    "message_045":
-        "Un banco singolo ammette una sola batteria. Scollegare prima le altre.",
+    "message_045": "Un banco singolo ammette una sola batteria. Scollegare prima le altre.",
     "message_046": "Dispositivo non connesso",
     "message_047": "Il BMS ha restituito un altro valore: {0} s",
     "message_048": "Il BMS ha restituito un altro valore: {0}",
     "message_049": "Differenza SOC tra batterie: {0}%",
     "message_050": "SOC alla soglia critica o inferiore ({0}% ≤ {1}%)",
     "message_051": "SOC alla soglia di avviso o inferiore ({0}% ≤ {1}%)",
-    "message_052": "{0} • {1} batterie • SOC {2}%",
+    "message_052": "{0} • {1} • SOC {2}%",
     "message_053": "Inserire il nome del banco",
     "message_054": "Nome già utilizzato",
     "message_055": "«{0}» verrà eliminato. {1}",
     "message_056": "Il banco diventerà singolo",
-    "message_057":
-        "Scollegando «{0}» resterà una batteria. «{1}» diventerà un banco singolo. Continuare?",
+    "message_057": "Scollegando «{0}» resterà una batteria. «{1}» diventerà un banco singolo. Continuare?",
     "message_058": "Scollega",
     "message_059": "Eliminare banco e scollegare batteria?",
-    "message_060":
-        "«{0}» è l'unica batteria. Scollegandola verrà eliminato anche «{1}», poiché i banchi vuoti non sono ammessi.",
+    "message_060": "«{0}» è l'unica batteria. Scollegandola verrà eliminato anche «{1}», poiché i banchi vuoti non sono ammessi.",
     "message_061": "Scollegare la batteria?",
     "message_062": "«{0}» verrà disconnessa e rimossa dal banco «{1}».",
-    "message_063":
-        "{0} richiede almeno due batterie. Aggiungerne una o cambiare tipo.",
+    "message_063": "{0} richiede almeno due batterie. Aggiungerne una o cambiare tipo.",
     "message_069": "Cella {0}, mV",
-    "message_090":
-        "Nessun dato grezzo. I dispositivi demo non forniscono registri. Collegare un BMS reale.",
-    "message_091":
-        "SOC (registro 0x2A): grezzo = {0}\nA ×0.1%: {1}%   A 1%: {2}%\nConfrontare con l'app del produttore BMS.",
+    "message_090": "Nessun dato grezzo. I dispositivi demo non forniscono registri. Collegare un BMS reale.",
+    "message_091": "SOC (registro 0x2A): grezzo = {0}\nA ×0.1%: {1}%   A 1%: {2}%\nConfrontare con l'app del produttore BMS.",
     "message_092": "Indirizzo scheda",
-    "message_093":
-        "Numero da 1 a 16. Un indirizzo univoco identifica ogni batteria su RS485 e NMEA2000. NMEA2000 mostra uno in meno: l'indirizzo 14 appare come «.13».",
+    "message_093": "Numero da 1 a 16. Un indirizzo univoco identifica ogni batteria su RS485 e NMEA2000. NMEA2000 mostra uno in meno: l'indirizzo 14 appare come «.13».",
     "message_094": "Indirizzo",
     "message_095": "Intervallo indirizzi valido: 1–16",
     "message_096": "Scrivi",
-    "message_097":
-        "Indirizzo scritto e verificato. Riavviare BMS se NMEA2000 non rileva la modifica.",
+    "message_097": "Indirizzo scritto e verificato. Riavviare BMS se NMEA2000 non rileva la modifica.",
     "message_098": "Errore di scrittura: {0}",
     "message_099": "{0} h",
     "message_100": "{0} min",
     "message_101": "{0} s",
     "message_107": "Mai (sempre attivo)",
-    "message_109":
-        "Il BMS si riavvierà e disconnetterà brevemente. Riconnettere tramite ricerca se non avviene automaticamente.",
+    "message_109": "Il BMS si riavvierà e disconnetterà brevemente. Riconnettere tramite ricerca se non avviene automaticamente.",
     "message_110": "Riavvia",
     "message_111": "Errore: {0}",
     "message_112": "Nome dispositivo",
@@ -1645,8 +1553,7 @@ const messages = {
     "message_118": "Errore di ricerca: {0}",
     "message_119": "A QUALE BANCO AGGIUNGERE IL DISPOSITIVO?",
     "message_120": "Banco singolo già occupato",
-    "message_122":
-        "Batteria aggiunta. «{0}» è {1}: aggiungere almeno un'altra batteria.",
+    "message_122": "Batteria aggiunta. «{0}» è {1}: aggiungere almeno un'altra batteria.",
     "message_123": "Connessione non riuscita: {0}",
     "message_124": "Attendere — connessione in corso",
     "message_125": "Il banco ha una batteria",
@@ -1656,24 +1563,18 @@ const messages = {
     "message_131": "CONNESSI (NON VISIBILI NELLA RICERCA)",
     "message_132": "{0} — banco «{1}»",
     "message_133": "Ricerca batterie vicine…",
-    "message_134":
-        "Nessuna batteria trovata. Verificare che sia accesa e non connessa ad altre app, poi ripetere la ricerca. «Mostra tutto» elenca gli altri dispositivi BLE.",
+    "message_134": "Nessuna batteria trovata. Verificare che sia accesa e non connessa ad altre app, poi ripetere la ricerca. «Mostra tutto» elenca gli altri dispositivi BLE.",
     "message_135": "NEL BANCO",
-    "message_136":
-        "Questa batteria è già in «{0}». Gestirla dalla scheda Banchi.",
-    "message_137":
-        "Il dispositivo non sembra una batteria EM-Power e non può essere connesso. Le batterie hanno un'icona gialla.",
+    "message_136": "Questa batteria è già in «{0}». Gestirla dalla scheda Banchi.",
+    "message_137": "Il dispositivo non sembra una batteria EM-Power e non può essere connesso. Le batterie hanno un'icona gialla.",
     "message_138": "Modalità sviluppatore attivata",
     "message_139": "Modalità sviluppatore disattivata",
-    "message_141":
-        "Colori SOC: verde sopra la soglia di avviso, giallo tra le soglie, rosso sotto la soglia critica.",
+    "message_141": "Colori SOC: verde sopra la soglia di avviso, giallo tra le soglie, rosso sotto la soglia critica.",
     "message_142": "Modalità demo",
-    "message_143":
-        "Attivo: tre banchi demo con dati simulati. Disattivo: solo dispositivi reali. I banchi vengono salvati e ripristinati all'avvio.",
+    "message_143": "Attivo: tre banchi demo con dati simulati. Disattivo: solo dispositivi reali. I banchi vengono salvati e ripristinati all'avvio.",
     "message_151": "Nessun dato",
     "message_152": "Le batterie connesse ({0}) verranno scollegate.",
-    "message_065":
-        "Un banco singolo ammette una batteria. Passare a parallelo o serie per aggiungerne altre.",
+    "message_065": "Un banco singolo ammette una batteria. Passare a parallelo o serie per aggiungerne altre.",
     "message_066": "Banco",
     "message_067": "Info dispositivo",
     "message_078": "Numero di celle",
@@ -1718,6 +1619,12 @@ const messages = {
     "message_115": "TEMPERATURA min / max",
     "message_116": "Indirizzo scheda (RS485 / NMEA2000)",
     "message_149": "{0} h {1} min",
+    "battery_count_one": "{0} batteria",
+    "battery_count_few": "{0} batterie",
+    "battery_count_other": "{0} batterie",
+    "message_152_one": "La batteria connessa ({0}) verrà scollegata.",
+    "message_152_few": "Le batterie connesse ({0}) verranno scollegate.",
+    "message_152_other": "Le batterie connesse ({0}) verranno scollegate."
   },
   "tr": {
     "nav_home": "Ana sayfa",
@@ -1787,8 +1694,7 @@ const messages = {
     "connect_device": "Cihaz bağla",
     "device_connected": "Cihaz bağlandı",
     "connect_failed": "Bağlantı başarısız",
-    "not_a_bms":
-        "Cihaz bağlandı ancak Daly BMS olarak yanıt vermiyor — grup oluşturulmadı",
+    "not_a_bms": "Cihaz bağlandı ancak Daly BMS olarak yanıt vermiyor — grup oluşturulmadı",
     "no_alerts": "Uyarı yok",
     "all_ok": "Bağlı tüm bataryalar normal",
     "alarm": "ALARM",
@@ -1870,59 +1776,46 @@ const messages = {
     "message_036": "Akü grubu düşük şarj uyarıları",
     "message_037": "Kritik şarj seviyesi",
     "message_038": "“{0}”: SOC %{1} — %{2} kritik eşiğinin altında",
-    "message_039":
-        "Tekli grup bir akü destekler. Daha fazlası için paralel veya seri türünü seçin.",
+    "message_039": "Tekli grup bir akü destekler. Daha fazlası için paralel veya seri türünü seçin.",
     "message_040": "Cihaz zaten bağlı",
-    "message_041":
-        "Cihaz bağlandı ancak BMS yanıt vermiyor. Grup oluşturulmadı.",
-    "message_042":
-        "Akü gerilimleri farklı ({0}S / {1}S). Aynı gruba eklenemezler.",
-    "message_043":
-        "Nominal kapasiteler farklı ({0} Ah / {1} Ah). Aynı gruba eklenemezler.",
+    "message_041": "Cihaz bağlandı ancak BMS yanıt vermiyor. Grup oluşturulmadı.",
+    "message_042": "Akü gerilimleri farklı ({0}S / {1}S). Aynı gruba eklenemezler.",
+    "message_043": "Nominal kapasiteler farklı ({0} Ah / {1} Ah). Aynı gruba eklenemezler.",
     "message_044": "Grup bulunamadı",
-    "message_045":
-        "Tekli grupta yalnızca bir akü olabilir. Önce diğerlerini ayırın.",
+    "message_045": "Tekli grupta yalnızca bir akü olabilir. Önce diğerlerini ayırın.",
     "message_046": "Cihaz bağlı değil",
     "message_047": "BMS farklı değer döndürdü: {0} sn",
     "message_048": "BMS farklı değer döndürdü: {0}",
     "message_049": "Aküler arası SOC farkı: %{0}",
     "message_050": "SOC kritik eşikte veya altında (%{0} ≤ %{1})",
     "message_051": "SOC uyarı eşiğinde veya altında (%{0} ≤ %{1})",
-    "message_052": "{0} • {1} akü • SOC %{2}",
+    "message_052": "{0} • {1} • SOC %{2}",
     "message_053": "Grup adı girin",
     "message_054": "Bu ad zaten kullanılıyor",
     "message_055": "“{0}” silinecek. {1}",
     "message_056": "Grup tekli olacak",
-    "message_057":
-        "“{0}” ayrılınca bir akü kalacak. “{1}” tekli grup olacak. Devam edilsin mi?",
+    "message_057": "“{0}” ayrılınca bir akü kalacak. “{1}” tekli grup olacak. Devam edilsin mi?",
     "message_058": "Ayır",
     "message_059": "Grup silinsin ve akü ayrılsın mı?",
-    "message_060":
-        "“{0}” tek aküdür. Boş grup olamayacağı için ayrılınca “{1}” grubu da silinecek.",
+    "message_060": "“{0}” tek aküdür. Boş grup olamayacağı için ayrılınca “{1}” grubu da silinecek.",
     "message_061": "Akü ayrılsın mı?",
     "message_062": "“{0}” bağlantısı kesilecek ve “{1}” grubundan çıkarılacak.",
-    "message_063":
-        "{0} en az iki akü gerektirir. Akü ekleyin veya türü değiştirin.",
+    "message_063": "{0} en az iki akü gerektirir. Akü ekleyin veya türü değiştirin.",
     "message_069": "Hücre {0}, mV",
-    "message_090":
-        "Ham veri yok. Demo cihazları kayıt sağlamaz. Gerçek bir BMS bağlayın.",
-    "message_091":
-        "SOC (kayıt 0x2A): ham = {0}\n×0.1%: {1}%   1%: {2}%\nBMS üreticisinin servis uygulamasıyla karşılaştırın.",
+    "message_090": "Ham veri yok. Demo cihazları kayıt sağlamaz. Gerçek bir BMS bağlayın.",
+    "message_091": "SOC (kayıt 0x2A): ham = {0}\n×0.1%: {1}%   1%: {2}%\nBMS üreticisinin servis uygulamasıyla karşılaştırın.",
     "message_092": "Kart adresi",
-    "message_093":
-        "1–16 arası sayı. Benzersiz adres RS485 ve NMEA2000 cihazlarında aküleri ayırt eder. NMEA2000 bir eksik gösterir: 14 adresi “.13” görünür.",
+    "message_093": "1–16 arası sayı. Benzersiz adres RS485 ve NMEA2000 cihazlarında aküleri ayırt eder. NMEA2000 bir eksik gösterir: 14 adresi “.13” görünür.",
     "message_094": "Adres",
     "message_095": "Geçerli adres aralığı: 1–16",
     "message_096": "Yaz",
-    "message_097":
-        "Kart adresi yazıldı ve doğrulandı. NMEA2000 değişikliği algılamazsa BMS'yi yeniden başlatın.",
+    "message_097": "Kart adresi yazıldı ve doğrulandı. NMEA2000 değişikliği algılamazsa BMS'yi yeniden başlatın.",
     "message_098": "Yazma hatası: {0}",
     "message_099": "{0} sa",
     "message_100": "{0} dk",
     "message_101": "{0} sn",
     "message_107": "Asla (uyanık kal)",
-    "message_109":
-        "BMS yeniden başlayacak ve bağlantı kısa süre kesilecek. Otomatik bağlanmazsa cihaz aramasıyla bağlayın.",
+    "message_109": "BMS yeniden başlayacak ve bağlantı kısa süre kesilecek. Otomatik bağlanmazsa cihaz aramasıyla bağlayın.",
     "message_110": "Yeniden başlat",
     "message_111": "Hata: {0}",
     "message_112": "Cihaz adı",
@@ -1941,23 +1834,18 @@ const messages = {
     "message_131": "BAĞLI (TARAMADA GÖRÜNMEZ)",
     "message_132": "{0} — “{1}” grubu",
     "message_133": "Yakındaki aküler aranıyor…",
-    "message_134":
-        "Akü bulunamadı. Akünün açık ve başka uygulamaya bağlı olmadığından emin olup tekrar tarayın. “Tümünü göster” diğer BLE cihazlarını listeler.",
+    "message_134": "Akü bulunamadı. Akünün açık ve başka uygulamaya bağlı olmadığından emin olup tekrar tarayın. “Tümünü göster” diğer BLE cihazlarını listeler.",
     "message_135": "GRUPTA",
     "message_136": "Bu akü zaten “{0}” grubunda. Gruplar sekmesinden yönetin.",
-    "message_137":
-        "Bu cihaz EM-Power aküsü gibi görünmüyor ve bağlanamaz. Aküler sarı simgeyle işaretlidir.",
+    "message_137": "Bu cihaz EM-Power aküsü gibi görünmüyor ve bağlanamaz. Aküler sarı simgeyle işaretlidir.",
     "message_138": "Geliştirici modu etkin",
     "message_139": "Geliştirici modu kapalı",
-    "message_141":
-        "SOC halka renkleri: uyarı eşiği üstü yeşil, eşikler arası sarı, kritik eşik altı kırmızı.",
+    "message_141": "SOC halka renkleri: uyarı eşiği üstü yeşil, eşikler arası sarı, kritik eşik altı kırmızı.",
     "message_142": "Demo modu",
-    "message_143":
-        "Açık: simüle verilerle üç demo grubu. Kapalı: yalnızca gerçek cihazlar. Gruplarınız kaydedilir ve açılışta geri yüklenir.",
+    "message_143": "Açık: simüle verilerle üç demo grubu. Kapalı: yalnızca gerçek cihazlar. Gruplarınız kaydedilir ve açılışta geri yüklenir.",
     "message_151": "Veri yok",
     "message_152": "Bağlı aküler ({0}) ayrılacak.",
-    "message_065":
-        "Tekli grup bir akü destekler. Daha fazlası için paralel veya seri türünü seçin.",
+    "message_065": "Tekli grup bir akü destekler. Daha fazlası için paralel veya seri türünü seçin.",
     "message_066": "Grup",
     "message_067": "Cihaz hakkında",
     "message_078": "Hücre sayısı",
@@ -2002,6 +1890,12 @@ const messages = {
     "message_115": "SICAKLIK min / max",
     "message_116": "Kart adresi (RS485 / NMEA2000)",
     "message_149": "{0} sa {1} dk",
+    "battery_count_one": "{0} akü",
+    "battery_count_few": "{0} akü",
+    "battery_count_other": "{0} akü",
+    "message_152_one": "Bağlı akü ({0}) ayrılacak.",
+    "message_152_few": "Bağlı aküler ({0}) ayrılacak.",
+    "message_152_other": "Bağlı aküler ({0}) ayrılacak."
   },
   "el": {
     "nav_home": "Αρχική",
@@ -2028,8 +1922,7 @@ const messages = {
     "temperature": "ΘΕΡΜΟΚΡΑΣΙΑ",
     "last_update": "Τελευταία ενημέρωση:",
     "no_banks_yet": "Καμία συστοιχία ακόμη",
-    "no_banks_hint":
-        "Συνδέστε ένα BMS ή δημιουργήστε συστοιχία στην καρτέλα Συστοιχίες",
+    "no_banks_hint": "Συνδέστε ένα BMS ή δημιουργήστε συστοιχία στην καρτέλα Συστοιχίες",
     "soc": "SOC",
     "soh": "SOH",
     "cycles": "ΚΥΚΛΟΙ",
@@ -2072,8 +1965,7 @@ const messages = {
     "connect_device": "Σύνδεση συσκευής",
     "device_connected": "Η συσκευή συνδέθηκε",
     "connect_failed": "Αποτυχία σύνδεσης",
-    "not_a_bms":
-        "Η συσκευή συνδέθηκε αλλά δεν αποκρίνεται ως Daly BMS — δεν δημιουργήθηκε συστοιχία",
+    "not_a_bms": "Η συσκευή συνδέθηκε αλλά δεν αποκρίνεται ως Daly BMS — δεν δημιουργήθηκε συστοιχία",
     "no_alerts": "Καμία ειδοποίηση",
     "all_ok": "Όλες οι συνδεδεμένες μπαταρίες είναι εντάξει",
     "alarm": "ΣΥΝΑΓΕΡΜΟΣ",
@@ -2155,60 +2047,46 @@ const messages = {
     "message_036": "Προειδοποιήσεις χαμηλής φόρτισης συστοιχιών",
     "message_037": "Κρίσιμη στάθμη φόρτισης",
     "message_038": "«{0}»: SOC {1}% — κάτω από το κρίσιμο όριο {2}%",
-    "message_039":
-        "Η μονή συστοιχία δέχεται μία μπαταρία. Για περισσότερες, επιλέξτε παράλληλη ή σε σειρά.",
+    "message_039": "Η μονή συστοιχία δέχεται μία μπαταρία. Για περισσότερες, επιλέξτε παράλληλη ή σε σειρά.",
     "message_040": "Η συσκευή είναι ήδη συνδεδεμένη",
-    "message_041":
-        "Η συσκευή συνδέθηκε αλλά το BMS δεν αποκρίνεται. Δεν δημιουργήθηκε συστοιχία.",
-    "message_042":
-        "Διαφορετικές τάσεις ({0}S / {1}S). Οι μπαταρίες δεν μπορούν να μπουν στην ίδια συστοιχία.",
-    "message_043":
-        "Διαφορετικές ονομαστικές χωρητικότητες ({0} Ah / {1} Ah). Δεν επιτρέπεται κοινή συστοιχία.",
+    "message_041": "Η συσκευή συνδέθηκε αλλά το BMS δεν αποκρίνεται. Δεν δημιουργήθηκε συστοιχία.",
+    "message_042": "Διαφορετικές τάσεις ({0}S / {1}S). Οι μπαταρίες δεν μπορούν να μπουν στην ίδια συστοιχία.",
+    "message_043": "Διαφορετικές ονομαστικές χωρητικότητες ({0} Ah / {1} Ah). Δεν επιτρέπεται κοινή συστοιχία.",
     "message_044": "Η συστοιχία δεν βρέθηκε",
-    "message_045":
-        "Η μονή συστοιχία δέχεται μία μπαταρία. Αποσυνδέστε πρώτα τις υπόλοιπες.",
+    "message_045": "Η μονή συστοιχία δέχεται μία μπαταρία. Αποσυνδέστε πρώτα τις υπόλοιπες.",
     "message_046": "Η συσκευή δεν είναι συνδεδεμένη",
     "message_047": "Το BMS επέστρεψε άλλη τιμή: {0} s",
     "message_048": "Το BMS επέστρεψε άλλη τιμή: {0}",
     "message_049": "Διαφορά SOC μεταξύ μπαταριών: {0}%",
     "message_050": "SOC στο κρίσιμο όριο ή κάτω ({0}% ≤ {1}%)",
     "message_051": "SOC στο όριο προειδοποίησης ή κάτω ({0}% ≤ {1}%)",
-    "message_052": "{0} • {1} μπαταρίες • SOC {2}%",
+    "message_052": "{0} • {1} • SOC {2}%",
     "message_053": "Εισαγάγετε όνομα συστοιχίας",
     "message_054": "Το όνομα χρησιμοποιείται ήδη",
     "message_055": "Το «{0}» θα διαγραφεί. {1}",
     "message_056": "Η συστοιχία θα γίνει μονή",
-    "message_057":
-        "Μετά την αφαίρεση του «{0}» θα μείνει μία μπαταρία. Το «{1}» θα γίνει μονή συστοιχία. Συνέχεια;",
+    "message_057": "Μετά την αφαίρεση του «{0}» θα μείνει μία μπαταρία. Το «{1}» θα γίνει μονή συστοιχία. Συνέχεια;",
     "message_058": "Αποσύνδεση",
     "message_059": "Διαγραφή συστοιχίας και αποσύνδεση μπαταρίας;",
-    "message_060":
-        "Το «{0}» είναι η μόνη μπαταρία. Η αφαίρεσή της θα διαγράψει και τη συστοιχία «{1}», επειδή δεν επιτρέπονται κενές συστοιχίες.",
+    "message_060": "Το «{0}» είναι η μόνη μπαταρία. Η αφαίρεσή της θα διαγράψει και τη συστοιχία «{1}», επειδή δεν επιτρέπονται κενές συστοιχίες.",
     "message_061": "Αποσύνδεση μπαταρίας;",
-    "message_062":
-        "Το «{0}» θα αποσυνδεθεί και θα αφαιρεθεί από τη συστοιχία «{1}».",
-    "message_063":
-        "Το {0} χρειάζεται τουλάχιστον δύο μπαταρίες. Προσθέστε άλλη μία ή αλλάξτε τύπο.",
+    "message_062": "Το «{0}» θα αποσυνδεθεί και θα αφαιρεθεί από τη συστοιχία «{1}».",
+    "message_063": "Το {0} χρειάζεται τουλάχιστον δύο μπαταρίες. Προσθέστε άλλη μία ή αλλάξτε τύπο.",
     "message_069": "Στοιχείο {0}, mV",
-    "message_090":
-        "Δεν υπάρχουν ακατέργαστα δεδομένα. Οι συσκευές επίδειξης δεν δίνουν καταχωρητές. Συνδέστε πραγματικό BMS.",
-    "message_091":
-        "SOC (καταχωρητής 0x2A): ακατέργαστο = {0}\nΣε ×0.1%: {1}%   Σε 1%: {2}%\nΣυγκρίνετε με την εφαρμογή του κατασκευαστή BMS.",
+    "message_090": "Δεν υπάρχουν ακατέργαστα δεδομένα. Οι συσκευές επίδειξης δεν δίνουν καταχωρητές. Συνδέστε πραγματικό BMS.",
+    "message_091": "SOC (καταχωρητής 0x2A): ακατέργαστο = {0}\nΣε ×0.1%: {1}%   Σε 1%: {2}%\nΣυγκρίνετε με την εφαρμογή του κατασκευαστή BMS.",
     "message_092": "Διεύθυνση πλακέτας",
-    "message_093":
-        "Αριθμός 1–16. Η μοναδική διεύθυνση ξεχωρίζει κάθε μπαταρία στα RS485 και NMEA2000. Το NMEA2000 δείχνει ένα λιγότερο: η διεύθυνση 14 εμφανίζεται ως «.13».",
+    "message_093": "Αριθμός 1–16. Η μοναδική διεύθυνση ξεχωρίζει κάθε μπαταρία στα RS485 και NMEA2000. Το NMEA2000 δείχνει ένα λιγότερο: η διεύθυνση 14 εμφανίζεται ως «.13».",
     "message_094": "Διεύθυνση",
     "message_095": "Έγκυρο εύρος διευθύνσεων: 1–16",
     "message_096": "Εγγραφή",
-    "message_097":
-        "Η διεύθυνση γράφτηκε και επαληθεύτηκε. Επανεκκινήστε το BMS αν το NMEA2000 δεν εντοπίζει την αλλαγή.",
+    "message_097": "Η διεύθυνση γράφτηκε και επαληθεύτηκε. Επανεκκινήστε το BMS αν το NMEA2000 δεν εντοπίζει την αλλαγή.",
     "message_098": "Σφάλμα εγγραφής: {0}",
     "message_099": "{0} ώρ.",
     "message_100": "{0} λεπ.",
     "message_101": "{0} δευτ.",
     "message_107": "Ποτέ (χωρίς αναστολή)",
-    "message_109":
-        "Το BMS θα επανεκκινηθεί και θα αποσυνδεθεί για λίγο. Συνδέστε το μέσω αναζήτησης αν δεν επανασυνδεθεί αυτόματα.",
+    "message_109": "Το BMS θα επανεκκινηθεί και θα αποσυνδεθεί για λίγο. Συνδέστε το μέσω αναζήτησης αν δεν επανασυνδεθεί αυτόματα.",
     "message_110": "Επανεκκίνηση",
     "message_111": "Σφάλμα: {0}",
     "message_112": "Όνομα συσκευής",
@@ -2217,36 +2095,28 @@ const messages = {
     "message_118": "Σφάλμα σάρωσης: {0}",
     "message_119": "ΣΕ ΠΟΙΑ ΣΥΣΤΟΙΧΙΑ ΝΑ ΠΡΟΣΤΕΘΕΙ;",
     "message_120": "Η μονή συστοιχία είναι κατειλημμένη",
-    "message_122":
-        "Προστέθηκε μπαταρία. Το «{0}» είναι {1}: προσθέστε τουλάχιστον μία ακόμη.",
+    "message_122": "Προστέθηκε μπαταρία. Το «{0}» είναι {1}: προσθέστε τουλάχιστον μία ακόμη.",
     "message_123": "Αδυναμία σύνδεσης: {0}",
     "message_124": "Περιμένετε — σύνδεση συσκευής",
     "message_125": "Η συστοιχία έχει μία μπαταρία",
-    "message_126":
-        "Το «{0}» είναι {1} και χρειάζεται τουλάχιστον δύο μπαταρίες. Τι θέλετε να κάνετε;",
+    "message_126": "Το «{0}» είναι {1} και χρειάζεται τουλάχιστον δύο μπαταρίες. Τι θέλετε να κάνετε;",
     "message_127": "Προσθήκη δεύτερης",
     "message_128": "Μετατροπή σε μονή",
     "message_131": "ΣΥΝΔΕΔΕΜΕΝΕΣ (ΕΚΤΟΣ ΣΑΡΩΣΗΣ)",
     "message_132": "{0} — συστοιχία «{1}»",
     "message_133": "Αναζήτηση κοντινών μπαταριών…",
-    "message_134":
-        "Δεν βρέθηκαν μπαταρίες. Βεβαιωθείτε ότι είναι ενεργές και δεν συνδέονται με άλλη εφαρμογή και σαρώστε ξανά. Η «Εμφάνιση όλων» δείχνει άλλες συσκευές BLE.",
+    "message_134": "Δεν βρέθηκαν μπαταρίες. Βεβαιωθείτε ότι είναι ενεργές και δεν συνδέονται με άλλη εφαρμογή και σαρώστε ξανά. Η «Εμφάνιση όλων» δείχνει άλλες συσκευές BLE.",
     "message_135": "ΣΕ ΣΥΣΤΟΙΧΙΑ",
-    "message_136":
-        "Η μπαταρία είναι ήδη στη συστοιχία «{0}». Διαχειριστείτε την από την καρτέλα Συστοιχίες.",
-    "message_137":
-        "Η συσκευή δεν φαίνεται να είναι μπαταρία EM-Power και δεν μπορεί να συνδεθεί. Οι μπαταρίες έχουν κίτρινο εικονίδιο.",
+    "message_136": "Η μπαταρία είναι ήδη στη συστοιχία «{0}». Διαχειριστείτε την από την καρτέλα Συστοιχίες.",
+    "message_137": "Η συσκευή δεν φαίνεται να είναι μπαταρία EM-Power και δεν μπορεί να συνδεθεί. Οι μπαταρίες έχουν κίτρινο εικονίδιο.",
     "message_138": "Η λειτουργία προγραμματιστή ενεργοποιήθηκε",
     "message_139": "Η λειτουργία προγραμματιστή απενεργοποιήθηκε",
-    "message_141":
-        "Χρώματα SOC: πράσινο πάνω από το όριο προειδοποίησης, κίτρινο μεταξύ ορίων, κόκκινο κάτω από το κρίσιμο όριο.",
+    "message_141": "Χρώματα SOC: πράσινο πάνω από το όριο προειδοποίησης, κίτρινο μεταξύ ορίων, κόκκινο κάτω από το κρίσιμο όριο.",
     "message_142": "Λειτουργία επίδειξης",
-    "message_143":
-        "Ενεργό: τρεις συστοιχίες επίδειξης με προσομοιωμένα δεδομένα. Ανενεργό: μόνο πραγματικές συσκευές. Οι συστοιχίες σας αποθηκεύονται και επαναφέρονται στην εκκίνηση.",
+    "message_143": "Ενεργό: τρεις συστοιχίες επίδειξης με προσομοιωμένα δεδομένα. Ανενεργό: μόνο πραγματικές συσκευές. Οι συστοιχίες σας αποθηκεύονται και επαναφέρονται στην εκκίνηση.",
     "message_151": "Χωρίς δεδομένα",
     "message_152": "Οι συνδεδεμένες μπαταρίες ({0}) θα αποσυνδεθούν.",
-    "message_065":
-        "Η μονή συστοιχία δέχεται μία μπαταρία. Για περισσότερες, επιλέξτε παράλληλη ή σε σειρά.",
+    "message_065": "Η μονή συστοιχία δέχεται μία μπαταρία. Για περισσότερες, επιλέξτε παράλληλη ή σε σειρά.",
     "message_066": "Συστοιχία",
     "message_067": "Σχετικά με τη συσκευή",
     "message_078": "Αριθμός στοιχείων",
@@ -2291,6 +2161,12 @@ const messages = {
     "message_115": "ΘΕΡΜΟΚΡΑΣΙΑ min / max",
     "message_116": "Διεύθυνση πλακέτας (RS485 / NMEA2000)",
     "message_149": "{0} ώρ. {1} λεπ.",
+    "battery_count_one": "{0} μπαταρία",
+    "battery_count_few": "{0} μπαταρίες",
+    "battery_count_other": "{0} μπαταρίες",
+    "message_152_one": "Η συνδεδεμένη μπαταρία ({0}) θα αποσυνδεθεί.",
+    "message_152_few": "Οι συνδεδεμένες μπαταρίες ({0}) θα αποσυνδεθούν.",
+    "message_152_other": "Οι συνδεδεμένες μπαταρίες ({0}) θα αποσυνδεθούν."
   },
   "hr": {
     "nav_home": "Početna",
@@ -2360,8 +2236,7 @@ const messages = {
     "connect_device": "Poveži uređaj",
     "device_connected": "Uređaj povezan",
     "connect_failed": "Povezivanje nije uspjelo",
-    "not_a_bms":
-        "Uređaj je povezan, ali ne odgovara kao Daly BMS — banka nije stvorena",
+    "not_a_bms": "Uređaj je povezan, ali ne odgovara kao Daly BMS — banka nije stvorena",
     "no_alerts": "Nema obavijesti",
     "all_ok": "Sve povezane baterije su u redu",
     "alarm": "ALARM",
@@ -2443,59 +2318,46 @@ const messages = {
     "message_036": "Upozorenja niske napunjenosti banaka",
     "message_037": "Kritična napunjenost",
     "message_038": "„{0}”: SOC {1}% — ispod kritičnog praga od {2}%",
-    "message_039":
-        "Pojedinačna banka podržava jednu bateriju. Za više baterija odaberite paralelnu ili serijsku.",
+    "message_039": "Pojedinačna banka podržava jednu bateriju. Za više baterija odaberite paralelnu ili serijsku.",
     "message_040": "Uređaj je već povezan",
-    "message_041":
-        "Uređaj je povezan, ali BMS ne odgovara. Banka nije stvorena.",
-    "message_042":
-        "Baterije imaju različite napone ({0}S / {1}S). Ne smiju biti u istoj banci.",
-    "message_043":
-        "Različiti nazivni kapaciteti ({0} Ah / {1} Ah). Ne smiju biti u istoj banci.",
+    "message_041": "Uređaj je povezan, ali BMS ne odgovara. Banka nije stvorena.",
+    "message_042": "Baterije imaju različite napone ({0}S / {1}S). Ne smiju biti u istoj banci.",
+    "message_043": "Različiti nazivni kapaciteti ({0} Ah / {1} Ah). Ne smiju biti u istoj banci.",
     "message_044": "Banka nije pronađena",
-    "message_045":
-        "Pojedinačna banka smije imati jednu bateriju. Prvo odvojite ostale.",
+    "message_045": "Pojedinačna banka smije imati jednu bateriju. Prvo odvojite ostale.",
     "message_046": "Uređaj nije povezan",
     "message_047": "BMS je vratio drugu vrijednost: {0} s",
     "message_048": "BMS je vratio drugu vrijednost: {0}",
     "message_049": "Razlika SOC-a između baterija: {0}%",
     "message_050": "SOC na kritičnom pragu ili ispod ({0}% ≤ {1}%)",
     "message_051": "SOC na pragu upozorenja ili ispod ({0}% ≤ {1}%)",
-    "message_052": "{0} • {1} baterija • SOC {2}%",
+    "message_052": "{0} • {1} • SOC {2}%",
     "message_053": "Unesite naziv banke",
     "message_054": "Naziv se već koristi",
     "message_055": "„{0}” će biti izbrisano. {1}",
     "message_056": "Banka će postati pojedinačna",
-    "message_057":
-        "Nakon odvajanja „{0}” ostaje jedna baterija. „{1}” postaje pojedinačna banka. Nastaviti?",
+    "message_057": "Nakon odvajanja „{0}” ostaje jedna baterija. „{1}” postaje pojedinačna banka. Nastaviti?",
     "message_058": "Odvoji",
     "message_059": "Izbrisati banku i odvojiti bateriju?",
-    "message_060":
-        "„{0}” je jedina baterija. Odvajanjem se briše i banka „{1}” jer prazne banke nisu dopuštene.",
+    "message_060": "„{0}” je jedina baterija. Odvajanjem se briše i banka „{1}” jer prazne banke nisu dopuštene.",
     "message_061": "Odvojiti bateriju?",
     "message_062": "„{0}” će se odspojiti i ukloniti iz banke „{1}”.",
-    "message_063":
-        "{0} zahtijeva najmanje dvije baterije. Dodajte drugu ili promijenite vrstu.",
+    "message_063": "{0} zahtijeva najmanje dvije baterije. Dodajte drugu ili promijenite vrstu.",
     "message_069": "Ćelija {0}, mV",
-    "message_090":
-        "Nema sirovih podataka. Demo uređaji ne daju registre. Povežite stvarni BMS.",
-    "message_091":
-        "SOC (registar 0x2A): sirovo = {0}\nPri ×0.1%: {1}%   Pri 1%: {2}%\nUsporedite s aplikacijom proizvođača BMS-a.",
+    "message_090": "Nema sirovih podataka. Demo uređaji ne daju registre. Povežite stvarni BMS.",
+    "message_091": "SOC (registar 0x2A): sirovo = {0}\nPri ×0.1%: {1}%   Pri 1%: {2}%\nUsporedite s aplikacijom proizvođača BMS-a.",
     "message_092": "Adresa ploče",
-    "message_093":
-        "Broj od 1 do 16. Jedinstvena adresa razlikuje baterije na RS485 i NMEA2000 uređajima. NMEA2000 prikazuje jedan manje: adresa 14 prikazuje se kao „.13”.",
+    "message_093": "Broj od 1 do 16. Jedinstvena adresa razlikuje baterije na RS485 i NMEA2000 uređajima. NMEA2000 prikazuje jedan manje: adresa 14 prikazuje se kao „.13”.",
     "message_094": "Adresa",
     "message_095": "Valjani raspon adresa: 1–16",
     "message_096": "Zapiši",
-    "message_097":
-        "Adresa je zapisana i provjerena. Ponovno pokrenite BMS ako NMEA2000 ne prepozna promjenu.",
+    "message_097": "Adresa je zapisana i provjerena. Ponovno pokrenite BMS ako NMEA2000 ne prepozna promjenu.",
     "message_098": "Pogreška zapisa: {0}",
     "message_099": "{0} h",
     "message_100": "{0} min",
     "message_101": "{0} s",
     "message_107": "Nikada (bez mirovanja)",
-    "message_109":
-        "BMS će se ponovno pokrenuti i nakratko odspojiti. Ako se ne spoji automatski, povežite ga pretraživanjem.",
+    "message_109": "BMS će se ponovno pokrenuti i nakratko odspojiti. Ako se ne spoji automatski, povežite ga pretraživanjem.",
     "message_110": "Ponovno pokreni",
     "message_111": "Pogreška: {0}",
     "message_112": "Naziv uređaja",
@@ -2504,36 +2366,28 @@ const messages = {
     "message_118": "Pogreška pretraživanja: {0}",
     "message_119": "U KOJU BANKU DODATI UREĐAJ?",
     "message_120": "Pojedinačna banka već je zauzeta",
-    "message_122":
-        "Baterija dodana. „{0}” je {1}: dodajte najmanje još jednu bateriju.",
+    "message_122": "Baterija dodana. „{0}” je {1}: dodajte najmanje još jednu bateriju.",
     "message_123": "Povezivanje nije uspjelo: {0}",
     "message_124": "Pričekajte — povezivanje uređaja",
     "message_125": "Banka ima jednu bateriju",
-    "message_126":
-        "„{0}” je {1} i zahtijeva najmanje dvije baterije. Što želite učiniti?",
+    "message_126": "„{0}” je {1} i zahtijeva najmanje dvije baterije. Što želite učiniti?",
     "message_127": "Dodaj drugu",
     "message_128": "Pretvori u pojedinačnu",
     "message_131": "POVEZANI (NISU U PRETRAZI)",
     "message_132": "{0} — banka „{1}”",
     "message_133": "Traženje baterija u blizini…",
-    "message_134":
-        "Nema pronađenih baterija. Provjerite je li baterija uključena i nije povezana s drugom aplikacijom pa ponovite pretragu. „Prikaži sve” prikazuje druge BLE uređaje.",
+    "message_134": "Nema pronađenih baterija. Provjerite je li baterija uključena i nije povezana s drugom aplikacijom pa ponovite pretragu. „Prikaži sve” prikazuje druge BLE uređaje.",
     "message_135": "U BANCI",
-    "message_136":
-        "Ova baterija već je u banci „{0}”. Upravljajte njome na kartici Banke.",
-    "message_137":
-        "Uređaj ne izgleda kao EM-Power baterija i ne može se povezati. Baterije imaju žutu ikonu.",
+    "message_136": "Ova baterija već je u banci „{0}”. Upravljajte njome na kartici Banke.",
+    "message_137": "Uređaj ne izgleda kao EM-Power baterija i ne može se povezati. Baterije imaju žutu ikonu.",
     "message_138": "Način za razvojne programere uključen",
     "message_139": "Način za razvojne programere isključen",
-    "message_141":
-        "Boje SOC-a: zelena iznad praga upozorenja, žuta između pragova, crvena ispod kritičnog praga.",
+    "message_141": "Boje SOC-a: zelena iznad praga upozorenja, žuta između pragova, crvena ispod kritičnog praga.",
     "message_142": "Demo način rada",
-    "message_143":
-        "Uključeno: tri demo banke sa simuliranim podacima. Isključeno: samo stvarni uređaji. Banke se spremaju i vraćaju pri pokretanju.",
+    "message_143": "Uključeno: tri demo banke sa simuliranim podacima. Isključeno: samo stvarni uređaji. Banke se spremaju i vraćaju pri pokretanju.",
     "message_151": "Nema podataka",
     "message_152": "Povezane baterije ({0}) bit će odvojene.",
-    "message_065":
-        "Pojedinačna banka podržava jednu bateriju. Za više baterija odaberite paralelnu ili serijsku.",
+    "message_065": "Pojedinačna banka podržava jednu bateriju. Za više baterija odaberite paralelnu ili serijsku.",
     "message_066": "Banka",
     "message_067": "O uređaju",
     "message_078": "Broj ćelija",
@@ -2578,7 +2432,13 @@ const messages = {
     "message_115": "TEMPERATURA min / max",
     "message_116": "Adresa ploče (RS485 / NMEA2000)",
     "message_149": "{0} h {1} min",
-  },
+    "battery_count_one": "{0} baterija",
+    "battery_count_few": "{0} baterije",
+    "battery_count_other": "{0} baterija",
+    "message_152_one": "Povezana baterija ({0}) bit će odvojena.",
+    "message_152_few": "Povezane baterije ({0}) bit će odvojene.",
+    "message_152_other": "Povezane baterije ({0}) bit će odvojene."
+  }
 };
 const sourceKeys = {
   "Домой": "nav_home",
@@ -2648,8 +2508,7 @@ const sourceKeys = {
   "Подключить устройство": "connect_device",
   "Устройство подключено": "device_connected",
   "Не удалось подключиться": "connect_failed",
-  "Устройство подключилось, но не отвечает как Daly BMS — банк не создан":
-      "not_a_bms",
+  "Устройство подключилось, но не отвечает как Daly BMS — банк не создан": "not_a_bms",
   "Уведомлений нет": "no_alerts",
   "Все подключённые батареи в норме": "all_ok",
   "АВАРИЯ": "alarm",
@@ -2731,17 +2590,13 @@ const sourceKeys = {
   "Предупреждения о низком заряде банков АКБ": "message_036",
   "Критический заряд": "message_037",
   "«{0}»: SOC {1} % — ниже критического порога {2} %": "message_038",
-  "В одиночный банк можно добавить только одну АКБ. Смените тип банка на параллельный или последовательный.":
-      "message_039",
+  "В одиночный банк можно добавить только одну АКБ. Смените тип банка на параллельный или последовательный.": "message_039",
   "Устройство уже подключено": "message_040",
   "Устройство подключилось, но BMS не отвечает. Банк не создан": "message_041",
-  "АКБ различаются по напряжению ({0}S против {1}S) — устанавливать их в общий банк недопустимо.":
-      "message_042",
-  "АКБ различаются по номинальной ёмкости ({0} Ач против {1} Ач) — устанавливать их в общий банк недопустимо.":
-      "message_043",
+  "АКБ различаются по напряжению ({0}S против {1}S) — устанавливать их в общий банк недопустимо.": "message_042",
+  "АКБ различаются по номинальной ёмкости ({0} Ач против {1} Ач) — устанавливать их в общий банк недопустимо.": "message_043",
   "Банк не найден": "message_044",
-  "В одиночном банке не может быть больше одной АКБ — сначала отвяжите лишние батареи.":
-      "message_045",
+  "В одиночном банке не может быть больше одной АКБ — сначала отвяжите лишние батареи.": "message_045",
   "Устройство не подключено": "message_046",
   "BMS вернула другое значение: {0} с": "message_047",
   "BMS вернула другое значение: {0}": "message_048",
@@ -2753,36 +2608,28 @@ const sourceKeys = {
   "Это имя уже занято другим банком": "message_054",
   "«{0}» будет удалён. {1}": "message_055",
   "Банк станет одиночным": "message_056",
-  "После отвязки «{0}» в банке останется одна АКБ, поэтому «{1}» автоматически станет одиночным банком. Продолжить?":
-      "message_057",
+  "После отвязки «{0}» в банке останется одна АКБ, поэтому «{1}» автоматически станет одиночным банком. Продолжить?": "message_057",
   "Отвязать": "message_058",
   "Удалить банк вместе с АКБ?": "message_059",
-  "«{0}» — единственная АКБ банка. Пустых банков не бывает, поэтому вместе с отвязкой будет удалён и банк «{1}».":
-      "message_060",
+  "«{0}» — единственная АКБ банка. Пустых банков не бывает, поэтому вместе с отвязкой будет удалён и банк «{1}».": "message_060",
   "Отвязать батарею?": "message_061",
   "«{0}» будет отключена и убрана из банка «{1}».": "message_062",
-  "{0} требует минимум две АКБ — добавьте вторую батарею или смените тип.":
-      "message_063",
+  "{0} требует минимум две АКБ — добавьте вторую батарею или смените тип.": "message_063",
   "Ячейка {0}, мВ": "message_069",
-  "Сырых данных нет.\nДемо-устройства (мок) не отдают регистры — подключите реальную BMS.":
-      "message_090",
-  "SOC (регистр 0x2A): сырое = {0}\n→ как ×0.1 %: {1} %   → как 1 %: {2} %\nСравните с показанием сервисного приложения производителя BMS.":
-      "message_091",
+  "Сырых данных нет.\nДемо-устройства (мок) не отдают регистры — подключите реальную BMS.": "message_090",
+  "SOC (регистр 0x2A): сырое = {0}\n→ как ×0.1 %: {1} %   → как 1 %: {2} %\nСравните с показанием сервисного приложения производителя BMS.": "message_091",
   "Адрес платы": "message_092",
-  "Число от 1 до 16. Уникальный адрес нужен, чтобы батареи различались на шине RS485 и на приборах NMEA2000. Внимание: на NMEA2000-приборах номер отображается на единицу меньше (адрес 14 виден как «.13») — особенность протокола.":
-      "message_093",
+  "Число от 1 до 16. Уникальный адрес нужен, чтобы батареи различались на шине RS485 и на приборах NMEA2000. Внимание: на NMEA2000-приборах номер отображается на единицу меньше (адрес 14 виден как «.13») — особенность протокола.": "message_093",
   "Адрес": "message_094",
   "Допустимый адрес — от 1 до 16 (проверено на BMS)": "message_095",
   "Записать": "message_096",
-  "Адрес платы записан и проверен. Если приборы NMEA2000 не увидели смену — перезагрузите BMS.":
-      "message_097",
+  "Адрес платы записан и проверен. Если приборы NMEA2000 не увидели смену — перезагрузите BMS.": "message_097",
   "Ошибка записи: {0}": "message_098",
   "{0} ч": "message_099",
   "{0} мин": "message_100",
   "{0} с": "message_101",
   "Никогда (не засыпать)": "message_107",
-  "BMS перезапустится, связь с батареей на несколько секунд оборвётся. Затем подключите её заново через поиск, если не подхватится сама.":
-      "message_109",
+  "BMS перезапустится, связь с батареей на несколько секунд оборвётся. Затем подключите её заново через поиск, если не подхватится сама.": "message_109",
   "Перезагрузить": "message_110",
   "Ошибка: {0}": "message_111",
   "Имя устройства": "message_112",
@@ -2801,24 +2648,18 @@ const sourceKeys = {
   "НА СВЯЗИ (НЕ ВИДНЫ В ПОИСКЕ)": "message_131",
   "{0} — банк «{1}»": "message_132",
   "Поиск АКБ поблизости…": "message_133",
-  "АКБ не найдены.\nУбедитесь, что батарея включена и не подключена к другому приложению, затем обновите поиск. Кнопка «Показать все» выводит остальные BLE-устройства.":
-      "message_134",
+  "АКБ не найдены.\nУбедитесь, что батарея включена и не подключена к другому приложению, затем обновите поиск. Кнопка «Показать все» выводит остальные BLE-устройства.": "message_134",
   "В БАНКЕ": "message_135",
-  "Эта АКБ уже в банке «{0}». Управлять ею можно из вкладки «Банки».":
-      "message_136",
-  "Это устройство не похоже на АКБ EM-Power — подключить его нельзя. АКБ помечены жёлтым значком.":
-      "message_137",
+  "Эта АКБ уже в банке «{0}». Управлять ею можно из вкладки «Банки».": "message_136",
+  "Это устройство не похоже на АКБ EM-Power — подключить его нельзя. АКБ помечены жёлтым значком.": "message_137",
   "Режим разработчика включён": "message_138",
   "Режим разработчика выключен": "message_139",
-  "Пороги задают цвет кольца SOC на главном экране: выше «Уведомления» — зелёный, между порогами — жёлтый, ниже «Критического» — красный.":
-      "message_141",
+  "Пороги задают цвет кольца SOC на главном экране: выше «Уведомления» — зелёный, между порогами — жёлтый, ниже «Критического» — красный.": "message_141",
   "Демо режим": "message_142",
-  "Вкл — три демонстрационных банка с имитацией данных. Выкл — только реальные устройства; ваши банки сохраняются и восстанавливаются при запуске.":
-      "message_143",
+  "Вкл — три демонстрационных банка с имитацией данных. Выкл — только реальные устройства; ваши банки сохраняются и восстанавливаются при запуске.": "message_143",
   "нет данных": "message_151",
   "Подключённые батареи ({0}) будут отвязаны.": "message_152",
-  "В одиночном банке может быть только одна АКБ. Чтобы добавить ещё — смените тип банка на параллельный или последовательный.":
-      "message_065",
+  "В одиночном банке может быть только одна АКБ. Чтобы добавить ещё — смените тип банка на параллельный или последовательный.": "message_065",
   "БАНК": "message_066",
   "Информация об устройстве": "message_067",
   "Число ячеек": "message_078",
@@ -2862,5 +2703,5 @@ const sourceKeys = {
   "MOS заряд / разряд": "message_114",
   "Температура min / max": "message_115",
   "Адрес платы (RS485 / NMEA2000)": "message_116",
-  "{0}ч {1}м": "message_149",
+  "{0}ч {1}м": "message_149"
 };

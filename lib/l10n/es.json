@@ -161,7 +161,7 @@
   "message_049": "Diferencia de SOC entre baterías: {0}%",
   "message_050": "SOC en el umbral crítico o inferior ({0}% ≤ {1}%)",
   "message_051": "SOC en el umbral de aviso o inferior ({0}% ≤ {1}%)",
-  "message_052": "{0} • {1} baterías • SOC {2}%",
+  "message_052": "{0} • {1} • SOC {2}%",
   "message_053": "Introduzca un nombre de banco",
   "message_054": "Este nombre ya está en uso",
   "message_055": "Se eliminará «{0}». {1}",
@@ -261,5 +261,11 @@
   "message_114": "MOS CARGA / MOS DESCARGA",
   "message_115": "TEMPERATURA min / max",
   "message_116": "Dirección de placa (RS485 / NMEA2000)",
-  "message_149": "{0} h {1} min"
+  "message_149": "{0} h {1} min",
+  "battery_count_one": "{0} batería",
+  "battery_count_few": "{0} baterías",
+  "battery_count_other": "{0} baterías",
+  "message_152_one": "Se desvinculará la batería conectada ({0}).",
+  "message_152_few": "Se desvincularán las baterías conectadas ({0}).",
+  "message_152_other": "Se desvincularán las baterías conectadas ({0})."
 }

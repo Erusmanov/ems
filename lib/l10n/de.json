@@ -161,7 +161,7 @@
   "message_049": "SOC-Abweichung zwischen Batterien: {0}%",
   "message_050": "SOC an/unter kritischer Schwelle ({0}% ≤ {1}%)",
   "message_051": "SOC an/unter Warnschwelle ({0}% ≤ {1}%)",
-  "message_052": "{0} • {1} Batterien • SOC {2}%",
+  "message_052": "{0} • {1} • SOC {2}%",
   "message_053": "Banknamen eingeben",
   "message_054": "Name bereits vergeben",
   "message_055": "„{0}“ wird gelöscht. {1}",
@@ -261,5 +261,11 @@
   "message_114": "LADE-MOS / ENTLADE-MOS",
   "message_115": "TEMPERATUR min / max",
   "message_116": "Platinenadresse (RS485 / NMEA2000)",
-  "message_149": "{0} Std. {1} Min."
+  "message_149": "{0} Std. {1} Min.",
+  "battery_count_one": "{0} Batterie",
+  "battery_count_few": "{0} Batterien",
+  "battery_count_other": "{0} Batterien",
+  "message_152_one": "Die verbundene Batterie ({0}) wird getrennt.",
+  "message_152_few": "Verbundene Batterien ({0}) werden getrennt.",
+  "message_152_other": "Verbundene Batterien ({0}) werden getrennt."
 }

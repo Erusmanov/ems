@@ -161,7 +161,7 @@
   "message_049": "Aküler arası SOC farkı: %{0}",
   "message_050": "SOC kritik eşikte veya altında (%{0} ≤ %{1})",
   "message_051": "SOC uyarı eşiğinde veya altında (%{0} ≤ %{1})",
-  "message_052": "{0} • {1} akü • SOC %{2}",
+  "message_052": "{0} • {1} • SOC %{2}",
   "message_053": "Grup adı girin",
   "message_054": "Bu ad zaten kullanılıyor",
   "message_055": "“{0}” silinecek. {1}",
@@ -261,5 +261,11 @@
   "message_114": "ŞARJ MOS / DEŞARJ MOS",
   "message_115": "SICAKLIK min / max",
   "message_116": "Kart adresi (RS485 / NMEA2000)",
-  "message_149": "{0} sa {1} dk"
+  "message_149": "{0} sa {1} dk",
+  "battery_count_one": "{0} akü",
+  "battery_count_few": "{0} akü",
+  "battery_count_other": "{0} akü",
+  "message_152_one": "Bağlı akü ({0}) ayrılacak.",
+  "message_152_few": "Bağlı aküler ({0}) ayrılacak.",
+  "message_152_other": "Bağlı aküler ({0}) ayrılacak."
 }

@@ -57,6 +57,51 @@ void main() {
     }
   });
 
+  test('battery counts use locale-specific singular and plural forms', () {
+    const expected = {
+      'ru': ['1 АКБ', '2 АКБ', '5 АКБ'],
+      'en': ['1 battery', '2 batteries', '5 batteries'],
+      'de': ['1 Batterie', '2 Batterien', '5 Batterien'],
+      'fr': ['1 batterie', '2 batteries', '5 batteries'],
+      'es': ['1 batería', '2 baterías', '5 baterías'],
+      'it': ['1 batteria', '2 batterie', '5 batterie'],
+      'tr': ['1 akü', '2 akü', '5 akü'],
+      'el': ['1 μπαταρία', '2 μπαταρίες', '5 μπαταρίες'],
+      'hr': ['1 baterija', '2 baterije', '5 baterija'],
+    };
+    for (final entry in expected.entries) {
+      AppStrings.locale = Locale(entry.key);
+      for (final (i, count) in [1, 2, 5].indexed) {
+        final label = AppStrings.plural('battery_count', count);
+        expect(label, entry.value[i], reason: '${entry.key}/$count');
+        expect(
+          tr('message_052', ['Type', label, '76']),
+          contains('• $label •'),
+        );
+      }
+      expect(AppStrings.plural('message_152', 1), tr('message_152_one', [1]));
+    }
+    AppStrings.locale = const Locale('hr');
+    for (final count in [0, 11, 12, 14, 20, 21, 22, 24, 25, 101, 111]) {
+      final few = [22, 24].contains(count);
+      expect(
+        AppStrings.plural('battery_count', count),
+        '$count ${few ? 'baterije' : 'baterija'}',
+      );
+    }
+    AppStrings.locale = const Locale('en');
+    expect(AppStrings.plural('battery_count', 0), '0 batteries');
+    expect(AppStrings.plural('battery_count', 21), '21 batteries');
+    expect(
+      AppStrings.plural('message_152', 1),
+      'The connected battery (1) will be unlinked.',
+    );
+    expect(
+      AppStrings.plural('message_152', 2),
+      'Connected batteries (2) will be unlinked.',
+    );
+  });
+
   test('bank names containing placeholder-like text are preserved', () {
     AppStrings.locale = const Locale('en');
     expect(

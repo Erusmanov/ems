@@ -55,7 +55,7 @@ class BankConfigScreen extends StatelessWidget {
         title: Text(tr('delete_bank_q'),
             style: TextStyle(color: AppColors.textPrimary, fontSize: 17)),
         content: Text(
-          tr('message_055', [bank.name, bank.batteries.isNotEmpty ? tr('message_152', [bank.batteries.length]) : '']),
+          tr('message_055', [bank.name, bank.batteries.isNotEmpty ? AppStrings.plural('message_152', bank.batteries.length) : '']),
           style: TextStyle(color: AppColors.textSecondary, fontSize: 14),
         ),
         actions: [

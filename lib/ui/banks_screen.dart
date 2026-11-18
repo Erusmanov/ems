@@ -111,7 +111,7 @@ class BanksScreen extends StatelessWidget {
   Widget _bankRow(BuildContext context, Bank bank) {
     final agg = bank.aggregate;
     final subtitle =
-        tr('message_052', [bank.type.label, bank.batteries.length, agg.soc.toStringAsFixed(0)]);
+        tr('message_052', [bank.type.label, AppStrings.plural('battery_count', bank.batteries.length), agg.soc.toStringAsFixed(0)]);
     return InkWell(
       onTap: () => _openBank(context, bank),
       child: Container(

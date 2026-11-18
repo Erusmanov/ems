@@ -161,7 +161,7 @@
   "message_049": "SOC spread between batteries: {0}%",
   "message_050": "SOC at or below critical threshold ({0}% ≤ {1}%)",
   "message_051": "SOC at or below warning threshold ({0}% ≤ {1}%)",
-  "message_052": "{0} • {1} batteries • SOC {2}%",
+  "message_052": "{0} • {1} • SOC {2}%",
   "message_053": "Enter a bank name",
   "message_054": "Another bank already uses this name",
   "message_055": "“{0}” will be deleted. {1}",
@@ -261,5 +261,11 @@
   "message_114": "CHARGE MOS / DISCHARGE MOS",
   "message_115": "TEMPERATURE min / max",
   "message_116": "Board address (RS485 / NMEA2000)",
-  "message_149": "{0} h {1} min"
+  "message_149": "{0} h {1} min",
+  "battery_count_one": "{0} battery",
+  "battery_count_few": "{0} batteries",
+  "battery_count_other": "{0} batteries",
+  "message_152_one": "The connected battery ({0}) will be unlinked.",
+  "message_152_few": "Connected batteries ({0}) will be unlinked.",
+  "message_152_other": "Connected batteries ({0}) will be unlinked."
 }

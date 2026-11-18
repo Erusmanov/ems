@@ -161,7 +161,7 @@
   "message_049": "Differenza SOC tra batterie: {0}%",
   "message_050": "SOC alla soglia critica o inferiore ({0}% ≤ {1}%)",
   "message_051": "SOC alla soglia di avviso o inferiore ({0}% ≤ {1}%)",
-  "message_052": "{0} • {1} batterie • SOC {2}%",
+  "message_052": "{0} • {1} • SOC {2}%",
   "message_053": "Inserire il nome del banco",
   "message_054": "Nome già utilizzato",
   "message_055": "«{0}» verrà eliminato. {1}",
@@ -261,5 +261,11 @@
   "message_114": "MOS CARICA / MOS SCARICA",
   "message_115": "TEMPERATURA min / max",
   "message_116": "Indirizzo scheda (RS485 / NMEA2000)",
-  "message_149": "{0} h {1} min"
+  "message_149": "{0} h {1} min",
+  "battery_count_one": "{0} batteria",
+  "battery_count_few": "{0} batterie",
+  "battery_count_other": "{0} batterie",
+  "message_152_one": "La batteria connessa ({0}) verrà scollegata.",
+  "message_152_few": "Le batterie connesse ({0}) verranno scollegate.",
+  "message_152_other": "Le batterie connesse ({0}) verranno scollegate."
 }

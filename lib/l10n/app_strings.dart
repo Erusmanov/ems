@@ -1,4 +1,5 @@
 import 'dart:ui';
+import 'package:intl/intl.dart';
 import 'messages.dart';
 
 /// The app has one locale, shared by UI labels and background notifications.
@@ -44,6 +45,18 @@ class AppStrings {
       final index = int.parse(match[1]!);
       return index < values.length ? '${values[index]}' : match[0]!;
     });
+  }
+
+  /// CLDR rules handle Croatian 2–4/22–24 as well as singular forms.
+  static String plural(String key, int count) {
+    final category = Intl.pluralLogic(
+      count,
+      one: 'one',
+      few: 'few',
+      other: 'other',
+      locale: locale.languageCode,
+    );
+    return text('${key}_$category', [count]);
   }
 
   static String source(String value) {
