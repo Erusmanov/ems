@@ -1,3 +1,4 @@
+import '../l10n/app_strings.dart';
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -36,38 +37,39 @@ class _DebugRegistersScreenState extends State<DebugRegistersScreen> {
   /// Подписи известных регистров карты Daly/KVMS.
   static String _label(int addr) {
     if (addr >= DalyReg.cellsStart && addr < DalyReg.tempStart) {
-      return 'Ячейка ${addr + 1}, мВ';
+      return tr('message_069', [addr + 1]);
     }
     if (addr >= DalyReg.tempStart && addr < DalyReg.totalVoltage) {
       return 'T${addr - DalyReg.tempStart + 1}, °C+40';
     }
     return switch (addr) {
-      DalyReg.totalVoltage => 'Напряжение, ×0.1 В',
-      DalyReg.current => 'Ток, ×0.1 А −30000',
+      DalyReg.totalVoltage => tr('message_070'),
+      DalyReg.current => tr('message_071'),
       DalyReg.soc => 'SOC, ×0.1 %',
-      DalyReg.maxCellV => 'Макс. ячейка, мВ',
-      DalyReg.minCellV => 'Мин. ячейка, мВ',
-      DalyReg.maxCellTemp => 'T макс, °C+40',
-      DalyReg.minCellTemp => 'T мин, °C+40',
-      DalyReg.status => 'Статус (0/1/2)',
-      DalyReg.remainingCap => 'Остаток, ×0.1 Ач',
-      DalyReg.cellCount => 'Число ячеек',
-      DalyReg.tempSensorCount => 'Число датчиков T',
-      DalyReg.cycles => 'Циклы',
-      DalyReg.chargeMos => 'MOS заряд',
-      DalyReg.dischargeMos => 'MOS разряд',
-      DalyReg.cellDelta => 'Дельта ячеек, мВ',
-      DalyReg.power => 'Мощность, Вт',
-      DalyReg.fault1 => 'Fault 1 (биты)',
-      DalyReg.fault2 => 'Fault 2 (биты)',
-      DalyReg.fault3 => 'Fault 3 (биты)',
-      DalyReg.fault4 => 'Fault 4 (биты)',
+      DalyReg.maxCellV => tr('message_072'),
+      DalyReg.minCellV => tr('message_073'),
+      DalyReg.maxCellTemp => tr('message_074'),
+      DalyReg.minCellTemp => tr('message_075'),
+      DalyReg.status => tr('message_076'),
+      DalyReg.remainingCap => tr('message_077'),
+      DalyReg.cellCount => tr('message_078'),
+      DalyReg.tempSensorCount => tr('message_079'),
+      DalyReg.cycles => tr('message_080'),
+      DalyReg.chargeMos => tr('message_081'),
+      DalyReg.dischargeMos => tr('message_082'),
+      DalyReg.cellDelta => tr('message_083'),
+      DalyReg.power => tr('message_084'),
+      DalyReg.fault1 => tr('message_085'),
+      DalyReg.fault2 => tr('message_086'),
+      DalyReg.fault3 => tr('message_087'),
+      DalyReg.fault4 => tr('message_088'),
       _ => '',
     };
   }
 
   @override
   Widget build(BuildContext context) {
+    Localizations.localeOf(context); // Rebuild open routes when the locale changes.
     final app = context.watch<AppState>();
     final regs = app.rawRegistersFor(widget.deviceId);
 
@@ -75,7 +77,7 @@ class _DebugRegistersScreenState extends State<DebugRegistersScreen> {
       appBar: AppBar(
         backgroundColor: AppColors.bg,
         elevation: 0,
-        title: Text('Сырые регистры',
+        title: Text(tr('message_089'),
             style: TextStyle(
                 color: AppColors.textPrimary,
                 fontSize: 16,
@@ -86,8 +88,7 @@ class _DebugRegistersScreenState extends State<DebugRegistersScreen> {
               child: Padding(
                 padding: const EdgeInsets.all(24),
                 child: Text(
-                  'Сырых данных нет.\nДемо-устройства (мок) не отдают регистры — '
-                  'подключите реальную BMS.',
+                  tr('message_090'),
                   textAlign: TextAlign.center,
                   style:
                       TextStyle(color: AppColors.textSecondary, fontSize: 14),
@@ -116,10 +117,7 @@ class _DebugRegistersScreenState extends State<DebugRegistersScreen> {
         border: Border.all(color: AppColors.accent),
       ),
       child: Text(
-        'SOC (регистр 0x2A): сырое = $raw\n'
-        '→ как ×0.1 %: ${(raw * 0.1).toStringAsFixed(1)} %   '
-        '→ как 1 %: $raw %\n'
-        'Сравните с показанием сервисного приложения производителя BMS.',
+        tr('message_091', [raw, (raw * 0.1).toStringAsFixed(1), raw]),
         style: TextStyle(
             color: AppColors.textPrimary, fontSize: 13, height: 1.4),
       ),

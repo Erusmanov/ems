@@ -1,3 +1,4 @@
+import '../l10n/app_strings.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../state/app_state.dart';
@@ -11,6 +12,7 @@ class DashboardScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Localizations.localeOf(context); // Rebuild open routes when the locale changes.
     final app = context.watch<AppState>();
     return Scaffold(
       appBar: AppBar(
@@ -30,13 +32,13 @@ class DashboardScreen extends StatelessWidget {
                 ),
               ),
               const SizedBox(width: 6),
-              Text(app.anyConnected ? 'Подключено' : 'Отключено',
+              Text(app.anyConnected ? tr('connected') : tr('disconnected'),
                   style: TextStyle(
                       color: AppColors.textSecondary, fontSize: 13)),
             ],
           ),
           IconButton(
-            tooltip: 'Подключить устройство',
+            tooltip: tr('connect_device'),
             icon: Icon(Icons.bluetooth_searching, color: AppColors.accent),
             onPressed: () => Navigator.of(context).push(
               MaterialPageRoute(builder: (_) => const DeviceScanScreen()),
@@ -52,13 +54,13 @@ class DashboardScreen extends StatelessWidget {
                   Icon(Icons.battery_unknown,
                       size: 44, color: AppColors.textLabel),
                   const SizedBox(height: 12),
-                  Text('Пока нет ни одного банка',
+                  Text(tr('no_banks_yet'),
                       style: TextStyle(
                           color: AppColors.textPrimary,
                           fontSize: 16,
                           fontWeight: FontWeight.w600)),
                   const SizedBox(height: 4),
-                  Text('Подключите BMS или создайте банк во вкладке «Банки»',
+                  Text(tr('no_banks_hint'),
                       textAlign: TextAlign.center,
                       style: TextStyle(
                           color: AppColors.textSecondary, fontSize: 13)),
@@ -69,7 +71,7 @@ class DashboardScreen extends StatelessWidget {
                           builder: (_) => const DeviceScanScreen()),
                     ),
                     icon: const Icon(Icons.bluetooth_searching, size: 18),
-                    label: const Text('Подключить устройство'),
+                    label:  Text(tr('connect_device')),
                     style: ElevatedButton.styleFrom(
                       backgroundColor: AppColors.accent,
                       foregroundColor: Colors.black,

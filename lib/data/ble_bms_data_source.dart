@@ -1,3 +1,4 @@
+import '../l10n/app_strings.dart';
 import 'dart:async';
 import 'package:flutter_blue_plus/flutter_blue_plus.dart';
 import '../models/bms_data.dart';
@@ -92,7 +93,7 @@ class BleBmsDataSource implements BmsDataSource {
         }
       }
     }
-    throw lastError ?? StateError('Не удалось подключиться');
+    throw lastError ?? StateError(tr('connect_failed'));
   }
 
   Future<void> _startOnce() async {
@@ -117,8 +118,7 @@ class BleBmsDataSource implements BmsDataSource {
           .take(6)
           .join(', ');
       throw StateError(
-          'BMS этого типа не поддерживается. '
-          'Сервисы устройства: ${found.isEmpty ? 'нет данных' : found}');
+          tr('message_000', [found.isEmpty ? tr('message_151') : found]));
     }
 
     await _notifyChar!.setNotifyValue(true);
@@ -235,7 +235,7 @@ class BleBmsDataSource implements BmsDataSource {
     final resp = await _request(Modbus.readHolding(reg, 1));
     final regs =
         Modbus.parseReadResponse(resp, expectedSlave: Modbus.defaultSlave);
-    if (regs.isEmpty) throw StateError('Пустой ответ BMS');
+    if (regs.isEmpty) throw StateError(tr('message_001'));
     return regs.first;
   }
 
@@ -243,7 +243,7 @@ class BleBmsDataSource implements BmsDataSource {
   Future<void> writeSetting(int reg, int value) async {
     final resp = await _request(Modbus.writeSingle(reg, value));
     if (resp.length < 8 || resp[1] & 0x80 != 0) {
-      throw StateError('BMS отклонила запись (код ${resp.length > 2 ? resp[2] : '?'})');
+      throw StateError(tr('message_002', [resp.length > 2 ? resp[2] : '?']));
     }
   }
 
@@ -254,7 +254,7 @@ class BleBmsDataSource implements BmsDataSource {
         Modbus.readHolding(reg, 1, slave: Modbus.intranetRequest));
     final regs = Modbus.parseReadResponse(resp,
         expectedSlave: Modbus.intranetResponse);
-    if (regs.isEmpty) throw StateError('Пустой ответ BMS');
+    if (regs.isEmpty) throw StateError(tr('message_001'));
     return regs.first;
   }
 
@@ -265,8 +265,7 @@ class BleBmsDataSource implements BmsDataSource {
     if (resp.length < 8 ||
         resp[0] != Modbus.intranetResponse ||
         resp[1] & 0x80 != 0) {
-      throw StateError('BMS отклонила запись адреса '
-          '(код ${resp.length > 2 ? resp[2] : '?'})');
+      throw StateError(tr('message_003', [resp.length > 2 ? resp[2] : '?']));
     }
   }
 

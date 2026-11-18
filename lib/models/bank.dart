@@ -1,3 +1,4 @@
+import '../l10n/app_strings.dart';
 import 'dart:math' as math;
 import 'package:flutter/material.dart';
 import '../theme/app_theme.dart';
@@ -7,9 +8,9 @@ enum BankType { single, parallel, series }
 
 extension BankTypeLabel on BankType {
   String get label => switch (this) {
-        BankType.single => 'Одиночная АКБ',
-        BankType.parallel => 'Параллельный банк',
-        BankType.series => 'Последовательный банк',
+        BankType.single => tr('type_single'),
+        BankType.parallel => tr('type_parallel'),
+        BankType.series => tr('type_series'),
       };
   String get short => switch (this) {
         BankType.single => 'single',

@@ -1,3 +1,4 @@
+import '../l10n/app_strings.dart';
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_blue_plus/flutter_blue_plus.dart';
@@ -67,7 +68,7 @@ class _DeviceScanScreenState extends State<DeviceScanScreen> {
 
   Future<void> _init() async {
     if (await FlutterBluePlus.isSupported == false) {
-      setState(() => _status = 'BLE не поддерживается на этом устройстве');
+      setState(() => _status = tr('message_117'));
       return;
     }
     // Разрешения Android 12+
@@ -118,7 +119,7 @@ class _DeviceScanScreenState extends State<DeviceScanScreen> {
         androidScanMode: AndroidScanMode.lowLatency,
       );
     } catch (e) {
-      setState(() => _status = 'Ошибка сканирования: $e');
+      setState(() => _status = tr('message_118', [e]));
     }
   }
 
@@ -160,7 +161,7 @@ class _DeviceScanScreenState extends State<DeviceScanScreen> {
           children: [
             Padding(
               padding: const EdgeInsets.fromLTRB(16, 14, 16, 6),
-              child: Text('В КАКОЙ БАНК ДОБАВИТЬ УСТРОЙСТВО?',
+              child: Text(tr('message_119'),
                   style: TextStyle(
                       color: AppColors.textLabel,
                       fontSize: 11,
@@ -185,7 +186,7 @@ class _DeviceScanScreenState extends State<DeviceScanScreen> {
                               : AppColors.textLabel,
                           fontSize: 14)),
                   subtitle: veto != null
-                      ? Text('одиночный банк уже занят',
+                      ? Text(tr('message_120'),
                           style: TextStyle(
                               color: AppColors.textLabel, fontSize: 11))
                       : null,
@@ -195,7 +196,7 @@ class _DeviceScanScreenState extends State<DeviceScanScreen> {
             ListTile(
               dense: true,
               leading: const Icon(Icons.add, size: 18, color: AppColors.accent),
-              title: Text('Новый банк…',
+              title: Text(tr('message_121'),
                   style:
                       TextStyle(color: AppColors.textPrimary, fontSize: 14)),
               onTap: () => Navigator.pop(ctx, '__new__'),
@@ -252,18 +253,18 @@ class _DeviceScanScreenState extends State<DeviceScanScreen> {
           setState(() => _lockedBankId = created.id);
           ScaffoldMessenger.of(context).showSnackBar(SnackBar(
               content: Text(
-                  'АКБ добавлена. «${created.name}» — ${created.type.label.toLowerCase()}: добавьте минимум ещё одну АКБ')));
+                  tr('message_122', [created.name, created.type.label.toLowerCase()]))));
           _startScan();
           return;
         }
       }
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Устройство подключено')),
+         SnackBar(content: Text(tr('device_connected'))),
       );
       Navigator.of(context).pop();
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Не удалось подключиться: $err')),
+        SnackBar(content: Text(tr('message_123', [err]))),
       );
     }
   }
@@ -274,8 +275,8 @@ class _DeviceScanScreenState extends State<DeviceScanScreen> {
     // Гонка из видео 03.08 (в4): выйти во время подключения -> банк создаётся
     // за спиной. Пока идёт подключение, выход заблокирован.
     if (_connectingId != null) {
-      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-          content: Text('Подождите — идёт подключение устройства')));
+      ScaffoldMessenger.of(context).showSnackBar( SnackBar(
+          content: Text(tr('message_124'))));
       return false;
     }
     final id = _lockedBankId ??
@@ -293,27 +294,26 @@ class _DeviceScanScreenState extends State<DeviceScanScreen> {
       barrierDismissible: false,
       builder: (ctx) => AlertDialog(
         backgroundColor: AppColors.card,
-        title: Text('В банке одна АКБ',
+        title: Text(tr('message_125'),
             style: TextStyle(color: AppColors.textPrimary, fontSize: 17)),
         content: Text(
-          '«${bank.name}» — ${bank.type.label.toLowerCase()}, ему нужно '
-          'минимум две АКБ. Что сделать?',
+          tr('message_126', [bank.name, bank.type.label.toLowerCase()]),
           style: TextStyle(color: AppColors.textSecondary, fontSize: 14),
         ),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(ctx, 'stay'),
-            child: const Text('Добавить вторую',
+            child:  Text(tr('message_127'),
                 style: TextStyle(color: AppColors.accent)),
           ),
           TextButton(
             onPressed: () => Navigator.pop(ctx, 'single'),
-            child: Text('Сделать одиночным',
+            child: Text(tr('message_128'),
                 style: TextStyle(color: AppColors.textPrimary)),
           ),
           TextButton(
             onPressed: () => Navigator.pop(ctx, 'delete'),
-            child: const Text('Удалить банк',
+            child:  Text(tr('delete_bank'),
                 style: TextStyle(color: AppColors.socRed)),
           ),
         ],
@@ -334,6 +334,7 @@ class _DeviceScanScreenState extends State<DeviceScanScreen> {
 
   @override
   Widget build(BuildContext context) {
+    Localizations.localeOf(context); // Rebuild open routes when the locale changes.
     return PopScope(
       canPop: false,
       onPopInvokedWithResult: (didPop, _) async {
@@ -346,7 +347,7 @@ class _DeviceScanScreenState extends State<DeviceScanScreen> {
       appBar: AppBar(
         backgroundColor: AppColors.bg,
         elevation: 0,
-        title: Text('Подключение устройства',
+        title: Text(tr('device_connect'),
             style: TextStyle(
                 color: AppColors.textPrimary, fontWeight: FontWeight.w700)),
         actions: [
@@ -383,16 +384,16 @@ class _DeviceScanScreenState extends State<DeviceScanScreen> {
                 Expanded(
                   child: Text(
                       _scanning
-                          ? 'Идёт поиск…'
-                          : 'Найдено АКБ: ${_results.where(_looksLikeBms).length}',
+                          ? tr('scanning')
+                          : tr('message_129', [_results.where(_looksLikeBms).length]),
                       style: TextStyle(color: AppColors.textSecondary)),
                 ),
                 TextButton(
                   onPressed: () => setState(() => _showAll = !_showAll),
                   child: Text(
                       _showAll
-                          ? 'Только АКБ'
-                          : 'Показать все (${_results.length})',
+                          ? tr('only_batteries')
+                          : tr('message_130', [_results.length]),
                       style: TextStyle(
                           color: AppColors.textLabel, fontSize: 12)),
                 ),
@@ -414,7 +415,7 @@ class _DeviceScanScreenState extends State<DeviceScanScreen> {
               children: [
                 Padding(
                   padding: const EdgeInsets.fromLTRB(16, 6, 16, 2),
-                  child: Text('НА СВЯЗИ (НЕ ВИДНЫ В ПОИСКЕ)',
+                  child: Text(tr('message_131'),
                       style: TextStyle(
                           color: AppColors.textLabel,
                           fontSize: 10,
@@ -430,7 +431,7 @@ class _DeviceScanScreenState extends State<DeviceScanScreen> {
                           size: 14, color: AppColors.socGreen),
                       const SizedBox(width: 10),
                       Expanded(
-                        child: Text('${bat.bleName} — банк «${bk.name}»',
+                        child: Text(tr('message_132', [bat.bleName, bk.name]),
                             maxLines: 1,
                             overflow: TextOverflow.ellipsis,
                             style: TextStyle(
@@ -454,11 +455,8 @@ class _DeviceScanScreenState extends State<DeviceScanScreen> {
                     padding: const EdgeInsets.all(24),
                     child: Text(
                         _scanning
-                            ? 'Поиск АКБ поблизости…'
-                            : 'АКБ не найдены.\nУбедитесь, что батарея включена и '
-                              'не подключена к другому приложению, затем '
-                              'обновите поиск. Кнопка «Показать все» выводит '
-                              'остальные BLE-устройства.',
+                            ? tr('message_133')
+                            : tr('message_134'),
                         textAlign: TextAlign.center,
                         style: TextStyle(color: AppColors.textLabel)),
                   ),
@@ -480,7 +478,7 @@ class _DeviceScanScreenState extends State<DeviceScanScreen> {
 
   Widget _tile(ScanResult r) {
     final rawName = nameOf(r);
-    final name = rawName.isNotEmpty ? rawName : 'Без имени';
+    final name = rawName.isNotEmpty ? rawName : tr('no_name');
     final isBms = _looksLikeBms(r);
     final connecting = _connectingId == r.device.remoteId.str;
     // АКБ, уже назначенная в банк, помечается и не подключается повторно
@@ -512,7 +510,7 @@ class _DeviceScanScreenState extends State<DeviceScanScreen> {
                 color: AppColors.socGreen.withValues(alpha: 0.15),
                 borderRadius: BorderRadius.circular(8),
               ),
-              child: Text('В БАНКЕ',
+              child: Text(tr('message_135'),
                   style: TextStyle(color: AppColors.socGreen, fontSize: 10)),
             )
           else if (isBms)
@@ -523,7 +521,7 @@ class _DeviceScanScreenState extends State<DeviceScanScreen> {
                 color: AppColors.accent.withValues(alpha: 0.15),
                 borderRadius: BorderRadius.circular(8),
               ),
-              child: Text('АКБ',
+              child: Text(tr('battery_badge'),
                   style: TextStyle(color: AppColors.accent, fontSize: 10)),
             ),
         ],
@@ -552,18 +550,16 @@ class _DeviceScanScreenState extends State<DeviceScanScreen> {
               if (ownerBank != null) {
                 ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                     content: Text(
-                        'Эта АКБ уже в банке «${ownerBank.name}». Управлять ею '
-                        'можно из вкладки «Банки».')));
+                        tr('message_136', [ownerBank.name]))));
                 return;
               }
               // Клиенты добавляли в банк колонки и наушники (видео 17.08):
               // подключение не-АКБ разрешено только в режиме разработчика.
               final isDev = context.read<SettingsState>().devMode;
               if (!isBms && !isDev) {
-                ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                ScaffoldMessenger.of(context).showSnackBar( SnackBar(
                     content: Text(
-                        'Это устройство не похоже на АКБ EM-Power — '
-                        'подключить его нельзя. АКБ помечены жёлтым значком.')));
+                        tr('message_137'))));
                 return;
               }
               _connect(r.device, name);
@@ -580,6 +576,7 @@ class _SignalBars extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Localizations.localeOf(context); // Rebuild open routes when the locale changes.
     final level = rssi >= -60
         ? 4
         : rssi >= -70

@@ -1,3 +1,5 @@
+import 'package:flutter_localizations/flutter_localizations.dart';
+import 'l10n/app_strings.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:hive_flutter/hive_flutter.dart';
@@ -10,30 +12,40 @@ import 'ui/home_shell.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  AppStrings.locale = AppStrings.resolve(
+    'system',
+    WidgetsBinding.instance.platformDispatcher.locales,
+  );
   // Любой сбой инициализации не должен оставлять вечный белый экран
   // (репорт Михаила 23.08, iOS): показываем текст ошибки вместо тишины.
   try {
     await Hive.initFlutter();
     final settingsBox = await Hive.openBox(SettingsState.boxName);
     final banksBox = await Hive.openBox(AppState.banksBoxName);
+    AppStrings.locale = AppStrings.resolve(
+      SettingsState(settingsBox).language,
+      WidgetsBinding.instance.platformDispatcher.locales,
+    );
     await NotificationService.init();
     runApp(EmPowerApp(settingsBox: settingsBox, banksBox: banksBox));
   } catch (e, st) {
-    runApp(MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: Scaffold(
-        backgroundColor: const Color(0xFF000000),
-        body: SafeArea(
-          child: SingleChildScrollView(
-            padding: const EdgeInsets.all(24),
-            child: Text(
-              'Ошибка запуска EM-Power\n\n$e\n\n$st',
-              style: const TextStyle(color: Color(0xFFF2F4F7), fontSize: 13),
+    runApp(
+      MaterialApp(
+        debugShowCheckedModeBanner: false,
+        home: Scaffold(
+          backgroundColor: const Color(0xFF000000),
+          body: SafeArea(
+            child: SingleChildScrollView(
+              padding: const EdgeInsets.all(24),
+              child: Text(
+                tr('message_004', [e, st]),
+                style: const TextStyle(color: Color(0xFFF2F4F7), fontSize: 13),
+              ),
             ),
           ),
         ),
       ),
-    ));
+    );
   }
 }
 
@@ -46,15 +58,20 @@ class _ClampedScrollBehavior extends MaterialScrollBehavior {
 
   @override
   Widget buildOverscrollIndicator(
-          BuildContext context, Widget child, ScrollableDetails details) =>
-      child; // без stretch/glow-эффекта на краях
+    BuildContext context,
+    Widget child,
+    ScrollableDetails details,
+  ) => child; // без stretch/glow-эффекта на краях
 }
 
 class EmPowerApp extends StatefulWidget {
   final Box settingsBox;
   final Box banksBox;
-  const EmPowerApp(
-      {super.key, required this.settingsBox, required this.banksBox});
+  const EmPowerApp({
+    super.key,
+    required this.settingsBox,
+    required this.banksBox,
+  });
 
   @override
   State<EmPowerApp> createState() => _EmPowerAppState();
@@ -78,30 +95,41 @@ class _EmPowerAppState extends State<EmPowerApp> with WidgetsBindingObserver {
   void didChangePlatformBrightness() => setState(() {});
 
   @override
+  void didChangeLocales(List<Locale>? locales) => setState(() {});
+
+  @override
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider<SettingsState>(
-            create: (_) => SettingsState(widget.settingsBox)),
+          create: (_) => SettingsState(widget.settingsBox),
+        ),
         // Старт с нуля как в реале: восстановление сохранённых банков;
         // демо-банки — только если включены в настройках.
-        ChangeNotifierProvider<AppState>(create: (context) {
-          final settings = context.read<SettingsState>();
-          final app = AppState(
-            banksBox: widget.banksBox,
-            socWarning: settings.socWarning,
-            socCritical: settings.socCritical,
-          );
-          final demo = settings.demoMode;
-          demo ? app.initMock() : app.initFromStore();
-          return app;
-        }),
+        ChangeNotifierProvider<AppState>(
+          create: (context) {
+            final settings = context.read<SettingsState>();
+            final app = AppState(
+              banksBox: widget.banksBox,
+              socWarning: settings.socWarning,
+              socCritical: settings.socCritical,
+            );
+            final demo = settings.demoMode;
+            demo ? app.initMock() : app.initFromStore();
+            return app;
+          },
+        ),
       ],
       child: Consumer<SettingsState>(
         builder: (context, settings, _) {
           NotificationService.enabled = settings.lowSocNotify;
+          AppStrings.locale = AppStrings.resolve(
+            settings.language,
+            WidgetsBinding.instance.platformDispatcher.locales,
+          );
           final dark = settings.resolveDark(
-              WidgetsBinding.instance.platformDispatcher.platformBrightness);
+            WidgetsBinding.instance.platformDispatcher.platformBrightness,
+          );
           AppColors.apply(dark: dark);
           // Явные цвета системных полос: без них статус-бар и нижняя
           // навигация Android зависали в цвете старой темы до первого тапа
@@ -110,12 +138,16 @@ class _EmPowerAppState extends State<EmPowerApp> with WidgetsBindingObserver {
             statusBarColor: Colors.transparent,
             statusBarIconBrightness: dark ? Brightness.light : Brightness.dark,
             systemNavigationBarColor: AppColors.bg,
-            systemNavigationBarIconBrightness:
-                dark ? Brightness.light : Brightness.dark,
+            systemNavigationBarIconBrightness: dark
+                ? Brightness.light
+                : Brightness.dark,
           );
           SystemChrome.setSystemUIOverlayStyle(overlay);
           return MaterialApp(
             title: 'EM-Power',
+            locale: AppStrings.locale,
+            supportedLocales: AppStrings.supportedLocales,
+            localizationsDelegates: GlobalMaterialLocalizations.delegates,
             debugShowCheckedModeBanner: false,
             theme: AppTheme.of(dark: dark),
             // Без «резинового» оверскролла: списки упираются в край,

@@ -1,3 +1,4 @@
+import '../l10n/app_strings.dart';
 import 'dart:typed_data';
 import 'crc16.dart';
 
@@ -63,25 +64,25 @@ class Modbus {
   /// Бросает [ModbusException] при ошибке CRC/длины/функции.
   static List<int> parseReadResponse(List<int> resp, {int? expectedSlave}) {
     if (resp.length < 5) {
-      throw const ModbusException('Слишком короткий ответ');
+      throw  ModbusException(tr('message_029'));
     }
     if (!checkCrc(resp)) {
-      throw const ModbusException('Ошибка CRC');
+      throw  ModbusException(tr('message_030'));
     }
     final slave = resp[0];
     final fn = resp[1];
     if (expectedSlave != null && slave != expectedSlave) {
-      throw ModbusException('Чужой адрес slave: $slave');
+      throw ModbusException(tr('message_031', [slave]));
     }
     if (fn & 0x80 != 0) {
-      throw ModbusException('BMS вернула ошибку, код ${resp[2]}');
+      throw ModbusException(tr('message_032', [resp[2]]));
     }
     if (fn != fnReadHolding) {
-      throw ModbusException('Неожиданная функция 0x${fn.toRadixString(16)}');
+      throw ModbusException(tr('message_033', [fn.toRadixString(16)]));
     }
     final byteCount = resp[2];
     if (resp.length < 3 + byteCount + 2) {
-      throw const ModbusException('Несовпадение длины пакета');
+      throw  ModbusException(tr('message_034'));
     }
     final regs = <int>[];
     for (int i = 0; i < byteCount; i += 2) {

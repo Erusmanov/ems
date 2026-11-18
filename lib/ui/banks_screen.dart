@@ -1,3 +1,4 @@
+import '../l10n/app_strings.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../models/bank.dart';
@@ -44,6 +45,7 @@ class BanksScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Localizations.localeOf(context); // Rebuild open routes when the locale changes.
     final app = context.watch<AppState>();
     final banks = app.banks;
 
@@ -51,18 +53,18 @@ class BanksScreen extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: AppColors.bg,
         elevation: 0,
-        title: Text('Банки',
+        title: Text(tr('nav_banks'),
             style: TextStyle(
                 color: AppColors.textPrimary, fontWeight: FontWeight.w700)),
         actions: [
           IconButton(
-            tooltip: 'Подключить устройство',
+            tooltip: tr('connect_device'),
             onPressed: () => _openScan(context),
             icon: Icon(Icons.bluetooth_searching,
                 color: AppColors.accent),
           ),
           IconButton(
-            tooltip: 'Создать банк',
+            tooltip: tr('create_bank'),
             onPressed: () => _createBank(context),
             icon: Icon(Icons.add, color: AppColors.accent),
           ),
@@ -86,7 +88,7 @@ class BanksScreen extends StatelessWidget {
           Icon(Icons.battery_unknown,
               size: 44, color: AppColors.textLabel),
           const SizedBox(height: 12),
-          Text('Банков пока нет',
+          Text(tr('no_banks'),
               style: TextStyle(
                   color: AppColors.textPrimary,
                   fontSize: 16,
@@ -95,7 +97,7 @@ class BanksScreen extends StatelessWidget {
           ElevatedButton.icon(
             onPressed: () => _openScan(context),
             icon: Icon(Icons.bluetooth_searching, size: 18),
-            label: Text('Подключить устройство'),
+            label: Text(tr('connect_device')),
             style: ElevatedButton.styleFrom(
               backgroundColor: AppColors.accent,
               foregroundColor: Colors.black,
@@ -109,7 +111,7 @@ class BanksScreen extends StatelessWidget {
   Widget _bankRow(BuildContext context, Bank bank) {
     final agg = bank.aggregate;
     final subtitle =
-        '${bank.type.label} • ${bank.batteries.length} АКБ • SOC ${agg.soc.toStringAsFixed(0)} %';
+        tr('message_052', [bank.type.label, bank.batteries.length, agg.soc.toStringAsFixed(0)]);
     return InkWell(
       onTap: () => _openBank(context, bank),
       child: Container(
@@ -182,10 +184,11 @@ class _BankEditDialogState extends State<BankEditDialog> {
 
   @override
   Widget build(BuildContext context) {
+    Localizations.localeOf(context); // Rebuild open routes when the locale changes.
     final isEdit = widget.bank != null;
     return AlertDialog(
       backgroundColor: AppColors.card,
-      title: Text(isEdit ? 'Банк' : 'Новый банк',
+      title: Text(isEdit ? tr('bank') : tr('new_bank'),
           style: TextStyle(color: AppColors.textPrimary, fontSize: 17)),
       content: SingleChildScrollView(
         controller: _scroll,
@@ -201,7 +204,7 @@ class _BankEditDialogState extends State<BankEditDialog> {
               },
               style: TextStyle(color: AppColors.textPrimary),
               decoration: InputDecoration(
-                labelText: 'Название',
+                labelText: tr('bank_name'),
                 errorText: _nameError,
                 labelStyle: TextStyle(color: AppColors.textSecondary),
                 enabledBorder: UnderlineInputBorder(
@@ -211,7 +214,7 @@ class _BankEditDialogState extends State<BankEditDialog> {
               ),
             ),
             const SizedBox(height: 16),
-            Text('ИКОНКА',
+            Text(tr('bank_icon'),
                 style: TextStyle(
                     color: AppColors.textLabel,
                     fontSize: 10,
@@ -251,7 +254,7 @@ class _BankEditDialogState extends State<BankEditDialog> {
             ),
             ...[
               const SizedBox(height: 16),
-              Text('ТИП БАНКА',
+              Text(tr('bank_type'),
                   style: TextStyle(
                       color: AppColors.textLabel,
                       fontSize: 10,
@@ -276,7 +279,7 @@ class _BankEditDialogState extends State<BankEditDialog> {
       actions: [
         TextButton(
           onPressed: () => Navigator.pop(context),
-          child: Text('Отмена',
+          child: Text(tr('cancel'),
               style: TextStyle(color: AppColors.textSecondary)),
         ),
         TextButton(
@@ -284,7 +287,7 @@ class _BankEditDialogState extends State<BankEditDialog> {
             final name = _name.text.trim();
             if (name.isEmpty) {
               // Раньше кнопка молча не работала — юзер не понимал, в чём дело
-              setState(() => _nameError = 'Введите название банка');
+              setState(() => _nameError = tr('message_053'));
               _scroll.animateTo(0,
                   duration: const Duration(milliseconds: 250),
                   curve: Curves.easeOut); // ошибка всегда на виду (видео 02.08)
@@ -295,7 +298,7 @@ class _BankEditDialogState extends State<BankEditDialog> {
                 b.name.trim().toLowerCase() == name.toLowerCase() &&
                 b.id != widget.bank?.id);
             if (dup) {
-              setState(() => _nameError = 'Это имя уже занято другим банком');
+              setState(() => _nameError = tr('message_054'));
               _scroll.animateTo(0,
                   duration: const Duration(milliseconds: 250),
                   curve: Curves.easeOut);
@@ -303,7 +306,7 @@ class _BankEditDialogState extends State<BankEditDialog> {
             }
             Navigator.pop(context, (name, _icon, _type));
           },
-          child: Text('Сохранить',
+          child: Text(tr('save'),
               style: TextStyle(color: AppColors.accent)),
         ),
       ],

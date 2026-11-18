@@ -1,3 +1,4 @@
+import '../l10n/app_strings.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../state/app_state.dart';
@@ -23,6 +24,7 @@ class AlarmsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Localizations.localeOf(context); // Rebuild open routes when the locale changes.
     final app = context.watch<AppState>();
 
     // Собираем активные аварии: (банк, батарея, текст)
@@ -33,7 +35,7 @@ class AlarmsScreen extends StatelessWidget {
           final level = _critical.contains(f)
               ? _AlarmLevel.fault
               : _AlarmLevel.warning;
-          items.add((level, f, '${bank.name} • ${b.bleName}'));
+          items.add((level, AppStrings.source(f), '${bank.name} • ${b.bleName}'));
         }
       }
       // Предупреждение о разбросе SOC внутри банка (ТЗ §12)
@@ -41,7 +43,7 @@ class AlarmsScreen extends StatelessWidget {
       if (bank.batteries.length > 1 && agg.socSpread > 10) {
         items.add((
           _AlarmLevel.warning,
-          'Разброс SOC между АКБ ${agg.socSpread.toStringAsFixed(0)} %',
+          tr('message_049', [agg.socSpread.toStringAsFixed(0)]),
           bank.name,
         ));
       }
@@ -51,15 +53,13 @@ class AlarmsScreen extends StatelessWidget {
         if (agg.soc <= bank.socCritical) {
           items.add((
             _AlarmLevel.fault,
-            'SOC ниже критического порога '
-                '(${agg.soc.toStringAsFixed(0)} % ≤ ${bank.socCritical.round()} %)',
+            tr('message_050', [agg.soc.toStringAsFixed(0), bank.socCritical.round()]),
             bank.name,
           ));
         } else if (agg.soc <= bank.socWarning) {
           items.add((
             _AlarmLevel.warning,
-            'SOC ниже порога уведомления '
-                '(${agg.soc.toStringAsFixed(0)} % ≤ ${bank.socWarning.round()} %)',
+            tr('message_051', [agg.soc.toStringAsFixed(0), bank.socWarning.round()]),
             bank.name,
           ));
         }
@@ -72,7 +72,7 @@ class AlarmsScreen extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: AppColors.bg,
         elevation: 0,
-        title: Text('Уведомления',
+        title: Text(tr('nav_alerts'),
             style: TextStyle(
                 color: AppColors.textPrimary, fontWeight: FontWeight.w700)),
       ),
@@ -87,13 +87,13 @@ class AlarmsScreen extends StatelessWidget {
         children: [
           Icon(Icons.verified_outlined, size: 44, color: AppColors.socGreen),
           SizedBox(height: 12),
-          Text('Уведомлений нет',
+          Text(tr('no_alerts'),
               style: TextStyle(
                   color: AppColors.textPrimary,
                   fontSize: 16,
                   fontWeight: FontWeight.w600)),
           SizedBox(height: 4),
-          Text('Все подключённые батареи в норме',
+          Text(tr('all_ok'),
               style:
                   TextStyle(color: AppColors.textSecondary, fontSize: 13)),
         ],
@@ -143,7 +143,7 @@ class AlarmsScreen extends StatelessWidget {
                 ),
               ),
               Text(
-                level == _AlarmLevel.fault ? 'АВАРИЯ' : 'ВНИМАНИЕ',
+                level == _AlarmLevel.fault ? tr('alarm') : tr('warning'),
                 style: TextStyle(
                     color: color,
                     fontSize: 10,

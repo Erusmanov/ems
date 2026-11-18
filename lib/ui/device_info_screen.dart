@@ -1,3 +1,4 @@
+import '../l10n/app_strings.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
@@ -56,17 +57,14 @@ class _DeviceInfoScreenState extends State<DeviceInfoScreen> {
       context: context,
       builder: (ctx) => AlertDialog(
         backgroundColor: AppColors.card,
-        title: Text('Адрес платы',
+        title: Text(tr('message_092'),
             style: TextStyle(color: AppColors.textPrimary, fontSize: 17)),
         content: Column(
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              'Число от 1 до 16. Уникальный адрес нужен, чтобы батареи '
-              'различались на шине RS485 и на приборах NMEA2000. '
-              'Внимание: на NMEA2000-приборах номер отображается на единицу '
-              'меньше (адрес 14 виден как «.13») — особенность протокола.',
+              tr('message_093'),
               style: TextStyle(color: AppColors.textSecondary, fontSize: 13),
             ),
             const SizedBox(height: 10),
@@ -76,7 +74,7 @@ class _DeviceInfoScreenState extends State<DeviceInfoScreen> {
               keyboardType: TextInputType.number,
               style: TextStyle(color: AppColors.textPrimary, fontSize: 20),
               decoration: InputDecoration(
-                labelText: 'Адрес',
+                labelText: tr('message_094'),
                 labelStyle: TextStyle(color: AppColors.textSecondary),
                 enabledBorder: UnderlineInputBorder(
                     borderSide: BorderSide(color: AppColors.cardBorder)),
@@ -89,21 +87,21 @@ class _DeviceInfoScreenState extends State<DeviceInfoScreen> {
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(ctx),
-            child: Text('Отмена',
+            child: Text(tr('cancel'),
                 style: TextStyle(color: AppColors.textSecondary)),
           ),
           TextButton(
             onPressed: () {
               final v = int.tryParse(controller.text.trim());
               if (v == null || v < 1 || v > 16) {
-                ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                ScaffoldMessenger.of(context).showSnackBar( SnackBar(
                     content: Text(
-                        'Допустимый адрес — от 1 до 16 (проверено на BMS)')));
+                        tr('message_095'))));
                 return;
               }
               Navigator.pop(ctx, v);
             },
-            child: const Text('Записать',
+            child:  Text(tr('message_096'),
                 style: TextStyle(color: AppColors.accent)),
           ),
         ],
@@ -115,34 +113,33 @@ class _DeviceInfoScreenState extends State<DeviceInfoScreen> {
     if (!mounted) return;
     if (err == null) {
       setState(() => _boardNumber = entered);
-      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-          content: Text('Адрес платы записан и проверен. Если приборы NMEA2000 '
-              'не увидели смену — перезагрузите BMS.')));
+      ScaffoldMessenger.of(context).showSnackBar( SnackBar(
+          content: Text(tr('message_097'))));
     } else {
       ScaffoldMessenger.of(context)
-          .showSnackBar(SnackBar(content: Text('Ошибка записи: $err')));
+          .showSnackBar(SnackBar(content: Text(tr('message_098', [err]))));
     }
   }
 
   String get _sleepLabel {
     final s = _sleepSec;
     if (s == null) return '…';
-    if (s >= 65535) return 'Никогда';
-    if (s % 3600 == 0) return '${s ~/ 3600} ч';
-    if (s % 60 == 0) return '${s ~/ 60} мин';
-    return '$s с';
+    if (s >= 65535) return tr('never');
+    if (s % 3600 == 0) return tr('message_099', [s ~/ 3600]);
+    if (s % 60 == 0) return tr('message_100', [s ~/ 60]);
+    return tr('message_101', [s]);
   }
 
   /// Диалог выбора sleep-таймера: пресеты + «Никогда». Запись безопасная:
   /// запись → контрольное чтение → сверка (протокол ТЗ M5).
   Future<void> _pickSleep() async {
-    const presets = <(String, int)>[
-      ('5 минут', 300),
-      ('30 минут', 1800),
-      ('1 час', 3600),
-      ('4 часа', 14400),
-      ('12 часов', 43200),
-      ('Никогда (не засыпать)', 65535),
+    final presets = <(String, int)>[
+      (tr('message_102'), 300),
+      (tr('message_103'), 1800),
+      (tr('message_104'), 3600),
+      (tr('message_105'), 14400),
+      (tr('message_106'), 43200),
+      (tr('message_107'), 65535),
     ];
     final chosen = await showModalBottomSheet<int>(
       context: context,
@@ -156,7 +153,7 @@ class _DeviceInfoScreenState extends State<DeviceInfoScreen> {
           children: [
             Padding(
               padding: const EdgeInsets.fromLTRB(16, 14, 16, 6),
-              child: Text('ТАЙМЕР СНА BMS',
+              child: Text(tr('message_108'),
                   style: TextStyle(
                       color: AppColors.textLabel,
                       fontSize: 11,
@@ -193,11 +190,11 @@ class _DeviceInfoScreenState extends State<DeviceInfoScreen> {
     if (!mounted) return;
     if (err == null) {
       setState(() => _sleepSec = chosen);
-      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-          content: Text('Таймер сна записан в BMS и проверен')));
+      ScaffoldMessenger.of(context).showSnackBar( SnackBar(
+          content: Text(tr('sleep_saved'))));
     } else {
       ScaffoldMessenger.of(context)
-          .showSnackBar(SnackBar(content: Text('Ошибка записи: $err')));
+          .showSnackBar(SnackBar(content: Text(tr('message_098', [err]))));
     }
   }
 
@@ -206,22 +203,21 @@ class _DeviceInfoScreenState extends State<DeviceInfoScreen> {
       context: context,
       builder: (ctx) => AlertDialog(
         backgroundColor: AppColors.card,
-        title: Text('Перезагрузить BMS?',
+        title: Text(tr('restart_bms_q'),
             style: TextStyle(color: AppColors.textPrimary, fontSize: 17)),
         content: Text(
-          'BMS перезапустится, связь с батареей на несколько секунд оборвётся. '
-          'Затем подключите её заново через поиск, если не подхватится сама.',
+          tr('message_109'),
           style: TextStyle(color: AppColors.textSecondary, fontSize: 14),
         ),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(ctx, false),
-            child: Text('Отмена',
+            child: Text(tr('cancel'),
                 style: TextStyle(color: AppColors.textSecondary)),
           ),
           TextButton(
             onPressed: () => Navigator.pop(ctx, true),
-            child: const Text('Перезагрузить',
+            child:  Text(tr('message_110'),
                 style: TextStyle(color: AppColors.socRed)),
           ),
         ],
@@ -232,12 +228,13 @@ class _DeviceInfoScreenState extends State<DeviceInfoScreen> {
     if (!mounted) return;
     ScaffoldMessenger.of(context).showSnackBar(SnackBar(
         content: Text(err == null
-            ? 'Команда перезагрузки отправлена'
-            : 'Ошибка: $err')));
+            ? tr('restart_sent')
+            : tr('message_111', [err]))));
   }
 
   @override
   Widget build(BuildContext context) {
+    Localizations.localeOf(context); // Rebuild open routes when the locale changes.
     final app = context.watch<AppState>();
     final bank = app.banks.where((b) => b.id == bankId).firstOrNull;
     final battery =
@@ -247,7 +244,7 @@ class _DeviceInfoScreenState extends State<DeviceInfoScreen> {
       return Scaffold(
         appBar: AppBar(backgroundColor: AppColors.bg),
         body: Center(
-          child: Text('Устройство не найдено',
+          child: Text(tr('device_not_found'),
               style: TextStyle(color: AppColors.textSecondary)),
         ),
       );
@@ -257,28 +254,28 @@ class _DeviceInfoScreenState extends State<DeviceInfoScreen> {
     // Поля, которых прошивка не отдаёт, не показываем вовсе (пустые прочерки
     // на скрине Михаила 24.08 выглядели как недоделка)
     final rows = <(IconData, String, String)>[
-      (Icons.bluetooth, 'BLE-имя', battery.bleName),
+      (Icons.bluetooth, tr('ble_name'), battery.bleName),
       if (battery.swVersion != null)
-        (Icons.memory, 'Версия ПО BMS', battery.swVersion!),
+        (Icons.memory, tr('fw_version'), battery.swVersion!),
       if (battery.serialNumber != null)
-        (Icons.qr_code_2, 'Имя устройства', battery.serialNumber!),
+        (Icons.qr_code_2, tr('message_112'), battery.serialNumber!),
       if (battery.manufactureDate != null)
         (
           Icons.event,
-          'Дата производства',
+          tr('mfg_date'),
           df.format(battery.manufactureDate!)
         ),
-      (Icons.grid_view_rounded, 'Количество ячеек', '${battery.cellCount}'),
-      (Icons.thermostat, 'Датчиков температуры', '${battery.tempSensorCount}'),
-      (Icons.replay, 'Циклов заряд/разряд', '${battery.cycles}'),
+      (Icons.grid_view_rounded, tr('cell_count'), '${battery.cellCount}'),
+      (Icons.thermostat, tr('temp_sensors'), '${battery.tempSensorCount}'),
+      (Icons.replay, tr('message_113'), '${battery.cycles}'),
       (
         Icons.settings_input_component,
-        'MOS заряд / разряд',
+        tr('message_114'),
         '${battery.mosCharge ? 'вкл' : 'выкл'} / ${battery.mosDischarge ? 'вкл' : 'выкл'}'
       ),
       (
         Icons.thermostat_auto,
-        'Температура min / max',
+        tr('message_115'),
         '${battery.tempMin.toStringAsFixed(0)} / ${battery.tempMax.toStringAsFixed(0)} °C'
       ),
     ];
@@ -293,7 +290,7 @@ class _DeviceInfoScreenState extends State<DeviceInfoScreen> {
             Icon(Icons.info_outline, size: 18, color: AppColors.accent),
             const SizedBox(width: 8),
             Expanded(
-              child: Text('Об устройстве',
+              child: Text(tr('about_device'),
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                   style: TextStyle(
@@ -337,7 +334,7 @@ class _DeviceInfoScreenState extends State<DeviceInfoScreen> {
           // Запрос Михаила 21.07: батареи засыпают, зависшую не ресетнуть из Daly.
           Padding(
             padding: const EdgeInsets.fromLTRB(16, 16, 16, 6),
-            child: Text('УПРАВЛЕНИЕ BMS',
+            child: Text(tr('bms_control'),
                 style: TextStyle(
                     color: AppColors.textLabel,
                     fontSize: 11,
@@ -358,7 +355,7 @@ class _DeviceInfoScreenState extends State<DeviceInfoScreen> {
                   Icon(Icons.tag, size: 15, color: AppColors.accent),
                   const SizedBox(width: 12),
                   Expanded(
-                    child: Text('Адрес платы (RS485 / NMEA2000)',
+                    child: Text(tr('message_116'),
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
                         style: TextStyle(
@@ -367,7 +364,7 @@ class _DeviceInfoScreenState extends State<DeviceInfoScreen> {
                   Text(
                       battery.connected
                           ? (_boardNumber?.toString() ?? '…')
-                          : 'нет связи',
+                          : tr('no_link'),
                       style: TextStyle(
                           color: AppColors.textSecondary, fontSize: 13)),
                   Icon(Icons.chevron_right,
@@ -391,11 +388,11 @@ class _DeviceInfoScreenState extends State<DeviceInfoScreen> {
                       size: 15, color: AppColors.accent),
                   const SizedBox(width: 12),
                   Expanded(
-                    child: Text('Таймер сна',
+                    child: Text(tr('sleep_timer'),
                         style: TextStyle(
                             color: AppColors.textPrimary, fontSize: 14)),
                   ),
-                  Text(battery.connected ? _sleepLabel : 'нет связи',
+                  Text(battery.connected ? _sleepLabel : tr('no_link'),
                       style: TextStyle(
                           color: AppColors.textSecondary, fontSize: 13)),
                   Icon(Icons.chevron_right,
@@ -419,7 +416,7 @@ class _DeviceInfoScreenState extends State<DeviceInfoScreen> {
                       size: 15, color: AppColors.socRed),
                   const SizedBox(width: 12),
                   Expanded(
-                    child: Text('Перезагрузить BMS',
+                    child: Text(tr('restart_bms'),
                         style: TextStyle(
                             color: battery.connected
                                 ? AppColors.socRed
@@ -451,7 +448,7 @@ class _DeviceInfoScreenState extends State<DeviceInfoScreen> {
                   Icon(Icons.terminal, size: 15, color: AppColors.accent),
                   const SizedBox(width: 12),
                   Expanded(
-                    child: Text('Сырые регистры (отладка)',
+                    child: Text(tr('raw_registers'),
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
                         style: TextStyle(

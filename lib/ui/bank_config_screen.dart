@@ -1,3 +1,4 @@
+import '../l10n/app_strings.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../models/bank.dart';
@@ -51,23 +52,22 @@ class BankConfigScreen extends StatelessWidget {
       context: context,
       builder: (ctx) => AlertDialog(
         backgroundColor: AppColors.card,
-        title: Text('Удалить банк?',
+        title: Text(tr('delete_bank_q'),
             style: TextStyle(color: AppColors.textPrimary, fontSize: 17)),
         content: Text(
-          '«${bank.name}» будет удалён. '
-          '${bank.batteries.isNotEmpty ? 'Подключённые батареи (${bank.batteries.length}) будут отвязаны.' : ''}',
+          tr('message_055', [bank.name, bank.batteries.isNotEmpty ? tr('message_152', [bank.batteries.length]) : '']),
           style: TextStyle(color: AppColors.textSecondary, fontSize: 14),
         ),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(ctx, false),
-            child: Text('Отмена',
+            child: Text(tr('cancel'),
                 style: TextStyle(color: AppColors.textSecondary)),
           ),
           TextButton(
             onPressed: () => Navigator.pop(ctx, true),
             child:
-                const Text('Удалить', style: TextStyle(color: AppColors.socRed)),
+                 Text(tr('delete'), style: TextStyle(color: AppColors.socRed)),
           ),
         ],
       ),
@@ -91,22 +91,21 @@ class BankConfigScreen extends StatelessWidget {
         context: context,
         builder: (ctx) => AlertDialog(
           backgroundColor: AppColors.card,
-          title: Text('Банк станет одиночным',
+          title: Text(tr('message_056'),
               style: TextStyle(color: AppColors.textPrimary, fontSize: 17)),
           content: Text(
-            'После отвязки «$name» в банке останется одна АКБ, поэтому '
-            '«${bank.name}» автоматически станет одиночным банком. Продолжить?',
+            tr('message_057', [name, bank.name]),
             style: TextStyle(color: AppColors.textSecondary, fontSize: 14),
           ),
           actions: [
             TextButton(
               onPressed: () => Navigator.pop(ctx, false),
-              child: Text('Отмена',
+              child: Text(tr('cancel'),
                   style: TextStyle(color: AppColors.textSecondary)),
             ),
             TextButton(
               onPressed: () => Navigator.pop(ctx, true),
-              child: const Text('Отвязать',
+              child:  Text(tr('message_058'),
                   style: TextStyle(color: AppColors.socRed)),
             ),
           ],
@@ -125,22 +124,21 @@ class BankConfigScreen extends StatelessWidget {
         context: context,
         builder: (ctx) => AlertDialog(
           backgroundColor: AppColors.card,
-          title: Text('Удалить банк вместе с АКБ?',
+          title: Text(tr('message_059'),
               style: TextStyle(color: AppColors.textPrimary, fontSize: 17)),
           content: Text(
-            '«$name» — единственная АКБ банка. Пустых банков не бывает, '
-            'поэтому вместе с отвязкой будет удалён и банк «${bank.name}».',
+            tr('message_060', [name, bank.name]),
             style: TextStyle(color: AppColors.textSecondary, fontSize: 14),
           ),
           actions: [
             TextButton(
               onPressed: () => Navigator.pop(ctx, false),
-              child: Text('Отмена',
+              child: Text(tr('cancel'),
                   style: TextStyle(color: AppColors.textSecondary)),
             ),
             TextButton(
               onPressed: () => Navigator.pop(ctx, true),
-              child: const Text('Удалить банк',
+              child:  Text(tr('delete_bank'),
                   style: TextStyle(color: AppColors.socRed)),
             ),
           ],
@@ -156,21 +154,21 @@ class BankConfigScreen extends StatelessWidget {
       context: context,
       builder: (ctx) => AlertDialog(
         backgroundColor: AppColors.card,
-        title: Text('Отвязать батарею?',
+        title: Text(tr('message_061'),
             style: TextStyle(color: AppColors.textPrimary, fontSize: 17)),
         content: Text(
-          '«$name» будет отключена и убрана из банка «${bank.name}».',
+          tr('message_062', [name, bank.name]),
           style: TextStyle(color: AppColors.textSecondary, fontSize: 14),
         ),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(ctx, false),
-            child: Text('Отмена',
+            child: Text(tr('cancel'),
                 style: TextStyle(color: AppColors.textSecondary)),
           ),
           TextButton(
             onPressed: () => Navigator.pop(ctx, true),
-            child: const Text('Отвязать',
+            child:  Text(tr('message_058'),
                 style: TextStyle(color: AppColors.socRed)),
           ),
         ],
@@ -183,6 +181,7 @@ class BankConfigScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Localizations.localeOf(context); // Rebuild open routes when the locale changes.
     final app = context.watch<AppState>();
     final bank = app.banks.where((b) => b.id == bankId).firstOrNull;
 
@@ -191,7 +190,7 @@ class BankConfigScreen extends StatelessWidget {
       return Scaffold(
         appBar: AppBar(backgroundColor: AppColors.bg),
         body: Center(
-          child: Text('Банк не найден',
+          child: Text(tr('message_044'),
               style: TextStyle(color: AppColors.textSecondary)),
         ),
       );
@@ -221,7 +220,7 @@ class BankConfigScreen extends StatelessWidget {
         ),
         actions: [
           IconButton(
-            tooltip: 'Переименовать / сменить иконку',
+            tooltip: tr('rename_icon'),
             icon: Icon(Icons.drive_file_rename_outline,
                 size: 20, color: AppColors.accent),
             onPressed: () => _edit(context, bank),
@@ -257,19 +256,18 @@ class BankConfigScreen extends StatelessWidget {
                   const SizedBox(width: 10),
                   Expanded(
                     child: Text(
-                        '${bank.type.label} требует минимум две АКБ — '
-                        'добавьте вторую батарею или смените тип.',
+                        tr('message_063', [bank.type.label]),
                         style: TextStyle(
                             color: AppColors.textPrimary, fontSize: 13)),
                   ),
                 ],
               ),
             ),
-          _sectionTitle('БАТАРЕИ (${bank.batteries.length})'),
+          _sectionTitle(tr('message_064', [bank.batteries.length])),
           if (bank.batteries.isEmpty)
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-              child: Text('Батарей пока нет — добавьте устройство.',
+              child: Text(tr('no_batteries'),
                   style:
                       TextStyle(color: AppColors.textLabel, fontSize: 13)),
             ),
@@ -281,7 +279,7 @@ class BankConfigScreen extends StatelessWidget {
             _actionRow(
               context,
               icon: Icons.bluetooth_searching,
-              label: 'Добавить батарею',
+              label: tr('add_battery'),
               onTap: () => Navigator.of(context).push(MaterialPageRoute(
                 builder: (_) => DeviceScanScreen(targetBankId: bank.id),
               )),
@@ -290,22 +288,21 @@ class BankConfigScreen extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
               child: Text(
-                'В одиночном банке может быть только одна АКБ. Чтобы добавить '
-                'ещё — смените тип банка на параллельный или последовательный.',
+                tr('message_065'),
                 style: TextStyle(color: AppColors.textLabel, fontSize: 12),
               ),
             ),
-          _sectionTitle('БАНК'),
+          _sectionTitle(tr('message_066')),
           _actionRow(
             context,
             icon: Icons.drive_file_rename_outline,
-            label: 'Переименовать / сменить иконку',
+            label: tr('rename_icon'),
             onTap: () => _edit(context, bank),
           ),
           _actionRow(
             context,
             icon: Icons.delete_outline,
-            label: 'Удалить банк',
+            label: tr('delete_bank'),
             color: AppColors.socRed,
             onTap: () => _delete(context, bank),
           ),
@@ -354,7 +351,7 @@ class BankConfigScreen extends StatelessWidget {
                     fontSize: 12,
                     fontFeatures: const [FontFeature.tabularFigures()])),
             IconButton(
-              tooltip: 'Отвязать батарею',
+              tooltip: tr('unbind_battery'),
               visualDensity: VisualDensity.compact,
               // Красный «минус» — заметный, как просили после теста
               // дистрибьютора (26.07 п.9: кнопку никто не находил)

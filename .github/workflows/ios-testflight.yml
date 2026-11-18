@@ -29,6 +29,7 @@ jobs:
       - uses: subosito/flutter-action@v2
         with:
           channel: stable
+          flutter-version: 3.47.2
 
       - name: Import signing certificate
         run: |
@@ -71,6 +72,12 @@ jobs:
             --build-number=$GITHUB_RUN_NUMBER \
             --export-options-plist=ios/ExportOptions.plist
 
+      - name: Keep IPA as artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: ipa
+          path: build/ios/ipa/*.ipa
+
       - name: Upload to TestFlight
         run: |
           mkdir -p ~/private_keys
@@ -80,9 +87,3 @@ jobs:
             --apiKey "$ASC_KEY_ID" --apiIssuer "$ASC_ISSUER_ID"
         env:
           ASC_API_KEY_BASE64: ${{ secrets.ASC_API_KEY_BASE64 }}
-
-      - name: Keep IPA as artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: ipa
-          path: build/ios/ipa/*.ipa

@@ -1,3 +1,4 @@
+import '../../l10n/app_strings.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
@@ -27,9 +28,9 @@ class _BatteryCardState extends State<BatteryCard> {
   }
 
   String _statusLabel(ChargeStatus s) => switch (s) {
-    ChargeStatus.charging => 'Заряд',
-    ChargeStatus.discharging => 'Разряд',
-    ChargeStatus.standby => 'Ожидание',
+    ChargeStatus.charging => tr('status_charging'),
+    ChargeStatus.discharging => tr('status_discharging'),
+    ChargeStatus.standby => tr('status_standby'),
   };
 
   Color _statusColor(ChargeStatus s) => switch (s) {
@@ -40,6 +41,7 @@ class _BatteryCardState extends State<BatteryCard> {
 
   @override
   Widget build(BuildContext context) {
+    Localizations.localeOf(context); // Rebuild open routes when the locale changes.
     final app = context.watch<AppState>();
     final bank = widget.bank;
     if (bank.batteries.isEmpty) {
@@ -81,9 +83,9 @@ class _BatteryCardState extends State<BatteryCard> {
                       : (constraints.maxWidth * 0.40).clamp(0.0, 138.0),
                 );
                 final metrics = [
-                  _metric('НАПРЯЖЕНИЕ', '${agg.voltage.toStringAsFixed(2)} V'),
-                  _metric('ТОК', '${agg.current.toStringAsFixed(1)} A'),
-                  _metric('МОЩНОСТЬ', _fmtPower(agg.power), end: true),
+                  _metric(tr('voltage'), '${agg.voltage.toStringAsFixed(2)} V'),
+                  _metric(tr('current'), '${agg.current.toStringAsFixed(1)} A'),
+                  _metric(tr('power'), _fmtPower(agg.power), end: true),
                   _metric(time.label.toUpperCase(), time.text, end: true),
                 ];
                 if (accessibleLayout &&
@@ -148,7 +150,7 @@ class _BatteryCardState extends State<BatteryCard> {
     // Формат подписи — схема Михаила 26.07: код конфигурации банка (1/nS/nP),
     // тип словами, суммарная ёмкость банка.
     final subtitle =
-        'LFP-${bank.configCode} • ${bank.type.label} • ${bank.aggregate.full.round()} Ач';
+        tr('message_146', [bank.configCode, bank.type.label, bank.aggregate.full.round()]);
     return InkWell(
       // Тап по заголовку — конфигурация банка (решение Михаила 15.07);
       // к ячейкам батареи — из списка батарей на экране конфигурации.
@@ -243,17 +245,17 @@ class _BatteryCardState extends State<BatteryCard> {
     final tiles = <_Param>[
       _Param(
         Icons.battery_5_bar,
-        'ЁМКОСТЬ ОСТАТОК',
+        tr('cap_remaining'),
         '${agg.remaining.toStringAsFixed(1)} Ah',
       ),
       _Param(
         Icons.battery_full,
-        'ЁМКОСТЬ ПОЛНАЯ',
+        tr('cap_full'),
         '${agg.full.toStringAsFixed(1)} Ah',
       ),
       _Param(
         Icons.thermostat,
-        'ТЕМПЕРАТУРА',
+        tr('temperature'),
         '${agg.tempAvg.toStringAsFixed(1)} °C',
       ),
     ];
@@ -289,7 +291,7 @@ class _BatteryCardState extends State<BatteryCard> {
             child: Padding(
               padding: const EdgeInsets.only(left: 4, top: 4, bottom: 4),
               child: Text(
-                'Последнее обновление: ${DateFormat('HH:mm:ss').format(b.lastUpdate)}',
+                tr('message_147', [DateFormat('HH:mm:ss').format(b.lastUpdate)]),
                 style: TextStyle(color: AppColors.textLabel, fontSize: 11),
               ),
             ),

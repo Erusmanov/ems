@@ -1,3 +1,4 @@
+import '../l10n/app_strings.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../models/bms_data.dart';
@@ -22,6 +23,7 @@ class BatteryDetailScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Localizations.localeOf(context); // Rebuild open routes when the locale changes.
     final app = context.watch<AppState>();
     final bank = app.banks.where((b) => b.id == bankId).firstOrNull;
     final battery =
@@ -31,7 +33,7 @@ class BatteryDetailScreen extends StatelessWidget {
       return Scaffold(
         appBar: AppBar(backgroundColor: AppColors.bg),
         body: Center(
-          child: Text('Устройство не найдено',
+          child: Text(tr('device_not_found'),
               style: TextStyle(color: AppColors.textSecondary)),
         ),
       );
@@ -66,7 +68,7 @@ class BatteryDetailScreen extends StatelessWidget {
                   ? AppColors.bluetooth
                   : AppColors.textLabel),
           IconButton(
-            tooltip: 'Информация об устройстве',
+            tooltip: tr('message_067'),
             icon: Icon(Icons.info_outline,
                 size: 20, color: AppColors.accent),
             onPressed: () => Navigator.of(context).push(MaterialPageRoute(
@@ -82,9 +84,9 @@ class BatteryDetailScreen extends StatelessWidget {
         children: [
           _summaryStrip(battery),
           // Тревоги — между блоком данных и графиком ячеек (Михаил 16.07)
-          for (final fault in battery.faults) _alarmRow(fault),
+          for (final fault in battery.faults) _alarmRow(AppStrings.source(fault)),
           _sectionHeader(Icons.grid_view_rounded,
-              'ЯЧЕЙКИ (${battery.cellCount})', _cellsSummary(battery)),
+              tr('message_068', [battery.cellCount]), _cellsSummary(battery)),
           for (var i = 0; i < battery.cellCount; i++) _cellRow(battery, i),
         ],
       ),
@@ -187,25 +189,25 @@ class BatteryDetailScreen extends StatelessWidget {
               item('SOC', '${b.soc.toStringAsFixed(0)} %', align: -1),
               if (b.soh != null)
                 item('SOH', '${b.soh!.toStringAsFixed(0)} %'),
-              item('ЦИКЛЫ', '${b.cycles}', align: 1),
+              item(tr('cycles'), '${b.cycles}', align: 1),
             ],
           ),
           const SizedBox(height: 12),
           Row(
             children: [
-              item('НАПРЯЖЕНИЕ', '${b.totalVoltage.toStringAsFixed(2)} V',
+              item(tr('voltage'), '${b.totalVoltage.toStringAsFixed(2)} V',
                   align: -1),
-              item('ТОК', '${b.current.toStringAsFixed(1)} A'),
-              item('СТАТУС', _statusLabel(b.status), align: 1),
+              item(tr('current'), '${b.current.toStringAsFixed(1)} A'),
+              item(tr('status'), _statusLabel(b.status), align: 1),
             ],
           ),
           const SizedBox(height: 12),
           Row(
             children: [
-              item('ЁМКОСТЬ ДОСТУПНАЯ',
+              item(tr('cap_available'),
                   '${b.remainingCapacity.toStringAsFixed(1)} Ah',
                   align: -1),
-              item('ЁМКОСТЬ ПОЛНАЯ',
+              item(tr('cap_full'),
                   '${b.fullCapacity.toStringAsFixed(1)} Ah',
                   align: 1),
             ],
@@ -220,20 +222,20 @@ class BatteryDetailScreen extends StatelessWidget {
           const SizedBox(height: 12),
           Row(
             children: [
-              item('MOS ЗАРЯД', b.mosCharge ? 'вкл' : 'выкл', align: -1),
-              item('MOS РАЗРЯД', b.mosDischarge ? 'вкл' : 'выкл', align: 1),
+              item(tr('mos_charge'), b.mosCharge ? tr('on') : tr('off'), align: -1),
+              item(tr('mos_discharge'), b.mosDischarge ? tr('on') : tr('off'), align: 1),
             ],
           ),
           const SizedBox(height: 12),
           // Мин и макс — по краям, дельта в середине; без символа «№»
           Row(
             children: [
-              item('ЯЧЕЙКА MIN',
+              item(tr('cell_min'),
                   '${b.minCellV.toStringAsFixed(3)} V (${b.minCellIndex + 1})',
                   align: -1),
-              item('ДЕЛЬТА',
+              item(tr('delta'),
                   '${(b.cellDelta * 1000).toStringAsFixed(0)} mV'),
-              item('ЯЧЕЙКА MAX',
+              item(tr('cell_max'),
                   '${b.maxCellV.toStringAsFixed(3)} V (${b.maxCellIndex + 1})',
                   align: 1),
             ],
@@ -244,9 +246,9 @@ class BatteryDetailScreen extends StatelessWidget {
   }
 
   static String _statusLabel(ChargeStatus s) => switch (s) {
-        ChargeStatus.charging => 'Заряд',
-        ChargeStatus.discharging => 'Разряд',
-        ChargeStatus.standby => 'Ожидание',
+        ChargeStatus.charging => tr('status_charging'),
+        ChargeStatus.discharging => tr('status_discharging'),
+        ChargeStatus.standby => tr('status_standby'),
       };
 
   // ---------- Ячейки ----------

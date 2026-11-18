@@ -1,3 +1,4 @@
+import '../l10n/app_strings.dart';
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 
@@ -6,9 +7,9 @@ enum AppThemeMode { dark, light, system }
 
 extension AppThemeModeLabel on AppThemeMode {
   String get label => switch (this) {
-        AppThemeMode.dark => 'Тёмная',
-        AppThemeMode.light => 'Светлая',
-        AppThemeMode.system => 'Как в системе',
+        AppThemeMode.dark => tr('theme_dark'),
+        AppThemeMode.light => tr('theme_light'),
+        AppThemeMode.system => tr('theme_system'),
       };
 }
 
@@ -25,7 +26,10 @@ class SettingsState extends ChangeNotifier {
       (_box.get('themeMode', defaultValue: AppThemeMode.dark.index) as int)
           .clamp(0, AppThemeMode.values.length - 1)];
 
-  String get language => _box.get('language', defaultValue: 'ru') as String;
+  String get language {
+    final saved = _box.get('language', defaultValue: 'system');
+    return saved is String && (saved == 'system' || AppStrings.languageNames.containsKey(saved)) ? saved : 'system';
+  }
 
   double get socWarning =>
       (_box.get('socWarning', defaultValue: 50.0) as num).toDouble();
@@ -51,6 +55,9 @@ class SettingsState extends ChangeNotifier {
   }
 
   set language(String v) {
+    if (v != 'system' && !AppStrings.languageNames.containsKey(v)) {
+      throw ArgumentError.value(v, 'language');
+    }
     _box.put('language', v);
     notifyListeners();
   }

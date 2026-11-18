@@ -1,3 +1,4 @@
+import '../l10n/app_strings.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -6,8 +7,9 @@ import 'package:flutter_svg/flutter_svg.dart';
 /// В хранилище пишется строковый id (= имя файла без .svg).
 class BankIconDef {
   final String id;
-  final String label;
-  const BankIconDef(this.id, this.label);
+  final String _sourceLabel;
+  String get label => AppStrings.source(_sourceLabel);
+  const BankIconDef(this.id, this._sourceLabel);
 }
 
 const bankIconLibrary = <BankIconDef>[
@@ -38,9 +40,8 @@ const defaultBankIconId = 'house_bank';
 const _hiddenFromPicker = {'outboard_starter', 'home_energy', 'marine_house'};
 
 /// Список для грида выбора — только визуально различимые.
-List<BankIconDef> get bankIconChoices => bankIconLibrary
-    .where((d) => !_hiddenFromPicker.contains(d.id))
-    .toList();
+List<BankIconDef> get bankIconChoices =>
+    bankIconLibrary.where((d) => !_hiddenFromPicker.contains(d.id)).toList();
 
 /// Нормализация значения из хранилища: строковый id, легаси-индекс старой
 /// Material-библиотеки (int) или мусор → валидный id.
@@ -74,8 +75,12 @@ class BankIcon extends StatelessWidget {
   final double size;
   final Color color;
 
-  const BankIcon(this.iconId,
-      {super.key, required this.size, required this.color});
+  const BankIcon(
+    this.iconId, {
+    super.key,
+    required this.size,
+    required this.color,
+  });
 
   @override
   Widget build(BuildContext context) {

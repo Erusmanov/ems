@@ -1,3 +1,4 @@
+import '../l10n/app_strings.dart';
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_blue_plus/flutter_blue_plus.dart';
@@ -190,8 +191,7 @@ class AppState extends ChangeNotifier {
   /// null — добавлять можно, иначе текст запрета.
   String? canAddBatteryTo(Bank bank) {
     if (bank.type == BankType.single && bank.batteries.isNotEmpty) {
-      return 'В одиночный банк можно добавить только одну АКБ. '
-          'Смените тип банка на параллельный или последовательный.';
+      return tr('message_039');
     }
     return null;
   }
@@ -204,10 +204,10 @@ class AppState extends ChangeNotifier {
       String? displayName,
       ({String name, String iconId, BankType type})? newBank}) async {
     final id = device.remoteId.str;
-    if (_sources.containsKey(id)) return 'Устройство уже подключено';
+    if (_sources.containsKey(id)) return tr('message_040');
     // Имя: из advertising (передаёт экран скана) → системное → id
     final name = (displayName != null && displayName.isNotEmpty &&
-            displayName != 'Без имени')
+            displayName != tr('no_name'))
         ? displayName
         : (device.platformName.isNotEmpty ? device.platformName : id);
 
@@ -242,7 +242,7 @@ class AppState extends ChangeNotifier {
         firstData = await firstReading.timeout(const Duration(seconds: 8));
       } on TimeoutException {
         throw StateError(
-            'Устройство подключилось, но BMS не отвечает. Банк не создан');
+            tr('message_041'));
       }
       // Совместимость АКБ в банке (тест 26.07: 12В и 36В в параллели — «бабах»):
       // число ячеек (=номинал напряжения) строго равно, ёмкость в пределах 15%.
@@ -254,8 +254,7 @@ class AppState extends ChangeNotifier {
         if (ref != null) {
           if (firstData.cellCount != ref.cellCount) {
             throw StateError(
-                'АКБ различаются по напряжению (${firstData.cellCount}S против '
-                '${ref.cellCount}S) — устанавливать их в общий банк недопустимо.');
+                tr('message_042', [firstData.cellCount, ref.cellCount]));
           }
           // Номинальная ёмкость (заводской регистр 0x80) — строго равна
           // (правка Михаила 27.07: номинал либо равен, либо нет)
@@ -265,10 +264,7 @@ class AppState extends ChangeNotifier {
               newRated != null &&
               (refRated - newRated).abs() > 0.05) {
             throw StateError(
-                'АКБ различаются по номинальной ёмкости '
-                '(${newRated.toStringAsFixed(1)} Ач против '
-                '${refRated.toStringAsFixed(1)} Ач) — устанавливать их '
-                'в общий банк недопустимо.');
+                tr('message_043', [newRated.toStringAsFixed(1), refRated.toStringAsFixed(1)]));
           }
         }
       }
@@ -393,11 +389,10 @@ class AppState extends ChangeNotifier {
   String? renameBank(String bankId,
       {String? name, String? iconId, BankType? type}) {
     final bank = _banks.where((b) => b.id == bankId).firstOrNull;
-    if (bank == null) return 'Банк не найден';
+    if (bank == null) return tr('message_044');
     if (type != null && type != bank.type) {
       if (type == BankType.single && bank.batteries.length > 1) {
-        return 'В одиночном банке не может быть больше одной АКБ — '
-            'сначала отвяжите лишние батареи.';
+        return tr('message_045');
       }
       // single -> parallel/series разрешено и с одной АКБ: это единственный
       // путь расширить одиночный банк (замкнутый круг из теста 26.07 п.1)
@@ -446,12 +441,12 @@ class AppState extends ChangeNotifier {
   /// Возвращает null при успехе, иначе текст ошибки.
   Future<String?> writeSleepTime(String deviceId, int seconds) async {
     final src = _bleSourceOf(deviceId);
-    if (src == null) return 'Устройство не подключено';
+    if (src == null) return tr('message_046');
     try {
       await src.writeSetting(DalyReg.sleepWaitTime, seconds.clamp(0, 65535));
       final check = await src.readSetting(DalyReg.sleepWaitTime);
       if (check != seconds.clamp(0, 65535)) {
-        return 'BMS вернула другое значение: $check с';
+        return tr('message_047', [check]);
       }
       return null;
     } catch (e) {
@@ -473,12 +468,12 @@ class AppState extends ChangeNotifier {
   /// Безопасная запись адреса платы: запись → контрольное чтение → сверка.
   Future<String?> writeBoardNumber(String deviceId, int number) async {
     final src = _bleSourceOf(deviceId);
-    if (src == null) return 'Устройство не подключено';
+    if (src == null) return tr('message_046');
     try {
       final v = number.clamp(1, 16); // BMS реально принимает 1..16 (тест 26.07)
       await src.intranetWrite(DalyReg.intranetBoardNumber, v);
       final check = await src.intranetRead(DalyReg.intranetBoardNumber);
-      if (check != v) return 'BMS вернула другое значение: $check';
+      if (check != v) return tr('message_048', [check]);
       return null;
     } catch (e) {
       return e is StateError ? e.message : e.toString();
@@ -489,7 +484,7 @@ class AppState extends ChangeNotifier {
   /// устройство надо будет подключить заново (или дождаться автоподхвата).
   Future<String?> restartBms(String deviceId) async {
     final src = _bleSourceOf(deviceId);
-    if (src == null) return 'Устройство не подключено';
+    if (src == null) return tr('message_046');
     try {
       await src.writeSetting(DalyReg.cmdRestart, 1);
       return null;

@@ -1,3 +1,4 @@
+import '../l10n/app_strings.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../state/app_state.dart';
@@ -22,6 +23,7 @@ class _HomeShellState extends State<HomeShell> {
 
   @override
   Widget build(BuildContext context) {
+    Localizations.localeOf(context); // Rebuild open routes when the locale changes.
     final alerts = context.watch<AppState>().activeAlertCount;
     final screens = [
       const DashboardScreen(),
@@ -42,10 +44,10 @@ class _HomeShellState extends State<HomeShell> {
         selectedFontSize: 11,
         unselectedFontSize: 11,
         items: [
-          const BottomNavigationBarItem(
-              icon: Icon(Icons.home_filled), label: 'Домой'),
-          const BottomNavigationBarItem(
-              icon: Icon(Icons.battery_charging_full), label: 'Банки'),
+           BottomNavigationBarItem(
+              icon: Icon(Icons.home_filled), label: tr('nav_home')),
+           BottomNavigationBarItem(
+              icon: Icon(Icons.battery_charging_full), label: tr('nav_banks')),
           BottomNavigationBarItem(
               // Бейдж-восклицательный знак при активных событиях (02.08)
               icon: alerts > 0
@@ -57,9 +59,9 @@ class _HomeShellState extends State<HomeShell> {
                       child: const Icon(Icons.notifications_none),
                     )
                   : const Icon(Icons.notifications_none),
-              label: 'Уведомления'),
-          const BottomNavigationBarItem(
-              icon: Icon(Icons.settings), label: 'Настройки'),
+              label: tr('nav_alerts')),
+           BottomNavigationBarItem(
+              icon: Icon(Icons.settings), label: tr('nav_settings')),
         ],
       ),
     );

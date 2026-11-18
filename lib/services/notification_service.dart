@@ -1,3 +1,4 @@
+import '../l10n/app_strings.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:permission_handler/permission_handler.dart';
 
@@ -29,12 +30,12 @@ class NotificationService {
     }
   }
 
-  static const _details = NotificationDetails(
+  static NotificationDetails get _details => NotificationDetails(
     android: AndroidNotificationDetails(
       'soc_alerts',
-      'Заряд батарей',
+      tr('message_035'),
       channelDescription:
-          'Предупреждения о низком заряде банков АКБ',
+          tr('message_036'),
       importance: Importance.high,
       priority: Priority.high,
     ),
@@ -47,9 +48,8 @@ class NotificationService {
     try {
       await _plugin.show(
         id: bankName.hashCode & 0x7fffffff,
-        title: 'Критический заряд',
-        body: '«$bankName»: SOC ${soc.toStringAsFixed(0)} % — ниже '
-            'критического порога ${threshold.round()} %',
+        title: tr('message_037'),
+        body: tr('message_038', [bankName, soc.toStringAsFixed(0), threshold.round()]),
         notificationDetails: _details,
       );
     } catch (_) {

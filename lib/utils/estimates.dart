@@ -1,3 +1,4 @@
+import '../l10n/app_strings.dart';
 import 'dart:collection';
 import '../models/bms_data.dart';
 
@@ -42,16 +43,16 @@ class TimeEstimate {
     switch (status) {
       case ChargeStatus.charging:
         final i = avgCurrent.abs();
-        if (i < 0.05) return const TimeEstimate(null, 'Время до 100%');
+        if (i < 0.05) return  TimeEstimate(null, tr('time_to_full'));
         final hours = (full - remaining) / i;
-        return TimeEstimate(_h(hours), 'Время до 100%');
+        return TimeEstimate(_h(hours), tr('time_to_full'));
       case ChargeStatus.discharging:
         final i = avgCurrent.abs();
-        if (i < 0.05) return const TimeEstimate(null, 'Время до 0%');
+        if (i < 0.05) return  TimeEstimate(null, tr('time_to_empty'));
         final hours = remaining / i;
-        return TimeEstimate(_h(hours), 'Время до 0%');
+        return TimeEstimate(_h(hours), tr('time_to_empty'));
       case ChargeStatus.standby:
-        return const TimeEstimate(null, 'Время');
+        return  TimeEstimate(null, tr('time'));
     }
   }
 
@@ -65,7 +66,7 @@ class TimeEstimate {
     if (duration == null) return '— : —';
     final h = duration!.inHours;
     final m = duration!.inMinutes % 60;
-    if (h <= 0) return '$mм';
-    return '$hч $mм';
+    if (h <= 0) return tr('message_148', [m]);
+    return tr('message_149', [h, m]);
   }
 }

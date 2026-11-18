@@ -1,3 +1,4 @@
+import '../l10n/app_strings.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../state/app_state.dart';
@@ -25,69 +26,77 @@ class SettingsScreen extends StatelessWidget {
     if (_versionTaps >= 5) {
       _versionTaps = 0;
       settings.devMode = !settings.devMode;
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-          content: Text(settings.devMode
-              ? 'Режим разработчика включён'
-              : 'Режим разработчика выключен')));
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(
+            settings.devMode ? tr('message_138') : tr('message_139'),
+          ),
+        ),
+      );
     }
   }
 
   @override
   Widget build(BuildContext context) {
+    Localizations.localeOf(
+      context,
+    ); // Rebuild open routes when the locale changes.
     final settings = context.watch<SettingsState>();
 
     return Scaffold(
       appBar: AppBar(
         backgroundColor: AppColors.bg,
         elevation: 0,
-        title: Text('Настройки',
-            style: TextStyle(
-                color: AppColors.textPrimary, fontWeight: FontWeight.w700)),
+        title: Text(
+          tr('nav_settings'),
+          style: TextStyle(
+            color: AppColors.textPrimary,
+            fontWeight: FontWeight.w700,
+          ),
+        ),
       ),
       body: ListView(
         padding: const EdgeInsets.only(bottom: 16),
         children: [
-          _sectionTitle('ВНЕШНИЙ ВИД'),
+          _sectionTitle(tr('appearance')),
           _group([
             _row(
               context,
               icon: Icons.dark_mode_outlined,
-              label: 'Тема',
+              label: tr('theme'),
               value: settings.themeMode.label,
               onTap: () => _pickTheme(context, settings),
             ),
             _row(
               context,
               icon: Icons.language,
-              label: 'Язык',
-              value: switch (settings.language) {
-                'ru' => 'Русский',
-                'en' => 'English',
-                _ => 'Как в системе',
-              },
+              label: tr('language'),
+              value:
+                  AppStrings.languageNames[settings.language] ??
+                  tr('lang_auto'),
               onTap: () => _pickLanguage(context, settings),
             ),
           ]),
-          _sectionTitle('ПОРОГИ SOC'),
+          _sectionTitle(tr('soc_thresholds')),
           _group([
             _row(
               context,
               icon: Icons.notifications_none,
-              label: 'Порог «Уведомление»',
+              label: tr('threshold_warn'),
               value: '${settings.socWarning.round()} %',
               onTap: () => _pickThreshold(context, settings, warning: true),
             ),
             _row(
               context,
               icon: Icons.error_outline,
-              label: 'Порог «Критический»',
+              label: tr('threshold_crit'),
               value: '${settings.socCritical.round()} %',
               onTap: () => _pickThreshold(context, settings, warning: false),
             ),
             _switchRow(
               context,
               icon: Icons.battery_alert_outlined,
-              label: 'Уведомление о низком SOC',
+              label: tr('low_soc_notify'),
               value: settings.lowSocNotify,
               onChanged: (v) => settings.lowSocNotify = v,
             ),
@@ -95,18 +104,16 @@ class SettingsScreen extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.fromLTRB(16, 6, 16, 0),
             child: Text(
-              'Пороги задают цвет кольца SOC на главном экране: выше '
-              '«Уведомления» — зелёный, между порогами — жёлтый, ниже '
-              '«Критического» — красный.',
+              tr('message_141'),
               style: TextStyle(color: AppColors.textLabel, fontSize: 11),
             ),
           ),
-          _sectionTitle('ДАННЫЕ'),
+          _sectionTitle(tr('data')),
           _group([
             _switchRow(
               context,
               icon: Icons.science_outlined,
-              label: 'Демо режим',
+              label: tr('message_142'),
               value: settings.demoMode,
               onChanged: (v) {
                 settings.demoMode = v;
@@ -118,18 +125,16 @@ class SettingsScreen extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.fromLTRB(16, 6, 16, 0),
             child: Text(
-              'Вкл — три демонстрационных банка с имитацией данных. '
-              'Выкл — только реальные устройства; ваши банки сохраняются '
-              'и восстанавливаются при запуске.',
+              tr('message_143'),
               style: TextStyle(color: AppColors.textLabel, fontSize: 11),
             ),
           ),
-          _sectionTitle('О ПРИЛОЖЕНИИ'),
+          _sectionTitle(tr('about')),
           _group([
             _row(
               context,
               icon: Icons.info_outline,
-              label: 'Версия',
+              label: tr('version'),
               value: appVersion,
               onTap: () => _onVersionTap(context, settings),
             ),
@@ -144,7 +149,7 @@ class SettingsScreen extends StatelessWidget {
   Future<void> _pickTheme(BuildContext context, SettingsState settings) async {
     final mode = await _pickFromList<AppThemeMode>(
       context,
-      title: 'Тема',
+      title: tr('theme'),
       items: AppThemeMode.values,
       selected: settings.themeMode,
       labelOf: (m) => m.label,
@@ -158,30 +163,31 @@ class SettingsScreen extends StatelessWidget {
   }
 
   Future<void> _pickLanguage(
-      BuildContext context, SettingsState settings) async {
+    BuildContext context,
+    SettingsState settings,
+  ) async {
     final lang = await _pickFromList<String>(
       context,
-      title: 'Язык',
-      items: const ['system', 'ru', 'en'],
+      title: tr('language'),
+      items: ['system', ...AppStrings.languageNames.keys],
       selected: settings.language,
-      labelOf: (l) => switch (l) {
-        'ru' => 'Русский',
-        'en' => 'English (перевод — этап Э4)',
-        _ => 'Как в системе (авто по региону)',
-      },
+      labelOf: (l) => AppStrings.languageNames[l] ?? tr('lang_auto'),
       iconOf: (l) =>
           l == 'system' ? Icons.brightness_auto_outlined : Icons.language,
     );
     if (lang != null) settings.language = lang;
   }
 
-  Future<void> _pickThreshold(BuildContext context, SettingsState settings,
-      {required bool warning}) async {
+  Future<void> _pickThreshold(
+    BuildContext context,
+    SettingsState settings, {
+    required bool warning,
+  }) async {
     final appState = context.read<AppState>();
     final result = await showDialog<double>(
       context: context,
       builder: (_) => _ThresholdDialog(
-        title: warning ? 'Порог «Уведомление»' : 'Порог «Критический»',
+        title: warning ? tr('threshold_warn') : tr('threshold_crit'),
         initial: warning ? settings.socWarning : settings.socCritical,
         min: warning ? settings.socCritical + 1 : 1,
         max: warning ? 95 : settings.socWarning - 1,
@@ -195,7 +201,9 @@ class SettingsScreen extends StatelessWidget {
       settings.setSocThresholds(critical: result);
     }
     appState.applySocThresholds(
-        warning: settings.socWarning, critical: settings.socCritical);
+      warning: settings.socWarning,
+      critical: settings.socCritical,
+    );
   }
 
   Future<T?> _pickFromList<T>(
@@ -210,38 +218,49 @@ class SettingsScreen extends StatelessWidget {
       context: context,
       backgroundColor: AppColors.card,
       shape: const RoundedRectangleBorder(
-          borderRadius: BorderRadius.vertical(top: Radius.circular(16))),
+        borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
+      ),
       builder: (ctx) => SafeArea(
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Padding(
-              padding: const EdgeInsets.fromLTRB(16, 14, 16, 6),
-              child: Text(title.toUpperCase(),
+        child: SingleChildScrollView(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Padding(
+                padding: const EdgeInsets.fromLTRB(16, 14, 16, 6),
+                child: Text(
+                  title.toUpperCase(),
                   style: TextStyle(
-                      color: AppColors.textLabel,
-                      fontSize: 11,
-                      fontWeight: FontWeight.w600,
-                      letterSpacing: 1.0)),
-            ),
-            for (final item in items)
-              ListTile(
-                leading: Icon(iconOf(item),
+                    color: AppColors.textLabel,
+                    fontSize: 11,
+                    fontWeight: FontWeight.w600,
+                    letterSpacing: 1.0,
+                  ),
+                ),
+              ),
+              for (final item in items)
+                ListTile(
+                  leading: Icon(
+                    iconOf(item),
                     size: 18,
                     color: item == selected
                         ? AppColors.accent
-                        : AppColors.textSecondary),
-                title: Text(labelOf(item),
+                        : AppColors.textSecondary,
+                  ),
+                  title: Text(
+                    labelOf(item),
                     style: TextStyle(
-                        color: AppColors.textPrimary, fontSize: 14)),
-                trailing: item == selected
-                    ? Icon(Icons.check,
-                        size: 18, color: AppColors.accent)
-                    : null,
-                onTap: () => Navigator.pop(ctx, item),
-              ),
-          ],
+                      color: AppColors.textPrimary,
+                      fontSize: 14,
+                    ),
+                  ),
+                  trailing: item == selected
+                      ? Icon(Icons.check, size: 18, color: AppColors.accent)
+                      : null,
+                  onTap: () => Navigator.pop(ctx, item),
+                ),
+            ],
+          ),
         ),
       ),
     );
@@ -250,20 +269,23 @@ class SettingsScreen extends StatelessWidget {
   // ---------- Элементы списка ----------
 
   Widget _sectionTitle(String text) => Padding(
-        padding: const EdgeInsets.fromLTRB(16, 16, 16, 6),
-        child: Text(text,
-            style: TextStyle(
-                color: AppColors.textLabel,
-                fontSize: 11,
-                fontWeight: FontWeight.w600,
-                letterSpacing: 1.0)),
-      );
+    padding: const EdgeInsets.fromLTRB(16, 16, 16, 6),
+    child: Text(
+      text,
+      style: TextStyle(
+        color: AppColors.textLabel,
+        fontSize: 11,
+        fontWeight: FontWeight.w600,
+        letterSpacing: 1.0,
+      ),
+    ),
+  );
 
   /// Группа строк — на своём оттенке фона (карточка на общем фоне).
   Widget _group(List<Widget> rows) => Container(
-        color: AppColors.card,
-        child: Column(children: rows),
-      );
+    color: AppColors.card,
+    child: Column(children: rows),
+  );
 
   Widget _row(
     BuildContext context, {
@@ -284,15 +306,20 @@ class SettingsScreen extends StatelessWidget {
             Icon(icon, size: 15, color: AppColors.accent),
             const SizedBox(width: 12),
             Expanded(
-              child: Text(label,
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
-                  style: TextStyle(
-                      color: AppColors.textPrimary, fontSize: 14)),
+              child: Text(
+                label,
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+                style: TextStyle(color: AppColors.textPrimary, fontSize: 14),
+              ),
             ),
-            Text(value,
-                style: TextStyle(
-                    color: AppColors.textSecondary, fontSize: 13)),
+            Flexible(
+              child: Text(
+                value,
+                textAlign: TextAlign.end,
+                style: TextStyle(color: AppColors.textSecondary, fontSize: 13),
+              ),
+            ),
             if (onTap != null) ...[
               const SizedBox(width: 4),
               Icon(Icons.chevron_right, size: 18, color: AppColors.textLabel),
@@ -320,11 +347,12 @@ class SettingsScreen extends StatelessWidget {
           Icon(icon, size: 15, color: AppColors.accent),
           const SizedBox(width: 12),
           Expanded(
-            child: Text(label,
-                maxLines: 1,
-                overflow: TextOverflow.ellipsis,
-                style:
-                    TextStyle(color: AppColors.textPrimary, fontSize: 14)),
+            child: Text(
+              label,
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+              style: TextStyle(color: AppColors.textPrimary, fontSize: 14),
+            ),
           ),
           Switch(
             value: value,
@@ -363,10 +391,15 @@ class _ThresholdDialogState extends State<_ThresholdDialog> {
 
   @override
   Widget build(BuildContext context) {
+    Localizations.localeOf(
+      context,
+    ); // Rebuild open routes when the locale changes.
     return AlertDialog(
       backgroundColor: AppColors.card,
-      title: Text(widget.title,
-          style: TextStyle(color: AppColors.textPrimary, fontSize: 17)),
+      title: Text(
+        widget.title,
+        style: TextStyle(color: AppColors.textPrimary, fontSize: 17),
+      ),
       // Степпер вместо Slider: у Slider на устройстве Михаила рендер-глюк
       // («серый столб», видео 02.08). Кнопки −/+ надёжны везде.
       content: SizedBox(
@@ -379,29 +412,36 @@ class _ThresholdDialogState extends State<_ThresholdDialog> {
               onPressed: _value > widget.min
                   ? () => setState(() => _value = _value - 1)
                   : null,
-              icon: Icon(Icons.remove_circle_outline,
-                  color: _value > widget.min
-                      ? widget.accent
-                      : AppColors.textLabel),
+              icon: Icon(
+                Icons.remove_circle_outline,
+                color: _value > widget.min
+                    ? widget.accent
+                    : AppColors.textLabel,
+              ),
             ),
             SizedBox(
               width: 110,
-              child: Text('${_value.round()} %',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                      color: widget.accent,
-                      fontSize: 36,
-                      fontWeight: FontWeight.w700)),
+              child: Text(
+                '${_value.round()} %',
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  color: widget.accent,
+                  fontSize: 36,
+                  fontWeight: FontWeight.w700,
+                ),
+              ),
             ),
             IconButton(
               iconSize: 36,
               onPressed: _value < widget.max
                   ? () => setState(() => _value = _value + 1)
                   : null,
-              icon: Icon(Icons.add_circle_outline,
-                  color: _value < widget.max
-                      ? widget.accent
-                      : AppColors.textLabel),
+              icon: Icon(
+                Icons.add_circle_outline,
+                color: _value < widget.max
+                    ? widget.accent
+                    : AppColors.textLabel,
+              ),
             ),
           ],
         ),
@@ -409,13 +449,14 @@ class _ThresholdDialogState extends State<_ThresholdDialog> {
       actions: [
         TextButton(
           onPressed: () => Navigator.pop(context),
-          child: Text('Отмена',
-              style: TextStyle(color: AppColors.textSecondary)),
+          child: Text(
+            tr('cancel'),
+            style: TextStyle(color: AppColors.textSecondary),
+          ),
         ),
         TextButton(
           onPressed: () => Navigator.pop(context, _value),
-          child:
-              Text('Сохранить', style: TextStyle(color: AppColors.accent)),
+          child: Text(tr('save'), style: TextStyle(color: AppColors.accent)),
         ),
       ],
     );

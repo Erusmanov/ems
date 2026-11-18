@@ -6,6 +6,18 @@
 	<true/>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
+	<key>CFBundleLocalizations</key>
+	<array>
+		<string>ru</string>
+		<string>en</string>
+		<string>de</string>
+		<string>fr</string>
+		<string>es</string>
+		<string>it</string>
+		<string>tr</string>
+		<string>el</string>
+		<string>hr</string>
+	</array>
 	<key>CFBundleDisplayName</key>
 	<string>EM-Power BMS</string>
 	<key>CFBundleExecutable</key>
